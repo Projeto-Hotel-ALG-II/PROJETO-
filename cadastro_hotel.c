@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "quick_tools.h"
+#include "bib_quick_tools.h"
 #include "bib_cadastro_hotel.h"
 
 int escreveHotel(int mode, str_hotel h);
@@ -16,22 +16,22 @@ int escreveHotel(int mode, str_hotel h)
     case 1: // USANDO ARQUIVO DE TEXTO
         ptr = fopen("..\\data\\dados_hotel.txt", "w");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINÂµRIO
         ptr = fopen("..\\data\\dados_hotel.dat", "wb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMÃ RIA
         /* code */
         break;
     }
@@ -68,29 +68,29 @@ int alteraHotel(int mode, str_hotel h)
     case 1: // USANDO ARQUIVO DE TEXTO
         ptr = fopen("..\\data\\dados_hotel.txt", "w");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINÂµRIO
         ptr = fopen("..\\data\\dados_hotel.dat", "wb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMÃ RIA
         /* code */
         break;
     }
 
-    // CONDI€ÇO DE ERRO
+    // CONDIâ‚¬Ã‡O DE ERRO
     if (ptr == NULL)
     {
         return 1;
@@ -130,24 +130,24 @@ int lerHotel(int mode, str_hotel *h)
     case 1: // USANDO ARQUIVO DE TEXTO
         ptr = fopen("..\\data\\dados_hotel.txt", "r");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINÂµRIO
         ptr = fopen("..\\data\\dados_hotel.dat", "rb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMÃ RIA
         /* code */
         break;
     }
@@ -191,24 +191,24 @@ int deletaHotel(int mode)
     case 1: // USANDO ARQUIVO DE TEXTO
         ptr = fopen("..\\data\\dados_hotel.txt", "w");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINÂµRIO
         ptr = fopen("..\\data\\dados_hotel.dat", "wb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIâ‚¬Ã‡O DE ERRO
         if (ptr == NULL)
         {
             return 1;
         }
         break;
 
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMÃ RIA
         /* code */
         break;
     }
