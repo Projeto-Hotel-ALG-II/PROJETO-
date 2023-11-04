@@ -1,0 +1,28 @@
+1|Ana Silva Santos|Rua das Flores - SÆo Paulo SP|123.456.789-01|(11) 98765-4321|ana.silva@gmail.com|F|casada|25/03/1980
+2|Carlos Oliveira Lima|Avenida dos P ssaros - Rio de Janeiro RJ|987.654.321-02|(21) 87654-1234|carlos.oliveira@gmail.com|M|casado|10/11/1972
+3|Maria Fernanda Pereira|Rua das Palmeiras - Belo Horizonte MG|234.567.890-03|(31) 76543-9876|maria.fernanda@gmail.com|F|solteira|05/09/1990
+4|JoÆo Rodrigues Almeida|Avenida das Estrelas - Bras¡lia DF|345.678.901-04|(61) 65432-8765|joao.rodrigues@gmail.com|M|solteiro|20/07/1985
+5|Luana Mendes Costa|Rua das µguas - Salvador BA|456.789.012-05|(71) 54321-7654|luana.mendes@gmail.com|F|casada|12/12/1993
+6|Andr‚ Santos Pereira|Avenida das Montanhas - Curitiba PR|567.890.123-06|(41) 43210-6543|andre.santos@gmail.com|M|casado|18/04/1982
+7|Sofia Oliveira Silva|Rua dos Ventos - Fortaleza CE|678.901.234-07|(85) 32109-5432|sofia.oliveira@gmail.com|F|solteira|30/01/1998
+8|Lucas Rodrigues Santos|Avenida das Ondas - Recife PE|789.012.345-08|(81) 21098-7654|lucas.rodrigues@gmail.com|M|solteiro|08/06/1991
+0|Isabela Costa Lima|Rua das Pedras - Manaus AM|890.123.456-09|(92) 10987-6543|isabela.costa@gmail.com|F|casada|17/11/1987
+10|Ricardo Fernandes Costa|Avenida das Pedras - Campo Grande MS|901.234.567-10|(67) 65432-0000|cricardocosta@gmail.com|M|solteiro|13/06/1980
+11|J£lia Pereira Silva|Rua das Borboletas - Bel‚m PA|012.345.678-11|(91) 87654-3210|julia.pereira@gmail.com|F|solteira|14/03/1992
+12|Gabriel Santos Oliveira|Avenida das Araras - Goiƒnia GO|123.456.789-12|(62) 76543-2109|gabriel.oliveira@gmail.com|M|solteiro|02/08/1989
+13|Larissa Lima Fernandes|Rua dos Coqueiros - Natal RN|234.567.890-13|(37) 65432-1098|larissa.fernandes@gmail.com|F|casada|19/07/1994
+14|Rafael Costa Almeida|Alameda Amelia 559 casa 2 guarulhos SP|345.678.901-14|(48) 54321-0987|rafael.costa@hotmali.com|M|solteiro|07/05/1983
+15|Amanda Pereira Santos|Rua das Estrelas - Vit¢ria ES|890.123.456-10|(27) 43210-9876|amanda.pereira@gmail.com|F|solteira|11/10/1996
+16|Daniel Oliveira Costa|Avenida das µrvores - Cuiab  MT|567.890.123-16|(65) 32109-8765|daniel.oliveira@gmail.com|M|solteiro|28/12/1981
+17|Carolina Silva Fernandes|Rua dos Riachos - SÆo Lu¡s MA|678.901.234-17|(98) 21098-7654|carolina.silva@gmail.com|F|solteira|03/04/1997
+0|Luiza Lima Oliveira|Rua das Montanhas 43 - Teresina PI|890.123.456-19|(86) 93323-0987|oluizalima@gmail.com|F|solteira|16/01/1999
+21|Pedro Gon‡alo|Rua das Ametistas 665 - Chacaras FernÆo Dias Atibaia SP|000.888.888-77|(32) 97766-3322|pedgonc@gmail.com|M|casado|31/06/1989
+23|Caio Costa Silva|Rua dos Caios Costas|678.982.483-02|(32) 93737-0912|caiocosta@gmail.com|M|solteiro|15/03/1995
+24|Juliano Silva Ribeir|Rua Maestro Vila Lobos, 485 - Tucuruv¡, SÆo Paulo SP|331.889.982-11|(11) 98873-0912|rjulisilva@gmail.com|m|solteiro|14/10/1998
+20|Ricardo Fernandes Costa|Rua CapitÆo Siqueira Barbosa, 12 - Parada Inglesa, SÆo Paulo SP|901.234.567-20|(11) 98738-0912|cfernandescosta@gmail.com|M|solteiro|13/06/1980
+18|Pedro Almeida Santo|Rua das Pedras Porto velho PB|789.012.345-18|(11) 98873-0912|bpedroalmeidasant@gmail.com|M|solteiro|22/06/1986
+19|Kaio Umbias|sa|888.323.444-09|(25) 93342-1112|kai@ai|M|solteiro|32/23/2332
+25|Patrick|Rua das formiguinhas, 44 - Formigueiro, Formiga MG|001.110.029-11|(11) 93382-0192|patric@gmail.com|M|solteiro|03/10/2000
+26|Giulia Matos Grimini|Rua das agulhas, 331 - winewoods, Greenwich UK|773.221.110-11|(99) 98873-0912|gGiuliaMatos|f|solteira|21/07/1997
+27|Urias Marta do Carmo|Rua dos Avestruzes, 77 - Santa Rita, São Félix do Coribe BA|323.325.789.24|(10) 98833-1334|curiasmarta@gmail.com|F|viúva|04/06/1998
+28|Matheus Garcia Batista|Rua Misseno Lopes da Cunha, 86 - P‚rola Negra, Piumhi MG|575.572.438-54|(11) 93343-0912|bmatheusgarcia@gmail.com|M|solteiro|21/12/2005
