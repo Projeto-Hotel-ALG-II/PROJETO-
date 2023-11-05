@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 /*
- * Struct Hï¿½spedes - Guarda os dados dos Hï¿½spedes do hotel
+ * Struct H½spedes - Guarda os dados dos H½spedes do hotel
  */
 typedef struct
 {
@@ -20,22 +20,22 @@ typedef struct
 } str_hospedes;
 
 /*
- * Cadastra o Hï¿½spede (Parï¿½metro: struct com todos os dados)
+ * Cadastra o H¢spede (Parƒmetro: struct com todos os dados)
  */
 int cadastrarHospede(int mode, str_hospedes hospedes);
 
 /*
- * Pesquisa o Hï¿½spede (precisa ser chamado com os endereï¿½os de memï¿½ria de todos as variï¿½veis)
+ * Pesquisa o H¢spede (precisa ser chamado com os endere‡os de mem¢ria de todos as vari veis)
  */
 int pesquisarHospede(int mode, char pesQ_cpf[15], str_hospedes *pHosped);
 
 /*
- * Faz a alteraï¿½ï¿½o do hï¿½spede (selecionado pelo CPF)
+ * Faz a altera‡Æo do h¢spede (selecionado pelo CPF)
  */
 int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped);
 
 /*
- * Exclui o hï¿½spede selecionado
+ * Exclui o h¢spede selecionado
  */
 int excluirHospede(int mode, char cpf[15]);
 
