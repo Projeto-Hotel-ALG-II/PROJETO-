@@ -20,16 +20,16 @@ int cadastrarHospede(int mode, str_hospedes hospedes)
         hospedes.codigo = contadorLinhas("..\\data\\dados_hospedes.txt");
         break;
 
-    case 2: // TRABALHANDO COM ARQUIVOS BINï¿½RIOS
-        pF_hosped = fopen("..\\data\\dados_hospedes.bin", "ab");
+    case 2: // TRABALHANDO COM ARQUIVOS BINµRIOS
+        pF_hosped = fopen("..\\data\\dados_hospedes.dat", "ab");
         if (pF_hosped == NULL)
         {
             exit(1);
         }
-        hospedes.codigo = contadorLinhas("..\\data\\dados_hospedes.bin");
+        hospedes.codigo = contadorLinhas("..\\data\\dados_hospedes.dat");
         break;
 
-    case 3: // TRABALHANDO COM ALOCAï¿½ï¿½O DINï¿½MICA DE MEMï¿½RIA
+    case 3: // TRABALHANDO COM ALOCA€ÇO DIN¶MICA DE MEMàRIA
 
         break;
     }
@@ -146,7 +146,7 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
         while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.end_completo, tmp.cpf, tmp.telefone,
                       tmp.email, &tmp.sexo, tmp.estado_civil, tmp.data_nasc) != EOF)
         {
-            // caso hï¿½spede nï¿½o seja o pesquisado, serï¿½ escrito diretamente o conteudo do arquivo original no temporï¿½rio
+            // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
             if (strcmp(tmp.cpf, cpf) != 0)
             {
                 fprintf(pF_temp, "%d|", tmp.codigo);
@@ -159,7 +159,7 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
                 fprintf(pF_temp, "%s|", tmp.estado_civil);
                 fprintf(pF_temp, "%s\n", tmp.data_nasc);
             }
-            // caso o hï¿½spede seja o pesquisado, ele serï¿½ escrito no arquivo temporï¿½rio sï¿½ que com os novos dados
+            // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com os novos dados
             else
             {
                 att_hosped.codigo = tmp.codigo;
@@ -183,7 +183,7 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
     switch (mode)
     {
     case 1:
-        // Reescrevendo os dados do arquivo temporï¿½rio no arquivo principal
+        // Reescrevendo os dados do arquivo tempor rio no arquivo principal
         pF_temp = fopen("..\\data\\temp.txt", "r");
         pF_hospedes = fopen("..\\data\\dados_hospedes.txt", "w");
         if (pF_hospedes == NULL || pF_temp == NULL)
@@ -192,7 +192,7 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
         }
         break;
     case 2:
-        // Reescrevendo os dados do arquivo temporï¿½rio no arquivo principal
+        // Reescrevendo os dados do arquivo tempor rio no arquivo principal
         pF_temp = fopen("..\\data\\temp.dat", "rb");
         pF_hospedes = fopen("..\\data\\dados_hospedes.dat", "wb");
         if (pF_hospedes == NULL || pF_temp == NULL)
@@ -204,7 +204,7 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
 
     if (mode != 3)
     {
-        // funï¿½ï¿½o vai copiar os dados do arquivo temporï¿½rio de volta para o original
+        // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
         copiarArquivo(pF_temp, pF_hospedes);
 
         fclose(pF_temp);
@@ -225,9 +225,9 @@ int excluirHospede(int mode, char cpf[15])
     case 1:
         // abrindo arquivos
         pF_hospedes = fopen("..\\data\\dados_hospedes.txt", "r");
-        pF_temp = fopen("..\\data\\temp.txt", "w"); // arquivo temporï¿½rio
+        pF_temp = fopen("..\\data\\temp.txt", "w"); // arquivo tempor rio
 
-        // caso nï¿½o seja possï¿½vel abrir o arquivo
+        // caso nÆo seja poss¡vel abrir o arquivo
         if (pF_hospedes == NULL || pF_temp == NULL)
         {
             exit(1);
@@ -237,9 +237,9 @@ int excluirHospede(int mode, char cpf[15])
     case 2:
         // abrindo arquivos
         pF_hospedes = fopen("..\\data\\dados_hospedes.dat", "rb");
-        pF_temp = fopen("..\\data\\temp.dat", "wb"); // arquivo temporï¿½rio
+        pF_temp = fopen("..\\data\\temp.dat", "wb"); // arquivo tempor rio
 
-        // caso nï¿½o seja possï¿½vel abrir o arquivo
+        // caso nÆo seja poss¡vel abrir o arquivo
         if (pF_hospedes == NULL || pF_temp == NULL)
         {
             exit(1);
@@ -259,7 +259,7 @@ int excluirHospede(int mode, char cpf[15])
         while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.end_completo, tmp.cpf, tmp.telefone,
                       tmp.email, &tmp.sexo, tmp.estado_civil, tmp.data_nasc) != EOF)
         {
-            // caso hï¿½spede nï¿½o seja o pesquisado, serï¿½ escrito diretamente o conteudo do arquivo original no temporï¿½rio
+            // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
             if (strcmp(tmp.cpf, cpf) != 0)
             {
                 fprintf(pF_temp, "%d|", tmp.codigo);
@@ -272,7 +272,7 @@ int excluirHospede(int mode, char cpf[15])
                 fprintf(pF_temp, "%s|", tmp.estado_civil);
                 fprintf(pF_temp, "%s\n", tmp.data_nasc);
             }
-            // caso o hï¿½spede seja o pesquisado, ele serï¿½ escrito no arquivo temporï¿½rio sï¿½ que com o cï¿½digo igual a 0
+            // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com o c¢digo igual a 0
             else
             {
                 fprintf(pF_temp, "0|");
@@ -295,7 +295,7 @@ int excluirHospede(int mode, char cpf[15])
     switch (mode)
     {
     case 1:
-        // Reescrevendo os dados do arquivo temporï¿½rio no arquivo principal
+        // Reescrevendo os dados do arquivo tempor rio no arquivo principal
         pF_temp = fopen("..\\data\\temp.txt", "r");
         pF_hospedes = fopen("..\\data\\dados_hospedes.txt", "w");
         if (pF_hospedes == NULL || pF_temp == NULL)
@@ -304,7 +304,7 @@ int excluirHospede(int mode, char cpf[15])
         }
         break;
     case 2:
-        // Reescrevendo os dados do arquivo temporï¿½rio no arquivo principal
+        // Reescrevendo os dados do arquivo tempor rio no arquivo principal
         pF_temp = fopen("..\\data\\temp.dat", "rb");
         pF_hospedes = fopen("..\\data\\dados_hospedes.dat", "wb");
         if (pF_hospedes == NULL || pF_temp == NULL)
@@ -316,7 +316,7 @@ int excluirHospede(int mode, char cpf[15])
 
     if (mode != 3)
     {
-        // funï¿½ï¿½o vai copiar os dados do arquivo temporï¿½rio de volta para o original
+        // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
         copiarArquivo(pF_temp, pF_hospedes);
 
         fclose(pF_temp);
