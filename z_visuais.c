@@ -1125,8 +1125,7 @@ void visualCadastroFornecedor(int mode)
             fflush(stdin);
             scanf("%s", f.cnpj);
 
-            ret = pesquisarFornecedor(f.cnpj, &f.codigo, f.nome, f.razao_social, f.inscricao_estadual,
-                                      f.cnpj, f.end_completo, f.telefone, f.email);
+            ret = pesquisarFornecedor(mode, f.cnpj, &f);
 
             if (ret == 0)
             {
@@ -1158,8 +1157,7 @@ void visualCadastroFornecedor(int mode)
 
             printf("\n");
 
-            ret = pesquisarFornecedor(f.cnpj, &f.codigo, f.nome, f.razao_social, f.inscricao_estadual,
-                                      f.cnpj, f.end_completo, f.telefone, f.email);
+            ret = pesquisarFornecedor(mode, f.cnpj, &f);
 
             if (ret == 0)
             {
@@ -1209,7 +1207,7 @@ void visualCadastroFornecedor(int mode)
                     printf("Indique o novo email              : ");
                     scanf(" %[^\n]", f.email);
 
-                    ret = alterarFornecedor(f.cnpj, f);
+                    ret = alterarFornecedor(mode, f.cnpj, f);
 
                     if (ret == 0)
                     {
@@ -1240,8 +1238,7 @@ void visualCadastroFornecedor(int mode)
 
             printf("\n");
 
-            ret = pesquisarFornecedor(f.cnpj, &f.codigo, f.nome, f.razao_social, f.inscricao_estadual,
-                                      f.cnpj, f.end_completo, f.telefone, f.email);
+            ret = pesquisarFornecedor(mode, f.cnpj, &f);
 
             if (ret == 0)
             {
@@ -1261,7 +1258,7 @@ void visualCadastroFornecedor(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirFornecedor(f.cnpj);
+                    ret = excluirFornecedor(mode, f.cnpj);
 
                     if (ret == 0)
                     {
@@ -1364,7 +1361,7 @@ void visualCadastroProdutos(int mode)
             printf("DIGITE O C‡DIGO DO PRODUTO: \n");
             fflush(stdin);
             scanf("%d", &cliente.codigo);
-            ret = pesquisaProduto(cliente.codigo, cliente.descricao, &cliente.estoque, &cliente.estoque_min, &cliente.preco_custo, &cliente.preco_venda);
+            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
@@ -1390,7 +1387,9 @@ void visualCadastroProdutos(int mode)
             printf("DIGITE O C‡DIGO DO PRODUTO: \n");
             fflush(stdin);
             scanf("%d", &cliente.codigo);
-            ret = pesquisaProduto(cliente.codigo, cliente.descricao, &cliente.estoque, &cliente.estoque_min, &cliente.preco_custo, &cliente.preco_venda);
+
+            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
+
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
@@ -1487,26 +1486,46 @@ void visualCadastroProdutos(int mode)
             break;
 
         case 4:
-            printf("TEM CERTEZA QUE DESJA DELETAR OS DADOS DOS PRODUTOS?\n");
-            printf("1 - SIM\n");
-            printf("2 - N«O\n");
-            printf("\n");
-            printf("INSIRA: ");
-            scanf("%d", &x);
+            printf("Deletando produto\n");
+            printf("DIGITE O C‡DIGO DO PRODUTO: \n");
+            fflush(stdin);
+            scanf("%d", &cliente.codigo);
 
-            if (x == 1)
+            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
+
+            if (ret == 0)
             {
-                ret = deletaProduto();
-                if (ret == 1)
+                printf("PRODUTO ENCONTRADO!\n");
+                printf("=========================\n");
+                printf("C¢digo    : %d\n", cliente.codigo);
+                printf("Descriá∆o : %s\n", cliente.descricao);
+                printf("Estoque   : %d\n", cliente.estoque);
+                printf("=========================\n");
+                printf("Deseja apagar esse produto?\n");
+                printf("1 - Sim\n");
+                printf("0 - N∆o\n");
+                scanf("%d", &x);
+
+                if (x == 1)
                 {
-                    printf("ERRO AO DELETAR DADOS");
-                    pausaSist();
+                    ret = deletaProduto(mode, cliente.codigo);
+
+                    if (ret == 0)
+                    {
+                        printf("PRODUTO EXCLU÷DO COM SUCESSO");
+                        pausaSist();
+                    }
+                    else
+                    {
+                        printf("ERRO AO EXCLUIR PRODUTO");
+                        pausaSist();
+                    }
                 }
-                else
-                {
-                    printf("DADOS DELETADOS");
-                    pausaSist();
-                }
+            }
+            else
+            {
+                printf("PRODUTO N«O ENCONTRADO");
+                pausaSist();
             }
             break;
         }
@@ -1556,7 +1575,7 @@ void visualCadastroOperadores(int mode)
             scanf(" %[^\n]", operador.permissoes);
 
             // Funá∆o cadastra o operador
-            ret = cadastrarOperador(operador);
+            ret = cadastrarOperador(mode, operador);
 
             if (ret == 0)
             {
@@ -1576,7 +1595,7 @@ void visualCadastroOperadores(int mode)
             fflush(stdin);
             scanf("%s", operador.usuario);
 
-            ret = pesquisarOperadorPorUsuario(operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
 
             if (ret == 0)
             {
@@ -1603,7 +1622,7 @@ void visualCadastroOperadores(int mode)
             scanf("%s", operador.usuario);
 
             printf("\n");
-            ret = pesquisarOperadorPorUsuario(operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
 
             if (ret == 0)
             {
@@ -1635,7 +1654,7 @@ void visualCadastroOperadores(int mode)
                     printf("Indique as novas permiss‰es (separadas por v°rgulas) : ");
                     scanf(" %[^\n]", operador.permissoes);
 
-                    ret = editarOperador(operador.usuario, operador);
+                    ret = editarOperador(mode, operador.usuario, operador);
 
                     if (ret == 0)
                     {
@@ -1665,7 +1684,7 @@ void visualCadastroOperadores(int mode)
 
             printf("\n");
 
-            ret = pesquisarOperadorPorUsuario(operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
 
             if (ret == 0)
             {
@@ -1684,7 +1703,7 @@ void visualCadastroOperadores(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirOperador(operador.usuario);
+                    ret = excluirOperador(mode, operador.usuario);
 
                     if (ret == 0)
                     {
