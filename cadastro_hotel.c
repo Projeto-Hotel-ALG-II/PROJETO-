@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "quick_tools.h"
-#include "bib_cadastro_hotel.h"
+#include <stdlib.h>
 
-int escreveHotel(int mode, str_hotel h);
-int alteraHotel(int mode, str_hotel h);
-int lerHotel(int mode, str_hotel *h);
-int deletaHotel(int mode);
+#include "bib_quick_tools.h"
+#include "bib_cadastro_hotel.h"
 
 int escreveHotel(int mode, str_hotel h)
 {
@@ -122,8 +119,8 @@ int alteraHotel(int mode, str_hotel h)
 
 int lerHotel(int mode, str_hotel *h)
 {
-    str_hotel hotel;
     FILE *ptr;
+    str_hotel hotel;
 
     switch (mode)
     {
@@ -133,7 +130,9 @@ int lerHotel(int mode, str_hotel *h)
         // CONDI€ÇO DE ERRO
         if (ptr == NULL)
         {
-            return 1;
+            printf("Erro ao acessar arquivo.");
+            pausaSist();
+            exit(1);
         }
         break;
 
@@ -143,7 +142,9 @@ int lerHotel(int mode, str_hotel *h)
         // CONDI€ÇO DE ERRO
         if (ptr == NULL)
         {
-            return 1;
+            printf("Erro ao acessar arquivo.");
+            pausaSist();
+            exit(1);
         }
         break;
 
@@ -155,32 +156,32 @@ int lerHotel(int mode, str_hotel *h)
     if (mode != 3)
     {
         fscanf(ptr, "%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%f|", hotel.nome_fantasia, hotel.razao_soc, hotel.inscricao_estadual, hotel.cnpj, hotel.end_completo, hotel.telefone, hotel.email, hotel.nome_responsavel, hotel.tel_responsavel, hotel.horario_checkin, hotel.horario_checkout, &hotel.margem_lucro);
+        if (strcmp(hotel.nome_fantasia, "0") == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            strcpy(h->nome_fantasia, hotel.nome_fantasia);
+            strcpy(h->razao_soc, hotel.razao_soc);
+            strcpy(h->inscricao_estadual, hotel.inscricao_estadual);
+            strcpy(h->cnpj, hotel.cnpj);
+            strcpy(h->end_completo, hotel.end_completo);
+            strcpy(h->telefone, hotel.telefone);
+            strcpy(h->email, hotel.email);
+            strcpy(h->nome_responsavel, hotel.nome_responsavel);
+            strcpy(h->tel_responsavel, hotel.tel_responsavel);
+            strcpy(h->horario_checkin, hotel.horario_checkin);
+            strcpy(h->horario_checkout, hotel.horario_checkout);
+            h->margem_lucro = hotel.margem_lucro;
+            return 0;
+        }
     }
     else
     {
     }
 
-    if (strcmp(hotel.nome_fantasia, "0") == 0)
-    {
-        return 1;
-    }
-
-    strcpy(h->nome_fantasia, hotel.nome_fantasia);
-    strcpy(h->razao_soc, hotel.razao_soc);
-    strcpy(h->inscricao_estadual, hotel.inscricao_estadual);
-    strcpy(h->cnpj, hotel.cnpj);
-    strcpy(h->end_completo, hotel.end_completo);
-    strcpy(h->telefone, hotel.telefone);
-    strcpy(h->email, hotel.email);
-    strcpy(h->nome_responsavel, hotel.nome_responsavel);
-    strcpy(h->tel_responsavel, hotel.tel_responsavel);
-    strcpy(h->horario_checkin, hotel.horario_checkin);
-    strcpy(h->horario_checkout, hotel.horario_checkout);
-    h->margem_lucro = hotel.margem_lucro;
-
-    fclose(ptr);
-
-    return 0;
+    return 1;
 }
 
 int deletaHotel(int mode)
@@ -221,6 +222,6 @@ int deletaHotel(int mode)
     else
     {
     }
-    
+
     return 0;
 }
