@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 /*
- * Sub-Struct de 'Acomodacoes' - Guarda as caracter­sticas das acomoda?„es e ? acessada atrav?s da struct Acomodacoes
+ * Sub-Struct de 'Acomodacoes' - Guarda as caracterï¿½sticas das acomoda?ï¿½es e ? acessada atrav?s da struct Acomodacoes
  */
 typedef struct
 {
@@ -15,7 +15,7 @@ typedef struct
 } str_categ_acomodacoes;
 
 /*
- * Struct Acomodacoes - Guarda as informa?„es das acomoda?„es
+ * Struct Acomodacoes - Guarda as informa?ï¿½es das acomoda?ï¿½es
  */
 typedef struct
 {
@@ -26,52 +26,52 @@ typedef struct
 } str_acomodacoes;
 
 /*
- * FUN€ÇO LISTA TODAS AS CATEGORIAS DE ACOMODA€åES
+ * FUNï¿½ï¿½O LISTA TODAS AS CATEGORIAS DE ACOMODAï¿½ï¿½ES
  */
 void listarCategorias(int mode);
 
 /*
- * FUN€ÇO CADASTRA UMA NOVA CATEGORIA DE ACOMODA€ÇO
+ * FUNï¿½ï¿½O CADASTRA UMA NOVA CATEGORIA DE ACOMODAï¿½ï¿½O
  */
 int cadastrarCategoria(int mode, str_categ_acomodacoes categoria);
 
 /*
- * FUN€ÇO PESQUISA UMA CATEGORIA DE ACOMODA€ÇO
+ * FUNï¿½ï¿½O PESQUISA UMA CATEGORIA DE ACOMODAï¿½ï¿½O
  */
 int pesquisarCategoria(int mode, int codigo, str_categ_acomodacoes *categoria);
 
 /*
- * FUN€ÇO EDITA CATEGORIAS DE ACOMODA€åES
+ * FUNï¿½ï¿½O EDITA CATEGORIAS DE ACOMODAï¿½ï¿½ES
  */
 int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria);
 
 /*
- * FUN€ÇO EXCLUI CATEGORIA DE ACOMODA€ÇO
+ * FUNï¿½ï¿½O EXCLUI CATEGORIA DE ACOMODAï¿½ï¿½O
  */
 int excluirCategoria(int mode, int codigo);
 
 /*
- * FUN€ÇO LISTA AS ACOMODA€åES
+ * FUNï¿½ï¿½O LISTA AS ACOMODAï¿½ï¿½ES
  */
 void listarAcomodacoes(int mode);
 
 /*
- * FUN€ÇO CADASTRAR ACOMODA€åES
+ * FUNï¿½ï¿½O CADASTRAR ACOMODAï¿½ï¿½ES
  */
 int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao);
 
 /*
- * FUN€ÇO PESQUISA ACOMODA€åES
+ * FUNï¿½ï¿½O PESQUISA ACOMODAï¿½ï¿½ES
  */
 int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *acomodacao);
 
 /*
- * FUN€ÇO EDITA ACOMODA€åES
+ * FUNï¿½ï¿½O EDITA ACOMODAï¿½ï¿½ES
  */
 int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao);
 
 /*
- * FUN€ÇO EXCLUI ACOMODA€åES
+ * FUNï¿½ï¿½O EXCLUI ACOMODAï¿½ï¿½ES
  */
 int excluirAcomodacao(int mode, int codigo);
 

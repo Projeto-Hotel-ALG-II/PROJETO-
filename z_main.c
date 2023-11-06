@@ -720,7 +720,7 @@ void visualReservas()
         scanf("%d/%d", &reserva.dia_fimReserva, &reserva.mes_fimReserva);
 
       
-        ret = pesquisarDisp_porData(reserva, reservaDados, num_reservas);
+        ret = pesquisarDisp_porData(mode, reserva, reservaDados, num_reservas, reserva.dia_iniReserva, reserva.mes_iniReserva, reserva.dia_fimReserva, reserva.mes_fimReserva);
 
         if (ret == 0)
         {
@@ -852,8 +852,8 @@ void visualReservas()
     case 2: 
       printf("Qual é o dia e mes de check-in desejado para a sua reserva? Digite em DD/MM/AA");
       scanf("%d/%d", &reserva.dia_iniReserva, &reserva.dia_fimReserva);
-      printf("Qual é o dia e mes de check-out desejado para a sua reserva? Digite em DD/MM/AA");
-      printf("%d/%d", &reserva.dia_fimReserva, &reserva.mes_fimReserva);
+
+      int dataDisp = pesquisaDisp_PorData(mode, reserva, num_reservas, reserva.dia_iniReserva, reserva.dia_fimReserva);
 
       printf("Digite o código da categoria de acomodação desejada\n");
       for (int i = 0; i < reservaDados; i++)
@@ -876,13 +876,7 @@ void visualReservas()
           }
       scanf("%d", &reserva.acomod.codigo);
 
-      printf("Tudo pronto, podemos confimar sua reserva?\n");
-      int escolha;
-      printf("1 - SIM!\n");
-      printf("2 - NÃO!\n");
-      scanf("%d", &escolha);
-
-      if (escolha == 1)
+      if (reservar() == 1)
       {
         printf("Reserva feita com sucesso!\n");
       }

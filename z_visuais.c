@@ -5,7 +5,7 @@
 // BIBLIOTECA DE FERRAMENTAS
 #include "bib_quick_tools.h"
 
-// BIBLIOTECAS - CADASTRO E GEST¶O DE DADOS
+// BIBLIOTECAS - CADASTRO E GESTï¿½O DE DADOS
 #include "bib_cadastro_hotel.h"
 #include "bib_cadastro_hospedes.h"
 #include "bib_cadastro_acomodacoes.h"
@@ -25,7 +25,7 @@ void visualCadastroHotel(int mode)
     while (1)
     {
         clearPrompt();
-        printf("GestÆo dos dados do Hotel:\n");
+        printf("Gestï¿½o dos dados do Hotel:\n");
         printf("1 - Cadastrar\n");
         printf("2 - Visualizar\n");
         printf("3 - Alterar\n");
@@ -46,11 +46,11 @@ void visualCadastroHotel(int mode)
             fflush(stdin);
             scanf("%[^\n]", hot.nome_fantasia);
 
-            printf("DIGITE A RAZÇO SOCIAL: ");
+            printf("DIGITE A RAZï¿½O SOCIAL: ");
             fflush(stdin);
             scanf("%[^\n]", hot.razao_soc);
 
-            printf("DIGITE A INSCRI€ÇO ESTADUAL: ");
+            printf("DIGITE A INSCRIï¿½ï¿½O ESTADUAL: ");
             fflush(stdin);
             scanf("%[^\n]", hot.inscricao_estadual);
 
@@ -58,7 +58,7 @@ void visualCadastroHotel(int mode)
             fflush(stdin);
             scanf("%[^\n]", hot.cnpj);
 
-            printf("DIGITE O ENDERE€O COMPLETO: ");
+            printf("DIGITE O ENDEREï¿½O COMPLETO: ");
             fflush(stdin);
             scanf("%[^\n]", hot.end_completo);
 
@@ -70,19 +70,19 @@ void visualCadastroHotel(int mode)
             fflush(stdin);
             scanf("%[^\n]", hot.email);
 
-            printf("DIGITE O NOME DO RESPONSµVEL: ");
+            printf("DIGITE O NOME DO RESPONSï¿½VEL: ");
             fflush(stdin);
             scanf("%[^\n]", hot.nome_responsavel);
 
-            printf("DIGITE O TELEFONE DO RESPONSµVEL: ");
+            printf("DIGITE O TELEFONE DO RESPONSï¿½VEL: ");
             fflush(stdin);
             scanf("%[^\n]", hot.tel_responsavel);
 
-            printf("DIGITE O HORµRIO DE CHECK-IN: ");
+            printf("DIGITE O HORï¿½RIO DE CHECK-IN: ");
             fflush(stdin);
             scanf("%[^\n]", hot.horario_checkin);
 
-            printf("DIGITE O HORµRIO DE CHECK-OUT: ");
+            printf("DIGITE O HORï¿½RIO DE CHECK-OUT: ");
             fflush(stdin);
             scanf("%[^\n]", hot.horario_checkout);
 
@@ -110,14 +110,14 @@ void visualCadastroHotel(int mode)
                 printf("=> Dados do hotel carregados!\n");
                 printf("=========================================\n");
                 printf("NOME FANTASIA           : %s\n", hot.nome_fantasia);
-                printf("RAZÇO SOCIAL            : %s\n", hot.razao_soc);
-                printf("INSCRIÇÇO ESTADUAL      : %s\n", hot.inscricao_estadual);
+                printf("RAZï¿½O SOCIAL            : %s\n", hot.razao_soc);
+                printf("INSCRIï¿½ï¿½O ESTADUAL      : %s\n", hot.inscricao_estadual);
                 printf("CNPJ                    : %s\n", hot.cnpj);
-                printf("ENDEREÇO COMPLETO       : %s\n", hot.end_completo);
+                printf("ENDEREï¿½O COMPLETO       : %s\n", hot.end_completo);
                 printf("TELEFONE                : %s\n", hot.telefone);
                 printf("E-MAIL                  : %s\n", hot.email);
                 printf("NOME DO RESPONSAVEL     : %s\n", hot.nome_responsavel);
-                printf("TELEFONE DO RESPONSµVEL : %s\n", hot.tel_responsavel);
+                printf("TELEFONE DO RESPONSï¿½VEL : %s\n", hot.tel_responsavel);
                 printf("HORARIO DE CHECK-IN     : %sh\n", hot.horario_checkin);
                 printf("HORARIO DE CHECK-OUT    : %sh\n", hot.horario_checkout);
                 printf("MARGEM DE LUCRO         : %.1f%%\n", hot.margem_lucro);
@@ -137,7 +137,7 @@ void visualCadastroHotel(int mode)
             ret = lerHotel(mode, &hot);
             if (ret == 1)
             {
-                printf("NÇO EXISTEM DADOS NO ARQUIVO.\n");
+                printf("Nï¿½O EXISTEM DADOS NO ARQUIVO.\n");
                 pausaSist();
             }
             else
@@ -147,20 +147,20 @@ void visualCadastroHotel(int mode)
                     clearPrompt();
                     printf("Qual campo deseja alterar?\n");
                     printf("1   - NOME FANTASIA           - %s\n", hot.nome_fantasia);
-                    printf("2   - RAZÇO SOCIAL            - %s\n", hot.razao_soc);
-                    printf("3   - INSCRIÇÇO ESTADUAL      - %s\n", hot.inscricao_estadual);
+                    printf("2   - RAZï¿½O SOCIAL            - %s\n", hot.razao_soc);
+                    printf("3   - INSCRIï¿½ï¿½O ESTADUAL      - %s\n", hot.inscricao_estadual);
                     printf("4   - CNPJ                    - %s\n", hot.cnpj);
-                    printf("5   - ENDERE€O COMPLETO       - %s\n", hot.end_completo);
+                    printf("5   - ENDEREï¿½O COMPLETO       - %s\n", hot.end_completo);
                     printf("6   - TELEFONE                - %s\n", hot.telefone);
                     printf("7   - E-MAIL                  - %s\n", hot.email);
                     printf("8   - NOME DO RESPONSAVEL     - %s\n", hot.nome_responsavel);
-                    printf("9   - TELEFONE DO RESPONSµVEL - %s\n", hot.tel_responsavel);
+                    printf("9   - TELEFONE DO RESPONSï¿½VEL - %s\n", hot.tel_responsavel);
                     printf("10 - HORARIO DE CHECK-IN      - %s\n", hot.horario_checkin);
                     printf("11 - HORARIO DE CHECK-OUT     - %s\n", hot.horario_checkout);
                     printf("12 - MARGEM DE LUCRO          - %.1f%%\n\n", hot.margem_lucro);
 
                     printf("13 - Cancelar\n");
-                    printf("14 - Confirmar Mudan‡as\n");
+                    printf("14 - Confirmar Mudanï¿½as\n");
                     printf("=> ");
                     scanf("%d", &choice);
 
@@ -177,14 +177,14 @@ void visualCadastroHotel(int mode)
                     }
                     else if (choice == 2)
                     {
-                        printf("DIGITE A RAZÇO SOCIAL: ");
+                        printf("DIGITE A RAZï¿½O SOCIAL: ");
                         fflush(stdin);
 
                         scanf("%[^\n]s", hot.razao_soc);
                     }
                     else if (choice == 3)
                     {
-                        printf("DIGITE A INSCRI€ÇO SOCIAL: ");
+                        printf("DIGITE A INSCRIï¿½ï¿½O SOCIAL: ");
                         fflush(stdin);
                         scanf("%[^\n]s", hot.inscricao_estadual);
                     }
@@ -196,7 +196,7 @@ void visualCadastroHotel(int mode)
                     }
                     else if (choice == 5)
                     {
-                        printf("DIGITE O ENDERE€O COMPLETO: ");
+                        printf("DIGITE O ENDEREï¿½O COMPLETO: ");
                         fflush(stdin);
                         scanf("%[^\n]s", hot.end_completo);
                     }
@@ -214,7 +214,7 @@ void visualCadastroHotel(int mode)
                     }
                     else if (choice == 8)
                     {
-                        printf("DIGITE O NOME DO RESPONSµVEL: ");
+                        printf("DIGITE O NOME DO RESPONSï¿½VEL: ");
                         fflush(stdin);
                         scanf("%[^\n]s", hot.nome_responsavel);
                     }
@@ -227,13 +227,13 @@ void visualCadastroHotel(int mode)
                     }
                     else if (choice == 10)
                     {
-                        printf("DIGITE O HORµRIO CHECK-IN: ");
+                        printf("DIGITE O HORï¿½RIO CHECK-IN: ");
                         fflush(stdin);
                         scanf("%[^\n]s", hot.horario_checkin);
                     }
                     else if (choice == 11)
                     {
-                        printf("DIGITE O HORµRIO DE CHECK-OUT: ");
+                        printf("DIGITE O HORï¿½RIO DE CHECK-OUT: ");
                         fflush(stdin);
                         scanf("%[^\n]s", hot.horario_checkout);
                     }
@@ -266,7 +266,7 @@ void visualCadastroHotel(int mode)
         case 4:
             printf("Tem certeza que deseja apagar os dados do hotel?\n");
             printf("1 - Sim\n");
-            printf("2 - NÆo\n");
+            printf("2 - Nï¿½o\n");
             printf("=> ");
             scanf("%d", &choice);
 
@@ -293,15 +293,15 @@ void visualCadastroHotel(int mode)
 
 void visualCadastroHospedes(int mode)
 {
-    int choice; // armazena as escolhas de navegabilidade do usu rio
-    int ret;    // armazena o retorno das fun‡äes
+    int choice; // armazena as escolhas de navegabilidade do usuï¿½rio
+    int ret;    // armazena o retorno das funï¿½ï¿½es
     str_hospedes hospedes;
 
     while (1)
     {
         clearPrompt();
-        // menu principal da se‡Æo cadastro de hospedes
-        printf("Cadastro e GestÆo de H¢spedes:\n");
+        // menu principal da seï¿½ï¿½o cadastro de hospedes
+        printf("Cadastro e Gestï¿½o de Hï¿½spedes:\n");
         printf("1 - Cadastrar\n");
         printf("2 - Pesquisar\n");
         printf("3 - Alterar\n");
@@ -317,7 +317,7 @@ void visualCadastroHospedes(int mode)
 
         switch (choice)
         {
-        case 1: // ===== CADASTRAR HàSPEDE =====
+        case 1: // ===== CADASTRAR Hï¿½SPEDE =====
 
             // recolhendo dados do novo hospede
             fflush(stdin);
@@ -325,7 +325,7 @@ void visualCadastroHospedes(int mode)
             scanf(" %[^\n]", hospedes.nome);
 
             fflush(stdin); // Limpa o buffer
-            printf("Indique o endere‡o completo  : ");
+            printf("Indique o endereï¿½o completo  : ");
             scanf(" %[^\n]", hospedes.end_completo);
 
             fflush(stdin);
@@ -353,12 +353,12 @@ void visualCadastroHospedes(int mode)
             printf("Indique a data de nascimento : ");
             scanf("%[^\n]", hospedes.data_nasc);
 
-            // fun‡Æo cadastra os h¢spedes
+            // funï¿½ï¿½o cadastra os hï¿½spedes
             ret = cadastrarHospede(mode, hospedes);
 
             if (ret == 0)
             {
-                printf("\nH¢spede cadastrado com sucesso!");
+                printf("\nHï¿½spede cadastrado com sucesso!");
                 pausaSist();
             }
             else
@@ -369,9 +369,9 @@ void visualCadastroHospedes(int mode)
 
             break;
 
-        case 2: // ===== PESQUISAR HàSPEDE =====
-            printf("Pesquisar H¢spede: \n");
-            printf("CPF do h¢spede (XXX.XXX.XXX-XX): ");
+        case 2: // ===== PESQUISAR Hï¿½SPEDE =====
+            printf("Pesquisar Hï¿½spede: \n");
+            printf("CPF do hï¿½spede (XXX.XXX.XXX-XX): ");
             fflush(stdin);
             scanf("%s", hospedes.cpf);
 
@@ -379,11 +379,11 @@ void visualCadastroHospedes(int mode)
 
             if (ret == 0)
             {
-                printf("=> H¢spede encontrado!\n");
+                printf("=> Hï¿½spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
+                printf("Cï¿½digo             : %d\n", hospedes.codigo);
                 printf("Nome               : %s\n", hospedes.nome);
-                printf("Endere‡o           : %s\n", hospedes.end_completo);
+                printf("Endereï¿½o           : %s\n", hospedes.end_completo);
                 printf("CPF                : %s\n", hospedes.cpf);
                 printf("Telefone           : %s\n", hospedes.telefone);
                 printf("E-mail             : %s\n", hospedes.email);
@@ -394,13 +394,13 @@ void visualCadastroHospedes(int mode)
             }
             else
             {
-                printf("=> H¢spede nÆo encontrado!\n");
+                printf("=> Hï¿½spede nï¿½o encontrado!\n");
                 pausaSist();
             }
             break;
-        case 3: // ===== ALTERAR HàSPEDE =====
+        case 3: // ===== ALTERAR Hï¿½SPEDE =====
             clearPrompt();
-            printf("Alterar h¢spede:\n");
+            printf("Alterar hï¿½spede:\n");
 
             printf("Informe o CPF: \n");
             fflush(stdin);
@@ -412,17 +412,17 @@ void visualCadastroHospedes(int mode)
 
             if (ret == 0)
             {
-                printf("=> H¢spede encontrado!\n");
+                printf("=> Hï¿½spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
+                printf("Cï¿½digo             : %d\n", hospedes.codigo);
                 printf("Nome               : %s\n", hospedes.nome);
                 printf("Telefone           : %s\n", hospedes.telefone);
                 printf("Email              : %s\n", hospedes.email);
                 printf("Data de Nascimento : %s\n", hospedes.data_nasc);
                 printf("=========================================\n");
-                printf("Deseja alterar este h¢spede?\n");
+                printf("Deseja alterar este hï¿½spede?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -434,7 +434,7 @@ void visualCadastroHospedes(int mode)
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
                         printf("1 - Nome               - %s.\n", hospedes.nome);
-                        printf("2 - Endere‡o Completo  - %s.\n", hospedes.end_completo);
+                        printf("2 - Endereï¿½o Completo  - %s.\n", hospedes.end_completo);
                         printf("3 - CPF                - %s.\n", hospedes.cpf);
                         printf("4 - Telefone           - %s.\n", hospedes.telefone);
                         printf("5 - Email              - %s.\n", hospedes.email);
@@ -461,7 +461,7 @@ void visualCadastroHospedes(int mode)
                             break;
                         case 2:
                             fflush(stdin);
-                            printf("Indique o endere‡o completo  : ");
+                            printf("Indique o endereï¿½o completo  : ");
                             scanf(" %[^\n]", hospedes.end_completo);
                             break;
                         case 3:
@@ -496,7 +496,7 @@ void visualCadastroHospedes(int mode)
                             scanf("%[^\n]", hospedes.data_nasc);
                             break;
                         default:
-                            printf("Insira um valor v lido!\n");
+                            printf("Insira um valor vï¿½lido!\n");
                             clearPrompt();
                             break;
                         }
@@ -508,12 +508,12 @@ void visualCadastroHospedes(int mode)
 
                         if (ret == 0)
                         {
-                            printf("H¢spede alterado com sucesso");
+                            printf("Hï¿½spede alterado com sucesso");
                             pausaSist();
                         }
                         else
                         {
-                            printf("=> Falha ao alterar h¢spede");
+                            printf("=> Falha ao alterar hï¿½spede");
                             pausaSist();
                         }
                     }
@@ -521,14 +521,14 @@ void visualCadastroHospedes(int mode)
             }
             else
             {
-                printf("=> H¢spede nÆo encontrado!\n");
+                printf("=> Hï¿½spede nï¿½o encontrado!\n");
                 pausaSist();
             }
 
             break;
-        case 4: // ===== EXCLUIR HàSPEDE =====
+        case 4: // ===== EXCLUIR Hï¿½SPEDE =====
             clearPrompt();
-            printf("Excluir h¢spede:\n");
+            printf("Excluir hï¿½spede:\n");
 
             printf("Informe o CPF: \n");
             fflush(stdin);
@@ -540,17 +540,17 @@ void visualCadastroHospedes(int mode)
 
             if (ret == 0)
             {
-                printf("=> H¢spede encontrado!\n");
+                printf("=> Hï¿½spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
+                printf("Cï¿½digo             : %d\n", hospedes.codigo);
                 printf("Nome               : %s\n", hospedes.nome);
                 printf("Telefone           : %s\n", hospedes.telefone);
                 printf("Email              : %s\n", hospedes.email);
                 printf("Data de Nascimento : %s\n", hospedes.data_nasc);
                 printf("=========================================\n");
-                printf("Deseja excluir este h¢spede?\n");
+                printf("Deseja excluir este hï¿½spede?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -560,24 +560,24 @@ void visualCadastroHospedes(int mode)
 
                     if (ret == 0)
                     {
-                        printf("H¢spede exclu¡do com sucesso!");
+                        printf("Hï¿½spede excluï¿½do com sucesso!");
                         pausaSist();
                     }
                     else
                     {
-                        printf("=> Falha ao excluir h¢spede.");
+                        printf("=> Falha ao excluir hï¿½spede.");
                         pausaSist();
                     }
                 }
             }
             else
             {
-                printf("H¢spede nÆo encontrado.");
+                printf("Hï¿½spede nï¿½o encontrado.");
                 pausaSist();
             }
             break;
-        default: // ===== EM CASO DE OUTRA OP€ÇO =====
-            printf("\n[X] ERRO - Insira um valor v lido!");
+        default: // ===== EM CASO DE OUTRA OPï¿½ï¿½O =====
+            printf("\n[X] ERRO - Insira um valor vï¿½lido!");
             pausaSist();
             break;
         }
@@ -594,17 +594,17 @@ void visualCadastroAcomodacoes(int mode)
     while (1)
     {
         clearPrompt();
-        printf("Cadastro e GestÆo de Acomoda‡äes e Categorias:\n");
-        printf("1 - Cadastrar Categoria de Acomoda‡Æo\n");
-        printf("2 - Pesquisar Categoria de Acomoda‡Æo\n");
-        printf("3 - Editar Categoria de Acomoda‡Æo\n");
-        printf("4 - Excluir Categoria de Acomoda‡Æo\n");
-        printf("5 - Cadastrar Acomoda‡Æo\n");
-        printf("6 - Pesquisar Acomoda‡Æo\n");
-        printf("7 - Editar Acomoda‡Æo\n");
-        printf("8 - Excluir Acomoda‡Æo\n");
+        printf("Cadastro e Gestï¿½o de Acomodaï¿½ï¿½es e Categorias:\n");
+        printf("1 - Cadastrar Categoria de Acomodaï¿½ï¿½o\n");
+        printf("2 - Pesquisar Categoria de Acomodaï¿½ï¿½o\n");
+        printf("3 - Editar Categoria de Acomodaï¿½ï¿½o\n");
+        printf("4 - Excluir Categoria de Acomodaï¿½ï¿½o\n");
+        printf("5 - Cadastrar Acomodaï¿½ï¿½o\n");
+        printf("6 - Pesquisar Acomodaï¿½ï¿½o\n");
+        printf("7 - Editar Acomodaï¿½ï¿½o\n");
+        printf("8 - Excluir Acomodaï¿½ï¿½o\n");
         printf("9 - Listar Categorias\n");
-        printf("10 - Listar Acomoda‡äes\n");
+        printf("10 - Listar Acomodaï¿½ï¿½es\n");
         printf("11 - Sair\n");
         printf("=> ");
         scanf("%d", &choice);
@@ -613,11 +613,11 @@ void visualCadastroAcomodacoes(int mode)
         {
         case 1:
             fflush(stdin);
-            printf("Informe a descri‡Æo da categoria: ");
+            printf("Informe a descriï¿½ï¿½o da categoria: ");
             scanf(" %[^\n]", categoria.descricao);
 
             fflush(stdin);
-            printf("Informe o valor da di ria: ");
+            printf("Informe o valor da diï¿½ria: ");
             scanf("%f", &categoria.valor_diaria);
 
             fflush(stdin);
@@ -628,61 +628,61 @@ void visualCadastroAcomodacoes(int mode)
 
             if (ret == 0)
             {
-                printf("Categoria de acomoda‡Æo cadastrada com sucesso!\n");
+                printf("Categoria de acomodaï¿½ï¿½o cadastrada com sucesso!\n");
                 pausaSist();
             }
             else
             {
-                printf("Erro ao abrir o arquivo de categorias de acomoda‡äes.\n");
+                printf("Erro ao abrir o arquivo de categorias de acomodaï¿½ï¿½es.\n");
                 pausaSist();
             }
 
             break;
 
         case 2:
-            printf("Pesquisa de Categoria de Acomoda‡Æo.\n");
-            printf("Informe o c¢digo da categoria de acomoda‡Æo: ");
+            printf("Pesquisa de Categoria de Acomodaï¿½ï¿½o.\n");
+            printf("Informe o cï¿½digo da categoria de acomodaï¿½ï¿½o: ");
             scanf("%d", &acomodacao.catec_acomod.codigo);
 
             ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &categoria);
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                printf("Categoria de Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===================================\n");
-                printf("C¢digo                : %d\n", categoria.codigo);
-                printf("Descri‡Æo             : %s\n", categoria.descricao);
-                printf("Valor da Di ria       : R$%.2f\n", categoria.valor_diaria);
+                printf("Cï¿½digo                : %d\n", categoria.codigo);
+                printf("Descriï¿½ï¿½o             : %s\n", categoria.descricao);
+                printf("Valor da Diï¿½ria       : R$%.2f\n", categoria.valor_diaria);
                 printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
                 pausaSist();
             }
             else
             {
-                printf("Categoria de Acomoda‡Æo nÆo encontrada.\n");
+                printf("Categoria de Acomodaï¿½ï¿½o nï¿½o encontrada.\n");
                 pausaSist();
             }
 
             break;
 
         case 3:
-            printf("Pesquisa de Categoria de Acomoda‡Æo.\n");
-            printf("Informe o c¢digo da categoria de acomoda‡Æo: ");
+            printf("Pesquisa de Categoria de Acomodaï¿½ï¿½o.\n");
+            printf("Informe o cï¿½digo da categoria de acomodaï¿½ï¿½o: ");
             scanf("%d", &acomodacao.catec_acomod.codigo);
 
             ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &categoria);
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                printf("Categoria de Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===================================\n");
-                printf("C¢digo                : %d\n", categoria.codigo);
-                printf("Descri‡Æo             : %s\n", categoria.descricao);
-                printf("Valor da Di ria       : R$%.2f\n", categoria.valor_diaria);
+                printf("Cï¿½digo                : %d\n", categoria.codigo);
+                printf("Descriï¿½ï¿½o             : %s\n", categoria.descricao);
+                printf("Valor da Diï¿½ria       : R$%.2f\n", categoria.valor_diaria);
                 printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
                 printf("===================================\n");
                 printf("Deseja alterar esta categoria?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -692,8 +692,8 @@ void visualCadastroAcomodacoes(int mode)
                     {
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
-                        printf("1 - Descri‡Æo             - %s\n", categoria.descricao);
-                        printf("2 - Valor da Di ria       - R$%.2f\n", categoria.valor_diaria);
+                        printf("1 - Descriï¿½ï¿½o             - %s\n", categoria.descricao);
+                        printf("2 - Valor da Diï¿½ria       - R$%.2f\n", categoria.valor_diaria);
                         printf("3 - Quantidade de Pessoas - %d\n\n", categoria.qtd_pessoas);
                         printf("4 - Cancelar\n");
                         printf("5 - Alterar Categoria\n");
@@ -709,13 +709,13 @@ void visualCadastroAcomodacoes(int mode)
                         {
                         case 1:
                             fflush(stdin);
-                            printf("Informe a descri‡Æo da categoria: ");
+                            printf("Informe a descriï¿½ï¿½o da categoria: ");
                             scanf(" %[^\n]", categoria.descricao);
                             break;
 
                         case 2:
                             fflush(stdin);
-                            printf("Informe o valor da di ria: ");
+                            printf("Informe o valor da diï¿½ria: ");
                             scanf("%f", &categoria.valor_diaria);
                             break;
 
@@ -726,7 +726,7 @@ void visualCadastroAcomodacoes(int mode)
                             break;
 
                         default:
-                            printf("Insira um valor v lido.\n");
+                            printf("Insira um valor vï¿½lido.\n");
                             pausaSist();
                             break;
                         }
@@ -738,7 +738,7 @@ void visualCadastroAcomodacoes(int mode)
 
                         if (ret == 0)
                         {
-                            printf("Categoria de Acomoda‡Æo alterada com sucesso!\n");
+                            printf("Categoria de Acomodaï¿½ï¿½o alterada com sucesso!\n");
                             pausaSist();
                         }
                         else
@@ -751,30 +751,30 @@ void visualCadastroAcomodacoes(int mode)
             }
             else
             {
-                printf("Categoria de Acomoda‡Æo nÆo encontrada.\n");
+                printf("Categoria de Acomodaï¿½ï¿½o nï¿½o encontrada.\n");
                 pausaSist();
             }
 
             break;
 
         case 4:
-            printf("Informe o c¢digo da categoria a ser exclu¡da: ");
+            printf("Informe o cï¿½digo da categoria a ser excluï¿½da: ");
             scanf("%d", &categoria.codigo);
 
             ret = pesquisarCategoria(mode, categoria.codigo, &categoria);
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                printf("Categoria de Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===================================\n");
-                printf("C¢digo                : %d\n", categoria.codigo);
-                printf("Descri‡Æo             : %s\n", categoria.descricao);
-                printf("Valor da Di ria       : R$%.2f\n", categoria.valor_diaria);
+                printf("Cï¿½digo                : %d\n", categoria.codigo);
+                printf("Descriï¿½ï¿½o             : %s\n", categoria.descricao);
+                printf("Valor da Diï¿½ria       : R$%.2f\n", categoria.valor_diaria);
                 printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
                 printf("===================================\n");
                 printf("Deseja excluir esta categoria?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -784,28 +784,28 @@ void visualCadastroAcomodacoes(int mode)
 
                     if (ret == 0)
                     {
-                        printf("Categoria de Acomoda‡Æo exclu¡da com sucesso!\n");
+                        printf("Categoria de Acomodaï¿½ï¿½o excluï¿½da com sucesso!\n");
                         pausaSist();
                     }
                     else
                     {
-                        printf("Erro ao excluir Categoria de Acomoda‡Æo.\n");
+                        printf("Erro ao excluir Categoria de Acomodaï¿½ï¿½o.\n");
                         pausaSist();
                     }
                 }
             }
             else
             {
-                printf("Categoria de Acomoda‡Æo nÆo encontrada.\n");
+                printf("Categoria de Acomodaï¿½ï¿½o nï¿½o encontrada.\n");
                 pausaSist();
             }
 
             break;
 
         case 5:
-            printf("Cadastrando acomoda‡Æo.\n");
+            printf("Cadastrando acomodaï¿½ï¿½o.\n");
 
-            printf("Informe a descri‡Æo da acomoda‡Æo: ");
+            printf("Informe a descriï¿½ï¿½o da acomodaï¿½ï¿½o: ");
             fflush(stdin);
             scanf(" %[^\n]", acomodacao.descricao);
 
@@ -813,7 +813,7 @@ void visualCadastroAcomodacoes(int mode)
             fflush(stdin);
             scanf(" %[^\n]", acomodacao.facilidades);
 
-            printf("Informe o c¢digo da categoria da acomoda‡Æo: ");
+            printf("Informe o cï¿½digo da categoria da acomodaï¿½ï¿½o: ");
             fflush(stdin);
             scanf("%d", &acomodacao.catec_acomod.codigo);
 
@@ -825,18 +825,18 @@ void visualCadastroAcomodacoes(int mode)
 
                 if (ret == 0)
                 {
-                    printf("Acomoda‡Æo cadastrada com sucesso!\n");
+                    printf("Acomodaï¿½ï¿½o cadastrada com sucesso!\n");
                     pausaSist();
                 }
                 else
                 {
-                    printf("Erro ao abrir o arquivo de acomoda‡äes.\n");
+                    printf("Erro ao abrir o arquivo de acomodaï¿½ï¿½es.\n");
                     pausaSist();
                 }
             }
             else
             {
-                printf("O c¢digo dessa categoria de acomoda‡Æo nÆo existe.\n");
+                printf("O cï¿½digo dessa categoria de acomodaï¿½ï¿½o nï¿½o existe.\n");
                 pausaSist();
             }
 
@@ -844,55 +844,55 @@ void visualCadastroAcomodacoes(int mode)
 
         case 6:
 
-            printf("Pesquisando acomoda‡Æo.\n");
-            printf("Informe o c¢digo da acomoda‡Æo: ");
+            printf("Pesquisando acomodaï¿½ï¿½o.\n");
+            printf("Informe o cï¿½digo da acomodaï¿½ï¿½o: ");
             scanf("%d", &acomodacao.codigo);
 
             ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
 
             if (ret == 0)
             {
-                printf("Acomoda‡Æo encontrada!\n");
+                printf("Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===========================\n");
-                printf("C¢digo      : %d\n", acomodacao.codigo);
-                printf("Descri‡Æo   : %s\n", acomodacao.descricao);
+                printf("Cï¿½digo      : %d\n", acomodacao.codigo);
+                printf("Descriï¿½ï¿½o   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
-                printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo             : %s\n", acomodacao.catec_acomod.descricao);
-                printf("=  Valor da Di ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
+                printf("=> Categoria de Acomodaï¿½ï¿½o\n");
+                printf("=  Cï¿½digo                : %d\n", acomodacao.catec_acomod.codigo);
+                printf("=  Descriï¿½ï¿½o             : %s\n", acomodacao.catec_acomod.descricao);
+                printf("=  Valor da Diï¿½ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
                 printf("=  Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
 
                 pausaSist();
             }
             else
             {
-                printf("Acomoda‡Æo nÆo encontrada!\n");
+                printf("Acomodaï¿½ï¿½o nï¿½o encontrada!\n");
                 pausaSist();
             }
             break;
 
         case 7:
-            printf("Alterando acomoda‡Æo.\n");
-            printf("Informe o c¢digo da acomoda‡Æo: ");
+            printf("Alterando acomodaï¿½ï¿½o.\n");
+            printf("Informe o cï¿½digo da acomodaï¿½ï¿½o: ");
             scanf("%d", &acomodacao.codigo);
 
             ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                printf("Categoria de Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===================================\n");
-                printf("C¢digo      : %d\n", acomodacao.codigo);
-                printf("Descri‡Æo   : %s\n", acomodacao.descricao);
+                printf("Cï¿½digo      : %d\n", acomodacao.codigo);
+                printf("Descriï¿½ï¿½o   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
-                printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+                printf("=> Categoria de Acomodaï¿½ï¿½o\n");
+                printf("=  Cï¿½digo      : %d\n", acomodacao.catec_acomod.codigo);
+                printf("=  Descriï¿½ï¿½o   : %s\n", acomodacao.catec_acomod.descricao);
                 printf("===================================\n");
-                printf("Deseja alterar esta acomoda‡Æo?\n");
+                printf("Deseja alterar esta acomodaï¿½ï¿½o?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -903,10 +903,10 @@ void visualCadastroAcomodacoes(int mode)
                     {
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
-                        printf("1 - Descri‡Æo   : %s\n", acomodacao.descricao);
+                        printf("1 - Descriï¿½ï¿½o   : %s\n", acomodacao.descricao);
                         printf("2 - Facilidades : %s\n\n", acomodacao.facilidades);
-                        printf("Categoria de Acomoda‡Æo:\n");
-                        printf("3 - C¢digo      : %d (%s)\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
+                        printf("Categoria de Acomodaï¿½ï¿½o:\n");
+                        printf("3 - Cï¿½digo      : %d (%s)\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
                         printf("4 - Cancelar\n");
                         printf("5 - Alterar Categoria\n");
                         printf("=> ");
@@ -920,7 +920,7 @@ void visualCadastroAcomodacoes(int mode)
                         switch (choice)
                         {
                         case 1:
-                            printf("Informe a nova descri‡Æo da acomoda‡Æo: ");
+                            printf("Informe a nova descriï¿½ï¿½o da acomodaï¿½ï¿½o: ");
                             fflush(stdin);
                             scanf(" %[^\n]", acomodacao.descricao);
                             break;
@@ -933,7 +933,7 @@ void visualCadastroAcomodacoes(int mode)
 
                         case 3:
                             codTemp = acomodacao.catec_acomod.codigo;
-                            printf("Informe o novo c¢digo da categoria da acomoda‡Æo: ");
+                            printf("Informe o novo cï¿½digo da categoria da acomodaï¿½ï¿½o: ");
                             fflush(stdin);
                             scanf("%d", &acomodacao.catec_acomod.codigo);
 
@@ -941,7 +941,7 @@ void visualCadastroAcomodacoes(int mode)
 
                             if (ret != 0)
                             {
-                                printf("Informe um c¢digo de categoria v lido!\n");
+                                printf("Informe um cï¿½digo de categoria vï¿½lido!\n");
                                 pausaSist();
 
                                 acomodacao.catec_acomod.codigo = codTemp;
@@ -949,7 +949,7 @@ void visualCadastroAcomodacoes(int mode)
                             break;
 
                         default:
-                            printf("Selecione uma op‡Æo v lida.\n");
+                            printf("Selecione uma opï¿½ï¿½o vï¿½lida.\n");
                             pausaSist();
                             break;
                         }
@@ -961,12 +961,12 @@ void visualCadastroAcomodacoes(int mode)
 
                         if (ret == 0)
                         {
-                            printf("Acomoda‡Æo alterada com sucesso!\n");
+                            printf("Acomodaï¿½ï¿½o alterada com sucesso!\n");
                             pausaSist();
                         }
                         else
                         {
-                            printf("Erro ao alterar Acomoda‡Æo.\n");
+                            printf("Erro ao alterar Acomodaï¿½ï¿½o.\n");
                             pausaSist();
                         }
                     }
@@ -974,32 +974,32 @@ void visualCadastroAcomodacoes(int mode)
             }
             else
             {
-                printf("Acomoda‡Æo nÆo encontrada!\n");
+                printf("Acomodaï¿½ï¿½o nï¿½o encontrada!\n");
                 pausaSist();
             }
             break;
 
         case 8:
-            printf("Excluindo acomoda‡Æo.\n");
-            printf("Informe o c¢digo da acomoda‡Æo: ");
+            printf("Excluindo acomodaï¿½ï¿½o.\n");
+            printf("Informe o cï¿½digo da acomodaï¿½ï¿½o: ");
             scanf("%d", &acomodacao.codigo);
 
             ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                printf("Categoria de Acomodaï¿½ï¿½o encontrada!\n");
                 printf("===================================\n");
-                printf("C¢digo      : %d\n", acomodacao.codigo);
-                printf("Descri‡Æo   : %s\n", acomodacao.descricao);
+                printf("Cï¿½digo      : %d\n", acomodacao.codigo);
+                printf("Descriï¿½ï¿½o   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
-                printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+                printf("=> Categoria de Acomodaï¿½ï¿½o\n");
+                printf("=  Cï¿½digo      : %d\n", acomodacao.catec_acomod.codigo);
+                printf("=  Descriï¿½ï¿½o   : %s\n", acomodacao.catec_acomod.descricao);
                 printf("===================================\n");
-                printf("Deseja excluir esta acomoda‡Æo?\n");
+                printf("Deseja excluir esta acomodaï¿½ï¿½o?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -1009,19 +1009,19 @@ void visualCadastroAcomodacoes(int mode)
 
                     if (ret == 0)
                     {
-                        printf("Acomoda‡Æo exclu¡da com sucesso!\n");
+                        printf("Acomodaï¿½ï¿½o excluï¿½da com sucesso!\n");
                         pausaSist();
                     }
                     else
                     {
-                        printf("Erro ao excluir Acomoda‡Æo.\n");
+                        printf("Erro ao excluir Acomodaï¿½ï¿½o.\n");
                         pausaSist();
                     }
                 }
             }
             else
             {
-                printf("Acomoda‡Æo nÆo encontrada!\n");
+                printf("Acomodaï¿½ï¿½o nï¿½o encontrada!\n");
                 pausaSist();
             }
             break;
@@ -1040,7 +1040,7 @@ void visualCadastroAcomodacoes(int mode)
             exit(0);
 
         default:
-            printf("Op‡Æo inv lida. Tente novamente.\n");
+            printf("Opï¿½ï¿½o invï¿½lida. Tente novamente.\n");
             pausaSist();
             break;
         }
@@ -1057,8 +1057,8 @@ void visualCadastroFornecedor(int mode)
     while (1)
     {
         clearPrompt();
-        // menu principal da se?’o funcionarios
-        printf("Cadastro e Gest’o de Fornecedores:\n");
+        // menu principal da se?ï¿½o funcionarios
+        printf("Cadastro e Gestï¿½o de Fornecedores:\n");
         printf("1 - Cadastrar\n");
         printf("2 - Pesquisar\n");
         printf("3 - Alterar\n");
@@ -1082,11 +1082,11 @@ void visualCadastroFornecedor(int mode)
             scanf(" %[^\n]", f.nome);
 
             fflush(stdin);
-            printf("Indique a raz’o social       : ");
+            printf("Indique a razï¿½o social       : ");
             scanf(" %[^\n]", f.razao_social);
 
             fflush(stdin);
-            printf("Indique a inscri?’o estadual : ");
+            printf("Indique a inscri?ï¿½o estadual : ");
             scanf(" %[^\n]", f.inscricao_estadual);
 
             fflush(stdin);
@@ -1105,7 +1105,7 @@ void visualCadastroFornecedor(int mode)
             printf("Indique o email              : ");
             scanf(" %[^\n]", f.email);
 
-            // fun?’o cadastra o fornecedor
+            // fun?ï¿½o cadastra o fornecedor
             ret = cadastrarFornecedor(f);
 
             if (ret == 0)
@@ -1132,10 +1132,10 @@ void visualCadastroFornecedor(int mode)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C½digo             : %d\n", f.codigo);
+                printf("Cï¿½digo             : %d\n", f.codigo);
                 printf("Nome Fornecedor    : %s\n", f.nome);
-                printf("Raz’o Social       : %s\n", f.razao_social);
-                printf("Inscri?’o Estadual : %s\n", f.inscricao_estadual);
+                printf("Razï¿½o Social       : %s\n", f.razao_social);
+                printf("Inscri?ï¿½o Estadual : %s\n", f.inscricao_estadual);
                 printf("CNPJ               : %s\n", f.cnpj);
                 printf("Endere?o Completo  : %s\n", f.end_completo);
                 printf("Telefone           : %s\n", f.telefone);
@@ -1144,7 +1144,7 @@ void visualCadastroFornecedor(int mode)
             }
             else
             {
-                printf("=> Fornecedor n’o encontrado!\n");
+                printf("=> Fornecedor nï¿½o encontrado!\n");
                 pausaSist();
             }
             break;
@@ -1165,7 +1165,7 @@ void visualCadastroFornecedor(int mode)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C½digo             : %d\n", f.codigo);
+                printf("Cï¿½digo             : %d\n", f.codigo);
                 printf("Nome               : %s\n", f.nome);
                 printf("Telefone           : %s\n", f.telefone);
                 printf("Email              : %s\n", f.email);
@@ -1173,7 +1173,7 @@ void visualCadastroFornecedor(int mode)
                 printf("=========================================\n");
                 printf("Deseja alterar este fornecedor?\n");
                 printf("1 - Sim\n");
-                printf("0 - N’o\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -1186,11 +1186,11 @@ void visualCadastroFornecedor(int mode)
                     scanf(" %[^\n]", f.nome);
 
                     fflush(stdin);
-                    printf("Indique a nova raz’o social       : ");
+                    printf("Indique a nova razï¿½o social       : ");
                     scanf(" %[^\n]", f.razao_social);
 
                     fflush(stdin);
-                    printf("Indique a nova inscri?’o estadual : ");
+                    printf("Indique a nova inscri?ï¿½o estadual : ");
                     scanf(" %[^\n]", f.inscricao_estadual);
 
                     fflush(stdin);
@@ -1225,7 +1225,7 @@ void visualCadastroFornecedor(int mode)
             }
             else
             {
-                printf("=> Fornecedor n’o encontrado!\n");
+                printf("=> Fornecedor nï¿½o encontrado!\n");
                 pausaSist();
             }
 
@@ -1247,7 +1247,7 @@ void visualCadastroFornecedor(int mode)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C½digo             : %d\n", f.codigo);
+                printf("Cï¿½digo             : %d\n", f.codigo);
                 printf("Nome               : %s\n", f.nome);
                 printf("Telefone           : %s\n", f.telefone);
                 printf("Email              : %s\n", f.email);
@@ -1255,7 +1255,7 @@ void visualCadastroFornecedor(int mode)
                 printf("=========================================\n");
                 printf("Deseja excluir este fornecedor?\n");
                 printf("1 - Sim\n");
-                printf("0 - N’o\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -1265,7 +1265,7 @@ void visualCadastroFornecedor(int mode)
 
                     if (ret == 0)
                     {
-                        printf("Fornecedor exclu­do com sucesso!");
+                        printf("Fornecedor excluï¿½do com sucesso!");
                         pausaSist();
                     }
                     else
@@ -1277,12 +1277,12 @@ void visualCadastroFornecedor(int mode)
             }
             else
             {
-                printf("Fornecedor n’o encontrado.");
+                printf("Fornecedor nï¿½o encontrado.");
                 pausaSist();
             }
 
             break;
-        default: // ===== EM CASO DE OUTRA OP?€O =====
+        default: // ===== EM CASO DE OUTRA OP?ï¿½O =====
             printf("\n[X] ERRO - Insira um valor valido!");
             pausaSist();
             break;
@@ -1301,8 +1301,8 @@ void visualCadastroProdutos(int mode)
     while (1)
     {
         clearPrompt();
-        // menu principal da se?’o funcionarios
-        printf("Cadastro e GestÆo de Produtos:\n");
+        // menu principal da se?ï¿½o funcionarios
+        printf("Cadastro e Gestï¿½o de Produtos:\n");
         printf("1 - Cadastrar\n");
         printf("2 - Pesquisar\n");
         printf("3 - Alterar\n");
@@ -1320,11 +1320,11 @@ void visualCadastroProdutos(int mode)
         {
         case 1:
 
-            printf("DIGITE O CàDIGO DO PRODUTO: ");
+            printf("DIGITE O Cï¿½DIGO DO PRODUTO: ");
             fflush(stdin);
             scanf("%d", &cliente.codigo);
 
-            printf("DIGITE A DESCRI€ÇO DO PRODUTO: ");
+            printf("DIGITE A DESCRIï¿½ï¿½O DO PRODUTO: ");
             fflush(stdin);
             scanf("%[^\n]", cliente.descricao);
 
@@ -1332,15 +1332,15 @@ void visualCadastroProdutos(int mode)
             fflush(stdin);
             scanf("%d", &cliente.estoque);
 
-            printf("DIGITE O ESTOQUE MÖNIMO DO PRODUTO: ");
+            printf("DIGITE O ESTOQUE Mï¿½NIMO DO PRODUTO: ");
             fflush(stdin);
             scanf("%d", &cliente.estoque_min);
 
-            printf("DIGITE O PRE€O DE CUSTO DO PRODUTO: ");
+            printf("DIGITE O PREï¿½O DE CUSTO DO PRODUTO: ");
             fflush(stdin);
             scanf("%f", &cliente.preco_custo);
 
-            printf("DIGITE O PRE€O DE VENDA DO PRODUTO: ");
+            printf("DIGITE O PREï¿½O DE VENDA DO PRODUTO: ");
             fflush(stdin);
             scanf("%f", &cliente.preco_venda);
 
@@ -1361,19 +1361,19 @@ void visualCadastroProdutos(int mode)
 
         case 2:
             clearPrompt();
-            printf("DIGITE O CàDIGO DO PRODUTO: \n");
+            printf("DIGITE O Cï¿½DIGO DO PRODUTO: \n");
             fflush(stdin);
             scanf("%d", &cliente.codigo);
             ret = pesquisaProduto(cliente.codigo, cliente.descricao, &cliente.estoque, &cliente.estoque_min, &cliente.preco_custo, &cliente.preco_venda);
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
-                printf("CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                printf("DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
+                printf("Cï¿½DIGO DO PRODUTO: %d\n", cliente.codigo);
+                printf("DESCRIï¿½ï¿½O DO PRODUTO: %s\n", cliente.descricao);
                 printf("ESTOQUE DO PRODUTO: %d\n", cliente.estoque);
-                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", cliente.estoque_min);
+                printf("ESTOQUE Mï¿½NIMO DO PRODUTO: %d\n", cliente.estoque_min);
                 printf("CUSTO DO PRODUTO: R$%.2f\n", cliente.preco_custo);
-                printf("PRE€O DE VENDA: R$%.2f\n", cliente.preco_venda);
+                printf("PREï¿½O DE VENDA: R$%.2f\n", cliente.preco_venda);
                 pausaSist();
             }
             else
@@ -1387,24 +1387,24 @@ void visualCadastroProdutos(int mode)
         case 3:
 
             clearPrompt();
-            printf("DIGITE O CàDIGO DO PRODUTO: \n");
+            printf("DIGITE O Cï¿½DIGO DO PRODUTO: \n");
             fflush(stdin);
             scanf("%d", &cliente.codigo);
             ret = pesquisaProduto(cliente.codigo, cliente.descricao, &cliente.estoque, &cliente.estoque_min, &cliente.preco_custo, &cliente.preco_venda);
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
-                printf("CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                printf("DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
+                printf("Cï¿½DIGO DO PRODUTO: %d\n", cliente.codigo);
+                printf("DESCRIï¿½ï¿½O DO PRODUTO: %s\n", cliente.descricao);
                 printf("ESTOQUE DO PRODUTO: %d\n", cliente.estoque);
-                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", cliente.estoque_min);
+                printf("ESTOQUE Mï¿½NIMO DO PRODUTO: %d\n", cliente.estoque_min);
                 printf("CUSTO DO PRODUTO: R$%.2f\n", cliente.preco_custo);
-                printf("PRE€O DE VENDA: R$%.2f\n", cliente.preco_venda);
+                printf("PREï¿½O DE VENDA: R$%.2f\n", cliente.preco_venda);
 
                 printf("\n");
                 printf("TEM CERTEZA QUE DESEJA ALTERAR ESTE PRODUTO?\n");
                 printf("1 - SIM\n");
-                printf("2 - NÇO\n");
+                printf("2 - Nï¿½O\n");
                 printf("\n");
                 printf("INSIRA: ");
                 scanf("%d", &x);
@@ -1413,18 +1413,18 @@ void visualCadastroProdutos(int mode)
                 if (x == 1)
                 {
                     printf("---- DADOS DO PRODUTO ----\n");
-                    printf("1 - CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                    printf("2 - DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
+                    printf("1 - Cï¿½DIGO DO PRODUTO: %d\n", cliente.codigo);
+                    printf("2 - DESCRIï¿½ï¿½O DO PRODUTO: %s\n", cliente.descricao);
                     printf("3 - ESTOQUE: %d\n", cliente.estoque);
-                    printf("4 - ESTOQUE MÖNIMO: %d\n", cliente.estoque_min);
-                    printf("5 - PRE€O DE CUSTO: %.2f\n", cliente.preco_custo);
-                    printf("6 - PRE€O DE VENDA: %.2f\n", cliente.preco_venda);
+                    printf("4 - ESTOQUE Mï¿½NIMO: %d\n", cliente.estoque_min);
+                    printf("5 - PREï¿½O DE CUSTO: %.2f\n", cliente.preco_custo);
+                    printf("6 - PREï¿½O DE VENDA: %.2f\n", cliente.preco_venda);
                     printf("\n");
                     printf("INSIRA: ");
                     scanf("%d", &x);
                     if (x == 1)
                     {
-                        printf("DIGITE O CàDIGO DO PRODUTO: ");
+                        printf("DIGITE O Cï¿½DIGO DO PRODUTO: ");
                         fflush(stdin);
                         scanf("%d", &cliente.codigo);
                         printf("\n");
@@ -1432,7 +1432,7 @@ void visualCadastroProdutos(int mode)
 
                     if (x == 2)
                     {
-                        printf("DIGITE A DESCRI€ÇO DO PRODUTO: ");
+                        printf("DIGITE A DESCRIï¿½ï¿½O DO PRODUTO: ");
                         fflush(stdin);
                         scanf("%[^\n]", cliente.descricao);
                     }
@@ -1446,21 +1446,21 @@ void visualCadastroProdutos(int mode)
 
                     if (x == 4)
                     {
-                        printf("DIGITE O ESTOQUE MÖNIMO DO PRODUTO: ");
+                        printf("DIGITE O ESTOQUE Mï¿½NIMO DO PRODUTO: ");
                         fflush(stdin);
                         scanf("%d", &cliente.estoque_min);
                     }
 
                     if (x == 5)
                     {
-                        printf("DIGITE O PRE€O DE CUSTO DO PRODUTO: ");
+                        printf("DIGITE O PREï¿½O DE CUSTO DO PRODUTO: ");
                         fflush(stdin);
                         scanf("%f", &cliente.preco_custo);
                     }
 
                     if (x == 6)
                     {
-                        printf("DIGITE O PRE€O DE VENDA DO PRODUTO: ");
+                        printf("DIGITE O PREï¿½O DE VENDA DO PRODUTO: ");
                         fflush(stdin);
                         scanf("%f", &cliente.preco_venda);
                     }
@@ -1489,7 +1489,7 @@ void visualCadastroProdutos(int mode)
         case 4:
             printf("TEM CERTEZA QUE DESJA DELETAR OS DADOS DOS PRODUTOS?\n");
             printf("1 - SIM\n");
-            printf("2 - NÇO\n");
+            printf("2 - Nï¿½O\n");
             printf("\n");
             printf("INSIRA: ");
             scanf("%d", &x);
@@ -1521,7 +1521,7 @@ void visualCadastroOperadores(int mode)
 
     while (1)
     {
-        printf("Cadastro e GestÆo de Operadores do Sistema:\n");
+        printf("Cadastro e Gestï¿½o de Operadores do Sistema:\n");
         printf("1 - Cadastrar\n");
         printf("2 - Pesquisar\n");
         printf("3 - Alterar\n");
@@ -1552,10 +1552,10 @@ void visualCadastroOperadores(int mode)
             scanf(" %[^\n]", operador.senha);
 
             fflush(stdin);
-            printf("Indique as permissäes (separadas por v¡rgulas) : ");
+            printf("Indique as permissï¿½es (separadas por vï¿½rgulas) : ");
             scanf(" %[^\n]", operador.permissoes);
 
-            // Fun‡Æo cadastra o operador
+            // Funï¿½ï¿½o cadastra o operador
             ret = cadastrarOperador(operador);
 
             if (ret == 0)
@@ -1582,15 +1582,15 @@ void visualCadastroOperadores(int mode)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo      : %d\n", operador.codigo);
+                printf("Cï¿½digo      : %d\n", operador.codigo);
                 printf("Nome        : %s\n", operador.nome);
                 printf("Login       : %s\n", operador.usuario);
-                printf("Permissäes  : %s\n", operador.permissoes);
+                printf("Permissï¿½es  : %s\n", operador.permissoes);
                 pausaSist();
             }
             else
             {
-                printf("=> Operador nÆo encontrado!\n");
+                printf("=> Operador nï¿½o encontrado!\n");
                 pausaSist();
             }
             break;
@@ -1609,14 +1609,14 @@ void visualCadastroOperadores(int mode)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo      : %d\n", operador.codigo);
+                printf("Cï¿½digo      : %d\n", operador.codigo);
                 printf("Nome        : %s\n", operador.nome);
                 printf("Login       : %s\n", operador.usuario);
-                printf("Permissäes  : %s\n", operador.permissoes);
+                printf("Permissï¿½es  : %s\n", operador.permissoes);
                 printf("=========================================\n");
                 printf("Deseja alterar este operador?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -1632,7 +1632,7 @@ void visualCadastroOperadores(int mode)
                     scanf(" %[^\n]", operador.senha);
 
                     fflush(stdin);
-                    printf("Indique as novas permissäes (separadas por v¡rgulas) : ");
+                    printf("Indique as novas permissï¿½es (separadas por vï¿½rgulas) : ");
                     scanf(" %[^\n]", operador.permissoes);
 
                     ret = editarOperador(operador.usuario, operador);
@@ -1651,7 +1651,7 @@ void visualCadastroOperadores(int mode)
             }
             else
             {
-                printf("=> Operador nÆo encontrado!\n");
+                printf("=> Operador nï¿½o encontrado!\n");
                 pausaSist();
             }
             break;
@@ -1671,14 +1671,14 @@ void visualCadastroOperadores(int mode)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo      : %d\n", operador.codigo);
+                printf("Cï¿½digo      : %d\n", operador.codigo);
                 printf("Nome        : %s\n", operador.nome);
                 printf("Login       : %s\n", operador.usuario);
-                printf("Permissäes  : %s\n", operador.permissoes);
+                printf("Permissï¿½es  : %s\n", operador.permissoes);
                 printf("=========================================\n");
                 printf("Deseja excluir este operador?\n");
                 printf("1 - Sim\n");
-                printf("0 - NÆo\n");
+                printf("0 - Nï¿½o\n");
                 printf("=> ");
                 scanf("%d", &choice);
 
@@ -1688,7 +1688,7 @@ void visualCadastroOperadores(int mode)
 
                     if (ret == 0)
                     {
-                        printf("Operador exclu¡do com sucesso!");
+                        printf("Operador excluï¿½do com sucesso!");
                         pausaSist();
                     }
                     else
@@ -1700,13 +1700,13 @@ void visualCadastroOperadores(int mode)
             }
             else
             {
-                printf("Operador nÆo encontrado.");
+                printf("Operador nï¿½o encontrado.");
                 pausaSist();
             }
             break;
 
-        default: // EM CASO DE OUTRA OP€ÇO
-            printf("\n[X] ERRO - Insira um valor v lido!");
+        default: // EM CASO DE OUTRA OPï¿½ï¿½O
+            printf("\n[X] ERRO - Insira um valor vï¿½lido!");
             pausaSist();
             break;
         }
