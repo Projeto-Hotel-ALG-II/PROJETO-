@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include <string.h>
 
 // BIBLIOTECA DE FERRAMENTAS
@@ -16,6 +17,7 @@
 // BIBLIOTECA - RESERVAS
 #include "bib_reservas.h"
 
+// CADASTRO E GEST¶O DE DADOS:
 void visualCadastroHotel(int mode)
 {
     str_hotel hot;
@@ -288,7 +290,7 @@ void visualCadastroHotel(int mode)
             break;
         }
     }
-    return 0;
+    return;
 }
 
 void visualCadastroHospedes(int mode)
@@ -595,15 +597,15 @@ void visualCadastroAcomodacoes(int mode)
     {
         clearPrompt();
         printf("Cadastro e GestÆo de Acomoda‡äes e Categorias:\n");
-        printf("1 - Cadastrar Categoria de Acomoda‡Æo\n");
-        printf("2 - Pesquisar Categoria de Acomoda‡Æo\n");
-        printf("3 - Editar Categoria de Acomoda‡Æo\n");
-        printf("4 - Excluir Categoria de Acomoda‡Æo\n");
-        printf("5 - Cadastrar Acomoda‡Æo\n");
-        printf("6 - Pesquisar Acomoda‡Æo\n");
-        printf("7 - Editar Acomoda‡Æo\n");
-        printf("8 - Excluir Acomoda‡Æo\n");
-        printf("9 - Listar Categorias\n");
+        printf("1  - Cadastrar Categoria de Acomoda‡Æo\n");
+        printf("2  - Pesquisar Categoria de Acomoda‡Æo\n");
+        printf("3  - Editar Categoria de Acomoda‡Æo\n");
+        printf("4  - Excluir Categoria de Acomoda‡Æo\n");
+        printf("5  - Cadastrar Acomoda‡Æo\n");
+        printf("6  - Pesquisar Acomoda‡Æo\n");
+        printf("7  - Editar Acomoda‡Æo\n");
+        printf("8  - Excluir Acomoda‡Æo\n");
+        printf("9  - Listar Categorias\n");
         printf("10 - Listar Acomoda‡äes\n");
         printf("11 - Sair\n");
         printf("=> ");
@@ -617,7 +619,7 @@ void visualCadastroAcomodacoes(int mode)
             scanf(" %[^\n]", categoria.descricao);
 
             fflush(stdin);
-            printf("Informe o valor da di ria: ");
+            printf("Informe o valor da di ria: R$");
             scanf("%f", &categoria.valor_diaria);
 
             fflush(stdin);
@@ -715,7 +717,7 @@ void visualCadastroAcomodacoes(int mode)
 
                         case 2:
                             fflush(stdin);
-                            printf("Informe o valor da di ria: ");
+                            printf("Informe o valor da di ria: R$");
                             scanf("%f", &categoria.valor_diaria);
                             break;
 
@@ -852,16 +854,25 @@ void visualCadastroAcomodacoes(int mode)
 
             if (ret == 0)
             {
+                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+
                 printf("Acomoda‡Æo encontrada!\n");
                 printf("===========================\n");
                 printf("C¢digo      : %d\n", acomodacao.codigo);
                 printf("Descri‡Æo   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
                 printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo             : %s\n", acomodacao.catec_acomod.descricao);
-                printf("=  Valor da Di ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
-                printf("=  Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
+                if (ret = 0)
+                {
+                    printf("=  C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
+                    printf("=  Descri‡Æo             : %s\n", acomodacao.catec_acomod.descricao);
+                    printf("=  Valor da Di ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
+                    printf("=  Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
+                }
+                else
+                {
+                    printf("= A categoria desta acomoda‡Æo foi exclu¡da, por favor, altere a acomoda‡Æo para resolver o problema.\n");
+                }
 
                 pausaSist();
             }
@@ -881,14 +892,23 @@ void visualCadastroAcomodacoes(int mode)
 
             if (ret == 0)
             {
-                printf("Categoria de Acomoda‡Æo encontrada!\n");
+                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+
+                printf("Acomoda‡Æo encontrada!\n");
                 printf("===================================\n");
                 printf("C¢digo      : %d\n", acomodacao.codigo);
                 printf("Descri‡Æo   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
                 printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+                if (ret == 0)
+                {
+                    printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
+                    printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+                }
+                else
+                {
+                    printf("Informe uma nova categoria para esta acomoda‡Æo!\n");
+                }
                 printf("===================================\n");
                 printf("Deseja alterar esta acomoda‡Æo?\n");
                 printf("1 - Sim\n");
@@ -906,7 +926,18 @@ void visualCadastroAcomodacoes(int mode)
                         printf("1 - Descri‡Æo   : %s\n", acomodacao.descricao);
                         printf("2 - Facilidades : %s\n\n", acomodacao.facilidades);
                         printf("Categoria de Acomoda‡Æo:\n");
-                        printf("3 - C¢digo      : %d (%s)\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
+
+                        ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+                        
+                        if (ret == 0)
+                        {
+                            printf("3 - C¢digo      : %d - %s\n\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
+                        }
+                        else
+                        {
+                            printf("3 - C¢digo      : %d - Indispon¡vel.\n\n", acomodacao.catec_acomod.codigo);
+                        }
+
                         printf("4 - Cancelar\n");
                         printf("5 - Alterar Categoria\n");
                         printf("=> ");
@@ -988,14 +1019,24 @@ void visualCadastroAcomodacoes(int mode)
 
             if (ret == 0)
             {
+                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+
                 printf("Categoria de Acomoda‡Æo encontrada!\n");
                 printf("===================================\n");
                 printf("C¢digo      : %d\n", acomodacao.codigo);
                 printf("Descri‡Æo   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
                 printf("=> Categoria de Acomoda‡Æo\n");
-                printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+
+                if (ret == 0)
+                {
+                    printf("=  C¢digo      : %d\n", acomodacao.catec_acomod.codigo);
+                    printf("=  Descri‡Æo   : %s\n", acomodacao.catec_acomod.descricao);
+                }
+                else
+                {
+                    printf("A categoria desta acomoda‡Æo foi apagada!\n");
+                }
                 printf("===================================\n");
                 printf("Deseja excluir esta acomoda‡Æo?\n");
                 printf("1 - Sim\n");
@@ -1037,7 +1078,7 @@ void visualCadastroAcomodacoes(int mode)
             break;
 
         case 11:
-            exit(0);
+            return;
 
         default:
             printf("Op‡Æo inv lida. Tente novamente.\n");
@@ -1106,7 +1147,7 @@ void visualCadastroFornecedor(int mode)
             scanf(" %[^\n]", f.email);
 
             // fun?’o cadastra o fornecedor
-            ret = cadastrarFornecedor(f);
+            ret = cadastrarFornecedor(mode, f);
 
             if (ret == 0)
             {
@@ -1163,7 +1204,7 @@ void visualCadastroFornecedor(int mode)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C½digo             : %d\n", f.codigo);
+                printf("C¢digo             : %d\n", f.codigo);
                 printf("Nome               : %s\n", f.nome);
                 printf("Telefone           : %s\n", f.telefone);
                 printf("Email              : %s\n", f.email);
@@ -1177,7 +1218,6 @@ void visualCadastroFornecedor(int mode)
 
                 if (choice == 1)
                 {
-                    AnsiUpper(f.nome);
                     clearPrompt();
                     fflush(stdin);
                     printf("Indique o novo nome               : ");
@@ -1293,7 +1333,7 @@ void visualCadastroProdutos(int mode)
 {
     int x;
     int ret;
-    str_produtos cliente;
+    str_produtos prod;
 
     while (1)
     {
@@ -1319,29 +1359,29 @@ void visualCadastroProdutos(int mode)
 
             printf("DIGITE O CàDIGO DO PRODUTO: ");
             fflush(stdin);
-            scanf("%d", &cliente.codigo);
+            scanf("%d", &prod.codigo);
 
             printf("DIGITE A DESCRI€ÇO DO PRODUTO: ");
             fflush(stdin);
-            scanf("%[^\n]", cliente.descricao);
+            scanf("%[^\n]", prod.descricao);
 
             printf("DIGITE O ESTOQUE DO PRODUTO: ");
             fflush(stdin);
-            scanf("%d", &cliente.estoque);
+            scanf("%d", &prod.estoque);
 
             printf("DIGITE O ESTOQUE MÖNIMO DO PRODUTO: ");
             fflush(stdin);
-            scanf("%d", &cliente.estoque_min);
+            scanf("%d", &prod.estoque_min);
 
             printf("DIGITE O PRE€O DE CUSTO DO PRODUTO: ");
             fflush(stdin);
-            scanf("%f", &cliente.preco_custo);
+            scanf("%f", &prod.preco_custo);
 
             printf("DIGITE O PRE€O DE VENDA DO PRODUTO: ");
             fflush(stdin);
-            scanf("%f", &cliente.preco_venda);
+            scanf("%f", &prod.preco_venda);
 
-            ret = cadastro_produto(cliente);
+            ret = cadastro_produto(mode, prod);
 
             if (ret == 0)
             {
@@ -1360,17 +1400,17 @@ void visualCadastroProdutos(int mode)
             clearPrompt();
             printf("DIGITE O CàDIGO DO PRODUTO: \n");
             fflush(stdin);
-            scanf("%d", &cliente.codigo);
-            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
+            scanf("%d", &prod.codigo);
+            ret = pesquisaProduto(mode, prod.codigo, &prod);
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
-                printf("CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                printf("DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
-                printf("ESTOQUE DO PRODUTO: %d\n", cliente.estoque);
-                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", cliente.estoque_min);
-                printf("CUSTO DO PRODUTO: R$%.2f\n", cliente.preco_custo);
-                printf("PRE€O DE VENDA: R$%.2f\n", cliente.preco_venda);
+                printf("CàDIGO DO PRODUTO: %d\n", prod.codigo);
+                printf("DESCRI€ÇO DO PRODUTO: %s\n", prod.descricao);
+                printf("ESTOQUE DO PRODUTO: %d\n", prod.estoque);
+                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", prod.estoque_min);
+                printf("CUSTO DO PRODUTO: R$%.2f\n", prod.preco_custo);
+                printf("PRE€O DE VENDA: R$%.2f\n", prod.preco_venda);
                 pausaSist();
             }
             else
@@ -1386,19 +1426,19 @@ void visualCadastroProdutos(int mode)
             clearPrompt();
             printf("DIGITE O CàDIGO DO PRODUTO: \n");
             fflush(stdin);
-            scanf("%d", &cliente.codigo);
+            scanf("%d", &prod.codigo);
 
-            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
+            ret = pesquisaProduto(mode, prod.codigo, &prod);
 
             if (ret == 0)
             {
                 printf("----DADOS DO PRODUTO---- \n");
-                printf("CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                printf("DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
-                printf("ESTOQUE DO PRODUTO: %d\n", cliente.estoque);
-                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", cliente.estoque_min);
-                printf("CUSTO DO PRODUTO: R$%.2f\n", cliente.preco_custo);
-                printf("PRE€O DE VENDA: R$%.2f\n", cliente.preco_venda);
+                printf("CàDIGO DO PRODUTO: %d\n", prod.codigo);
+                printf("DESCRI€ÇO DO PRODUTO: %s\n", prod.descricao);
+                printf("ESTOQUE DO PRODUTO: %d\n", prod.estoque);
+                printf("ESTOQUE MÖNIMO DO PRODUTO: %d\n", prod.estoque_min);
+                printf("CUSTO DO PRODUTO: R$%.2f\n", prod.preco_custo);
+                printf("PRE€O DE VENDA: R$%.2f\n", prod.preco_venda);
 
                 printf("\n");
                 printf("TEM CERTEZA QUE DESEJA ALTERAR ESTE PRODUTO?\n");
@@ -1412,12 +1452,12 @@ void visualCadastroProdutos(int mode)
                 if (x == 1)
                 {
                     printf("---- DADOS DO PRODUTO ----\n");
-                    printf("1 - CàDIGO DO PRODUTO: %d\n", cliente.codigo);
-                    printf("2 - DESCRI€ÇO DO PRODUTO: %s\n", cliente.descricao);
-                    printf("3 - ESTOQUE: %d\n", cliente.estoque);
-                    printf("4 - ESTOQUE MÖNIMO: %d\n", cliente.estoque_min);
-                    printf("5 - PRE€O DE CUSTO: %.2f\n", cliente.preco_custo);
-                    printf("6 - PRE€O DE VENDA: %.2f\n", cliente.preco_venda);
+                    printf("1 - CàDIGO DO PRODUTO: %d\n", prod.codigo);
+                    printf("2 - DESCRI€ÇO DO PRODUTO: %s\n", prod.descricao);
+                    printf("3 - ESTOQUE: %d\n", prod.estoque);
+                    printf("4 - ESTOQUE MÖNIMO: %d\n", prod.estoque_min);
+                    printf("5 - PRE€O DE CUSTO: %.2f\n", prod.preco_custo);
+                    printf("6 - PRE€O DE VENDA: %.2f\n", prod.preco_venda);
                     printf("\n");
                     printf("INSIRA: ");
                     scanf("%d", &x);
@@ -1425,7 +1465,7 @@ void visualCadastroProdutos(int mode)
                     {
                         printf("DIGITE O CàDIGO DO PRODUTO: ");
                         fflush(stdin);
-                        scanf("%d", &cliente.codigo);
+                        scanf("%d", &prod.codigo);
                         printf("\n");
                     }
 
@@ -1433,38 +1473,38 @@ void visualCadastroProdutos(int mode)
                     {
                         printf("DIGITE A DESCRI€ÇO DO PRODUTO: ");
                         fflush(stdin);
-                        scanf("%[^\n]", cliente.descricao);
+                        scanf("%[^\n]", prod.descricao);
                     }
 
                     if (x == 3)
                     {
                         printf("DIGITE O ESTOQUE: ");
                         fflush(stdin);
-                        scanf("%d", &cliente.estoque);
+                        scanf("%d", &prod.estoque);
                     }
 
                     if (x == 4)
                     {
                         printf("DIGITE O ESTOQUE MÖNIMO DO PRODUTO: ");
                         fflush(stdin);
-                        scanf("%d", &cliente.estoque_min);
+                        scanf("%d", &prod.estoque_min);
                     }
 
                     if (x == 5)
                     {
                         printf("DIGITE O PRE€O DE CUSTO DO PRODUTO: ");
                         fflush(stdin);
-                        scanf("%f", &cliente.preco_custo);
+                        scanf("%f", &prod.preco_custo);
                     }
 
                     if (x == 6)
                     {
                         printf("DIGITE O PRE€O DE VENDA DO PRODUTO: ");
                         fflush(stdin);
-                        scanf("%f", &cliente.preco_venda);
+                        scanf("%f", &prod.preco_venda);
                     }
                 }
-                ret = alteraProduto(cliente);
+                ret = alteraProduto(mode, prod);
 
                 if (ret == 0)
                 {
@@ -1489,17 +1529,17 @@ void visualCadastroProdutos(int mode)
             printf("Deletando produto\n");
             printf("DIGITE O CàDIGO DO PRODUTO: \n");
             fflush(stdin);
-            scanf("%d", &cliente.codigo);
+            scanf("%d", &prod.codigo);
 
-            ret = pesquisaProduto(mode, cliente.codigo, &cliente);
+            ret = pesquisaProduto(mode, prod.codigo, &prod);
 
             if (ret == 0)
             {
                 printf("PRODUTO ENCONTRADO!\n");
                 printf("=========================\n");
-                printf("C¢digo    : %d\n", cliente.codigo);
-                printf("Descri‡Æo : %s\n", cliente.descricao);
-                printf("Estoque   : %d\n", cliente.estoque);
+                printf("C¢digo    : %d\n", prod.codigo);
+                printf("Descri‡Æo : %s\n", prod.descricao);
+                printf("Estoque   : %d\n", prod.estoque);
                 printf("=========================\n");
                 printf("Deseja apagar esse produto?\n");
                 printf("1 - Sim\n");
@@ -1508,7 +1548,7 @@ void visualCadastroProdutos(int mode)
 
                 if (x == 1)
                 {
-                    ret = deletaProduto(mode, cliente.codigo);
+                    ret = deletaProduto(mode, prod.codigo);
 
                     if (ret == 0)
                     {
@@ -1733,3 +1773,266 @@ void visualCadastroOperadores(int mode)
 
     return;
 }
+
+// RESERVAS: sendo desenvolvido
+
+/*
+void visualReservas()
+{
+  int mode;
+  str_reservas reservaDados[5], reserva;
+  int ret, choice, num_reservas;
+  while (1)
+  {
+    clearPrompt();
+    printf("=> RESERVAS:\n");
+    printf("Selecione uma op  o: \n");
+    printf("1 - Verificar disponibilidades\n");
+    printf("2 - Fazer Reserva\n");
+    printf("3 - Cancelamento\n");
+    printf("4 - Voltar\n");
+    printf("=> ");
+    scanf("%d", &choice);
+    if (choice == 4)
+    {
+      break;
+    }
+    switch (choice)
+    {
+    case 1: // Verificar disponibilidade das acomoda  es
+
+      printf("Como deseja verificar a disponibilidade das acomoda  es?\n");
+      printf("1 - Pesquisa por Data.\n");
+      printf("2 - Pesquisa por Categoria.\n");
+      printf("3 - Pesquisa por Quantidade de Pessoas.\n");
+      printf("4 - Tipo de Facilidade.\n");
+      printf("5 - Combina  o.\n");
+      printf("=> \n");
+      scanf("%d", &choice);
+
+      switch (choice)
+      {
+      case 1:
+        printf("Indique o dia e o mes de check-in (DD/MM): ");
+        scanf("%d/%d", &reserva.dia_iniReserva, &reserva.mes_iniReserva);
+
+        printf("Indique o dia e o mes de check-out (DD/MM): ");
+        scanf("%d/%d", &reserva.dia_fimReserva, &reserva.mes_fimReserva);
+
+      
+        ret = pesquisarDisp_porData(mode, reserva, reservaDados, num_reservas, reserva.dia_iniReserva, reserva.mes_iniReserva, reserva.dia_fimReserva, reserva.mes_fimReserva);
+
+        if (ret == 0)
+        {
+          printf("Nenhuma acomoda‡Æo dispon¡vel nesta data.\n");
+        }
+        else
+        {
+          printf("RESULTADOS: ---------------\n");
+          for (int i = 0; i < ret; i++)
+          {
+            printf("Op‡Æo: %d =================\n", i);
+            printf("Codigo      : %d\n", reservaDados[i].acomod.codigo);
+            printf("Descri‡Æo   : %s\n", reservaDados[i].acomod.descricao);
+            printf("Facilidades : %s\n", reservaDados[i].acomod.facilidades);
+            printf("Categoria desta Acomoda‡Æo --------------\n");
+            printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+            printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+            printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+            printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+          }
+        }
+
+        break;
+      case 2:
+        int codigoCateg;
+        printf("Indique o c digo da categoria que deseja reservar: ");
+        scanf("%d", &codigoCateg);
+
+        ret = pesquisaDisp_PorCateg(codigoCateg, 30);
+
+        if (ret == 1)
+        {
+          printf("Categoria de acomoda‡Æo dispon¡vel para reserva nos pr¢ximos 30 dias.\n");
+          printf(" ---------------\n");
+          for (int i = 0; i < ret; i++) {
+            printf("Categoria de Acomoda‡Æo --------------\n");
+            printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+            printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+            printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+            printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+          }
+        }
+        else
+        {
+          printf("Categoria de acomoda‡Æo nÆo est  dispon¡vel para reserva nos pr¢ximos 30 dias.\n");
+        }
+
+        break;
+      case 3:
+        int num_pessoas;
+        printf("Digite o n£mero desejado de pessoas para uma acomoda‡Æo: ");
+        scanf("%d", &num_pessoas);
+
+        int disponibilidade = pesquisaDisp_PorQtdPessoas(mode, reservaDados, num_reservas, num_pessoas, 30);
+        if (disponibilidade == 0)
+        {
+          printf("Categorias e acomoda‡äes dispon¡veis: \n");
+          for (int i = 0; i < num_reservas; i++)
+          {
+            printf("Op‡Æo: %d =================\n", i);
+            printf("Codigo      : %d\n", reservaDados[i].acomod.codigo);
+            printf("Descri‡Æo   : %s\n", reservaDados[i].acomod.descricao);
+            printf("Facilidades : %s\n", reservaDados[i].acomod.facilidades);
+            printf("Categoria desta Acomoda‡Æo --------------\n");
+            printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+            printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+            printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+            printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+          }
+        }
+        else
+        {
+          printf("Nenhuma categoria de acomoda‡Æo dispon¡vel para a quantidade de pessoas especificada nos pr¢ximos 30 dias.\n");
+        }
+
+        break;
+      case 4:
+        time_t agora = time(NULL);
+        struct tm data_atual = *localtime(&agora);
+        char facilidades_desejadas[200];
+        printf("Digite as facilidades desejadas: ");
+        scanf("%s", facilidades_desejadas);
+
+        int disponibilidade = pesquisaPor_Facilidades(mode, reserva, num_reservas, facilidades_desejadas, 30);
+
+        if (disponibilidade == 0)
+        {
+          printf("Acomoda‡äes com as facilidades desejadas estÆo dispon¡veis nos pr¢ximos 30 dias: \n");
+          for (int i = 0; i < num_reservas; i++)
+          {
+            printf("Op‡Æo: %d =================\n", i);
+            printf("Codigo      : %d\n", reservaDados[i].acomod.codigo);
+            printf("Descri‡Æo   : %s\n", reservaDados[i].acomod.descricao);
+            printf("Facilidades : %s\n", reservaDados[i].acomod.facilidades);
+            printf("Categoria desta Acomoda‡Æo --------------\n");
+            printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+            printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+            printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+            printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+          }
+        }
+        else
+        {
+          printf("Nenhuma acomoda‡Æo com as facilidades desejadas est  dispon¡vel nos pr¢ximos 30 dias.\n");
+        }
+        break;
+      case 5:
+
+        printf("Indique o dia e o mes de check-in (DD/MM): ");
+        scanf("%d/%d", &reserva.dia_iniReserva, &reserva.mes_iniReserva);
+
+        printf("Indique o dia e o mes de check-out (DD/MM): ");
+        scanf("%d/%d", &reserva.dia_fimReserva, &reserva.mes_fimReserva);
+
+        printf("Digite o c¢digo da categoria (ou -1 para ignorar a categoria): ");
+        scanf("%d", &codigoCateg);
+
+        printf("Digite o n£mero de pessoas desejado (ou -1 para ignorar a quantidade de pessoas): ");
+        scanf("%d", &num_pessoas);
+
+        printf("Digite as facilidades desejadas (ou deixe em branco para ignorar as facilidades): ");
+        scanf("%s", facilidades_desejadas);
+
+        struct tm check_in = {0};
+        check_in.tm_year = data_atual.tm_year;
+        check_in.tm_mon = reserva.mes_iniReserva - 1;
+        check_in.tm_mday = reserva.dia_iniReserva;
+
+        struct tm check_out = {0};
+        check_out.tm_year = data_atual.tm_year;
+        check_out.tm_mon = reserva.mes_fimReserva - 1;
+        check_out.tm_mday = reserva.dia_fimReserva;
+
+        int disponibilidade = pesquisaPorDisponibilidade(mode, reservaDados, num_reservas, check_in, check_out, codigoCateg, num_pessoas, facilidades_desejadas, 30);
+
+        if (disponibilidade > 0)
+        {
+          printf("Acomoda‡äes dispon¡veis com base nos crit‚rios fornecidos.\n");
+          for (int i = 0; i < disponibilidade; i++)
+          {
+            printf("Op‡Æo: %d =================\n", i);
+            printf("Codigo      : %d\n", reservaDados[i].acomod.codigo);
+            printf("Descri‡Æo   : %s\n", reservaDados[i].acomod.descricao);
+            printf("Facilidades : %s\n", reservaDados[i].acomod.facilidades);
+            printf("Categoria desta Acomoda‡Æo --------------\n");
+            printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+            printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+            printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+            printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+          }
+        }
+        else
+        {
+          printf("Nenhuma acomoda‡Æo dispon¡vel com base nos crit‚rios fornecidos.\n");
+        }
+
+      default:
+        break;
+      }
+
+    case 2: 
+      printf("Qual ‚ o dia e mes de check-in desejado para a sua reserva? Digite em DD/MM/AA");
+      scanf("%d/%d", &reserva.dia_iniReserva, &reserva.dia_fimReserva);
+
+      int dataDisp = pesquisaDisp_PorData(mode, reserva, num_reservas, reserva.dia_iniReserva, reserva.dia_fimReserva);
+
+      printf("Digite o c¢digo da categoria de acomoda‡Æo desejada\n");
+      for (int i = 0; i < reservaDados; i++)
+      {
+        printf("Categoria de Acomoda‡Æo --------------\n");
+        printf(" - Codigo                : %d\n", reservaDados[i].acomod.catec_acomod.codigo);
+        printf(" - Descri‡Æo             : %s\n", reservaDados[i].acomod.catec_acomod.descricao);
+        printf(" - Valor da Di ria       : %.2f\n", reservaDados[i].acomod.catec_acomod.valor_diaria);
+        printf(" - Quantidade de Pessoas : %d\n", reservaDados[i].acomod.catec_acomod.qtd_pessoas);
+      }
+      scanf("%d", &reserva.acomod.catec_acomod.codigo);
+
+      printf("Digite o c¢digo da acomoda‡Æo desejada\n");
+      for (int i = 0; i < reservaDados; i++)
+          {
+            printf("Op‡Æo: %d =================\n", i);
+            printf("Codigo      : %d\n", reservaDados[i].acomod.codigo);
+            printf("Descri‡Æo   : %s\n", reservaDados[i].acomod.descricao);
+            printf("Facilidades : %s\n", reservaDados[i].acomod.facilidades);
+          }
+      scanf("%d", &reserva.acomod.codigo);
+
+      if (reservar() == 1)
+      {
+        printf("Reserva feita com sucesso!\n");
+      }
+      else{
+        printf("A reserva nÆo foi feita.");
+      }
+      
+
+      
+     
+
+
+      break;
+    case 3: // Reservar
+
+      break;
+    case 4: // Cancelamento
+
+      break;
+    default:
+      printf("\n[X] ERRO - Insira um valor v lido!");
+      pausaSist();
+      break;
+    }
+  }
+}
+*/

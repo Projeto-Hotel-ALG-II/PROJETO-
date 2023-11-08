@@ -34,6 +34,6 @@ int pesquisaProduto(int mode, int searchCod, str_produtos *prod);
 /*
  * FUN€ÇO DELETA PRODUTO
  */
-int deletaProduto(int mode, int codigo);
+int deletaProduto(int mode, int codigoDel);
 
 #endif
