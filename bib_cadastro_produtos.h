@@ -16,6 +16,24 @@ typedef struct
     float preco_venda;
 } str_produtos;
 
+/*
+ * FUN€ÇO CADASTRA PRODUTO
+ */
+int cadastro_produto(int mode, str_produtos h);
 
+/*
+ * FUN€ÇO ALTERA PRODUTO
+ */
+int alteraProduto(int mode, str_produtos x);
+
+/*
+ * FUN€ÇO PESQUISA PRODUTO
+ */
+int pesquisaProduto(int mode, int searchCod, str_produtos *prod);
+
+/*
+ * FUN€ÇO DELETA PRODUTO
+ */
+int deletaProduto(int mode, int codigo);
 
 #endif

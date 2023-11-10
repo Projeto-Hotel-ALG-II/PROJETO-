@@ -4,32 +4,32 @@
 #include <stdio.h>
 
 /*
- * Funï¿½ï¿½o limpa o prompt de comando
+ * Fun‡Æo limpa o prompt de comando
  */
 void clearPrompt();
 
 /*
- * Funï¿½ï¿½o pausa a aplicaï¿½ï¿½o e mostra o texto "Pressione qualquer tecla para continuar..."
+ * Fun‡Æo pausa a aplica‡Æo e mostra o texto "Pressione qualquer tecla para continuar..."
  */
 void pausaSist();
 
 /*
- * Funï¿½ï¿½o apaga o arquivo temporï¿½rio
+ * Fun‡Æo apaga o arquivo tempor rio
  */
 void rmvTemp();
 
 /*
- * Funï¿½ï¿½o para contar linhas de um arquivo, exemplo: contadorLinhas("..\\data\\dados_nomeArq.dat");
+ * Fun‡Æo para contar linhas de um arquivo, exemplo: contadorLinhas("..\\data\\dados_nomeArq.dat");
  */
 int contadorLinhas(char fileName[35]);
 
 /*
- * Funï¿½ï¿½o para tornar arquivo temporario o arquivo principal, exemplo: substituiTemp("..\\data\\dados_arq.txt","..\\data\\temp.txt");
+ * Fun‡Æo para tornar arquivo temporario o arquivo principal, exemplo: substituiTemp("..\\data\\dados_arq.txt","..\\data\\temp.txt");
  */
 int substituiTemp(char original[35], char temporario[35]);
 
 /*
- * Funï¿½ï¿½o copia arquivo para outro, Primeiro argumento deve ser do arquivo que sera copiado e o segundo deve ser do arquivo que recebera os dados copiados
+ * Fun‡Æo copia arquivo para outro, Primeiro argumento deve ser do arquivo que sera copiado e o segundo deve ser do arquivo que recebera os dados copiados
  */
 void copiarArquivo(FILE *pF_fileCopiada, FILE *pF_fileCriada);
 

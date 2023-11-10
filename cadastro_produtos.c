@@ -1,19 +1,12 @@
-#ifndef CADASTRO_PRODUTOS
-#define CADASTRO_PRODUTOS
 #include <stdio.h>
 #include <string.h>
-#include "quick_tools.h"
+#include "bib_quick_tools.h"
 #include "bib_cadastro_produtos.h"
-
-int cadastro_produto(str_produtos h);
-int alteraProduto(str_produtos x);
-int pesquisaProduto(int searchCod, char *x, int *y, int *z, float *w, float *r);
-int deletaProduto();
 
 int cadastro_produto(int mode, str_produtos h)
 {
-  FILE *ptr;
-   switch (mode)
+    FILE *ptr;
+    switch (mode)
     {
     case 1:
         ptr = fopen("..\\data\\dados_produtos.txt", "w");
@@ -22,7 +15,7 @@ int cadastro_produto(int mode, str_produtos h)
             return 1;
         }
         break;
-    case 2: 
+    case 2:
         ptr = fopen("..\\data\\dados_produtos.dat", "wb");
         if (ptr == NULL)
         {
@@ -30,11 +23,11 @@ int cadastro_produto(int mode, str_produtos h)
         }
         break;
     case 3: // alocacao dinamica
-     
+
         break;
     }
 
-    if (mode!= 3)
+    if (mode != 3)
     {
         fprintf(ptr, "%d|", h.codigo);
         fprintf(ptr, "%s|", h.descricao);
@@ -45,15 +38,15 @@ int cadastro_produto(int mode, str_produtos h)
 
         fclose(ptr);
     }
-    
+
     return 0;
 }
 
-int pesquisaProduto(int mode, int searchCod, char *x, int *y, int *z, float *w, float *r)
+int pesquisaProduto(int mode, int searchCod, str_produtos *prod)
 {
-  str_produtos prod;
-  FILE *ptr;
-  switch (mode)
+    str_produtos prodTmp;
+    FILE *ptr;
+    switch (mode)
     {
     case 1:
         ptr = fopen("..\\data\\dados_produtos.txt", "w");
@@ -62,7 +55,7 @@ int pesquisaProduto(int mode, int searchCod, char *x, int *y, int *z, float *w, 
             return 1;
         }
         break;
-    case 2: 
+    case 2:
         ptr = fopen("..\\data\\dados_produtos.dat", "wb");
         if (ptr == NULL)
         {
@@ -70,22 +63,22 @@ int pesquisaProduto(int mode, int searchCod, char *x, int *y, int *z, float *w, 
         }
         break;
     case 3: // alocacao dinamica
-     
+
         break;
     }
- 
 
-    while (fscanf(ptr, "%d|%[^|]|%d|%d|%f|%f\n", &prod.codigo, prod.descricao, &prod.estoque, &prod.estoque_min, &prod.preco_custo, &prod.preco_venda) != EOF)
+    while (fscanf(ptr, "%d|%[^|]|%d|%d|%f|%f\n", &prodTmp.codigo, prodTmp.descricao, &prodTmp.estoque, &prodTmp.estoque_min, &prodTmp.preco_custo, &prodTmp.preco_venda) != EOF)
     {
-        if (prod.codigo == searchCod)
+        if (prodTmp.codigo == searchCod)
         {
-        strcpy(x, prod.descricao);
-        *y = prod.estoque;
-        *z = prod.estoque_min;
-        *w = prod.preco_custo;
-        *r = prod.preco_venda;
-        fclose(ptr);
-        return 0;
+            prod->codigo = prodTmp.codigo;
+            strcpy(prod->descricao, prodTmp.descricao);
+            prod->estoque = prodTmp.estoque;
+            prod->estoque_min = prodTmp.estoque_min;
+            prod->preco_custo = prodTmp.preco_custo;
+            prod->preco_venda = prodTmp.preco_venda;
+            fclose(ptr);
+            return 0;
         }
     }
 
@@ -96,9 +89,9 @@ int pesquisaProduto(int mode, int searchCod, char *x, int *y, int *z, float *w, 
 
 int alteraProduto(int mode, str_produtos x)
 {
-  str_produtos temp;
-  FILE *ptr, *ptrTemp;
-  switch (mode)
+    str_produtos temp;
+    FILE *ptr, *ptrTemp;
+    switch (mode)
     {
     case 1: // Usando txt
         ptr = fopen("..\\data\\dados_produtos.txt", "r");
@@ -110,14 +103,14 @@ int alteraProduto(int mode, str_produtos x)
         break;
     case 2:
         ptr = fopen("..\\data\\dados_produtos.dat", "rb");
-        ptrTemp = fopen("..\\data\\dados_produtos_temp.dat", "wb" );
-        if (ptr = NULL || ptrTemp == NULL)
+        ptrTemp = fopen("..\\data\\dados_produtos_temp.dat", "wb");
+        if (ptr == NULL || ptrTemp == NULL)
         {
             return 1;
         }
         break;
-    case 3: //usadno alocacao dinamica
-        //codigo
+    case 3: // usadno alocacao dinamica
+        // codigo
         break;
     }
 
@@ -125,21 +118,21 @@ int alteraProduto(int mode, str_produtos x)
     {
         if (x.codigo != temp.codigo)
         {
-        fprintf(ptrTemp, "%d|", temp.codigo);
-        fprintf(ptrTemp, "%s|", temp.descricao);
-        fprintf(ptrTemp, "%d|", temp.estoque);
-        fprintf(ptrTemp, "%d|", temp.estoque_min);
-        fprintf(ptrTemp, "%.2f|", temp.preco_custo);
-        fprintf(ptrTemp, "%.2f\n", temp.preco_venda);
+            fprintf(ptrTemp, "%d|", temp.codigo);
+            fprintf(ptrTemp, "%s|", temp.descricao);
+            fprintf(ptrTemp, "%d|", temp.estoque);
+            fprintf(ptrTemp, "%d|", temp.estoque_min);
+            fprintf(ptrTemp, "%.2f|", temp.preco_custo);
+            fprintf(ptrTemp, "%.2f\n", temp.preco_venda);
         }
         else
         {
-        fprintf(ptrTemp, "%d|", x.codigo);
-        fprintf(ptrTemp, "%s|", x.descricao);
-        fprintf(ptrTemp, "%d|", x.estoque);
-        fprintf(ptrTemp, "%d|", x.estoque_min);
-        fprintf(ptrTemp, "%.2f|", x.preco_custo);
-        fprintf(ptrTemp, "%.2f\n", x.preco_venda);
+            fprintf(ptrTemp, "%d|", x.codigo);
+            fprintf(ptrTemp, "%s|", x.descricao);
+            fprintf(ptrTemp, "%d|", x.estoque);
+            fprintf(ptrTemp, "%d|", x.estoque_min);
+            fprintf(ptrTemp, "%.2f|", x.preco_custo);
+            fprintf(ptrTemp, "%.2f\n", x.preco_venda);
         }
     }
 
@@ -156,8 +149,9 @@ int alteraProduto(int mode, str_produtos x)
         ptr = fopen("..\\data\\dados_produtos.txt", "wb");
         ptrTemp = fopen("..\\data\\dados_produtos_ temp.txt", "rb");
     }
-    else{
-        //alocacao
+    else
+    {
+        // alocacao
     }
 
     copiarArquivo(ptrTemp, ptr);
@@ -167,33 +161,39 @@ int alteraProduto(int mode, str_produtos x)
     return 0;
 }
 
-int deletaProduto(int mode)
+int deletaProduto(int mode, int codigo)
 {
-  FILE *ptr;
-  switch (mode)
+    FILE *pF_Prod, *pF_Temp;
+    switch (mode)
     {
     case 1:
-        ptr = fopen("..\\data\\dados_produtos.txt", "w");
-        if (ptr == NULL)
+        pF_Prod = fopen("..\\data\\dados_produtos.txt", "r");
+        pF_Temp = fopen("temp.txt", "w");
+        if (pF_Prod == NULL || pF_Temp == NULL)
         {
             return 1;
         }
         break;
-    case 2: 
-        ptr = fopen("..\\data\\dados_produtos.dat", "wb");
-        if (ptr == NULL)
+    case 2:
+        pF_Prod = fopen("..\\data\\dados_produtos.dat", "rb");
+        pF_Temp = fopen("temp.dat", "wb");
+        if (pF_Prod == NULL || pF_Temp == NULL)
         {
             return 1;
         }
         break;
     case 3: // alocacao dinamica
-     
+
         break;
     }
 
-    fprintf(ptr, "0");
-    fclose(ptr);
+    if(mode != 3){
+        while(fscanf(pF_Prod, "%d|%[^|]|%d|%d|%f|%f\n") != EOF){
+            if() /////////   <<<<================================================== MUDA AQUI VIU!
+        }
+    }
+
+    fclose(pF_Prod);
+    fclose(pF_Temp);
     return 0;
 }
-
-#endif

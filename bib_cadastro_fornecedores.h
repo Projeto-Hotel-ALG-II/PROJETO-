@@ -18,5 +18,24 @@ typedef struct
     char email[50];
 } str_fornecedores;
 
+/*
+ * FUN€ÇO CADASTRA FORNECEDORES
+ */
+int cadastrarFornecedor(int mode, str_fornecedores f);
+
+/*
+ * FUN€ÇO PESQUISA FORNECEDORES
+ */
+int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec);
+
+/*
+ * FUN€ÇO ALTERA FORNECEDORES
+ */
+int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec);
+
+/*
+ * FUN€ÇO EXCLUI FORNECEDORES
+ */
+int excluirFornecedor(int mode, char cnpj_forn[15]);
 
 #endif
