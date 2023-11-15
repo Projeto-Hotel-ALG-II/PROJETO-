@@ -16,26 +16,28 @@ typedef struct
     char end_completo[100];
     char telefone[16]; // (XX) YZZZZ-ZZZZ
     char email[50];
-} str_fornecedores;
+} str_fornecedores;                                            
+
+//inicia ponteiro
+int iniciaF(str_fornecedores * f); 
+/*
+ * FUNï¿½ï¿½O CADASTRA FORNECEDORES
+ */
+int cadastrarFornecedor(int mode, str_fornecedores * f);
 
 /*
- * FUN€ÇO CADASTRA FORNECEDORES
+ * FUNï¿½ï¿½O PESQUISA FORNECEDORES
  */
-int cadastrarFornecedor(int mode, str_fornecedores f);
+int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec,  str_fornecedores * f);
 
 /*
- * FUN€ÇO PESQUISA FORNECEDORES
+ * FUNï¿½ï¿½O ALTERA FORNECEDORES
  */
-int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec);
+int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores * f);
 
 /*
- * FUN€ÇO ALTERA FORNECEDORES
+ * FUNï¿½ï¿½O EXCLUI FORNECEDORES
  */
-int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec);
-
-/*
- * FUN€ÇO EXCLUI FORNECEDORES
- */
-int excluirFornecedor(int mode, char cnpj_forn[15]);
+int excluirFornecedor(int mode, char cnpj_forn[15], str_fornecedores * f);
 
 #endif

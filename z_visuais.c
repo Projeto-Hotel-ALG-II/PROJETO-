@@ -1050,10 +1050,9 @@ void visualCadastroAcomodacoes(int mode)
     return;
 }
 
-void visualCadastroFornecedor(int mode)
+void visualCadastroFornecedor(int mode, str_fornecedores * f)
 {
     int choice, ret;
-    str_fornecedores f;
 
     while (1)
     {
@@ -1080,31 +1079,31 @@ void visualCadastroFornecedor(int mode)
             // recolhendo dados do novo fornecedor
             fflush(stdin);
             printf("Indique o nome               : ");
-            scanf(" %[^\n]", f.nome);
+            scanf(" %[^\n]", f->nome);
 
             fflush(stdin);
             printf("Indique a razÆo social       : ");
-            scanf(" %[^\n]", f.razao_social);
+            scanf(" %[^\n]", f->razao_social);
 
             fflush(stdin);
             printf("Indique a inscri?Æo estadual : ");
-            scanf(" %[^\n]", f.inscricao_estadual);
+            scanf(" %[^\n]", f->inscricao_estadual);
 
             fflush(stdin);
             printf("Indique o cnpj               : ");
-            scanf(" %[^\n]", f.cnpj);
+            scanf(" %[^\n]", f->cnpj);
 
             fflush(stdin);
             printf("Indique o endere?o completo  : ");
-            scanf(" %[^\n]", f.end_completo);
+            scanf(" %[^\n]", f->end_completo);
 
             fflush(stdin);
             printf("Indique o telefone           : ");
-            scanf(" %[^\n]", f.telefone);
+            scanf(" %[^\n]", f->telefone);
 
             fflush(stdin);
             printf("Indique o email              : ");
-            scanf(" %[^\n]", f.email);
+            scanf(" %[^\n]", f->email);
 
             // fun?Æo cadastra o fornecedor
             ret = cadastrarFornecedor(mode, f);
@@ -1124,22 +1123,22 @@ void visualCadastroFornecedor(int mode)
             printf("Pesquisar Fornecedor: \n");
             printf("CNPJ do fornecedor: ");
             fflush(stdin);
-            scanf("%s", f.cnpj);
+            scanf("%s", f->cnpj);
 
-            ret = pesquisarFornecedor(mode, f.cnpj, &f);
+            ret = pesquisarFornecedor(mode, f->cnpj, f, f);
 
             if (ret == 0)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", f.codigo);
-                printf("Nome Fornecedor    : %s\n", f.nome);
-                printf("RazÆo Social       : %s\n", f.razao_social);
-                printf("Inscri?Æo Estadual : %s\n", f.inscricao_estadual);
-                printf("CNPJ               : %s\n", f.cnpj);
-                printf("Endere?o Completo  : %s\n", f.end_completo);
-                printf("Telefone           : %s\n", f.telefone);
-                printf("Email              : %s\n", f.email);
+                printf("C¢digo             : %d\n", f->codigo);
+                printf("Nome Fornecedor    : %s\n", f->nome);
+                printf("RazÆo Social       : %s\n", f->razao_social);
+                printf("Inscri?Æo Estadual : %s\n", f->inscricao_estadual);
+                printf("CNPJ               : %s\n", f->cnpj);
+                printf("Endere?o Completo  : %s\n", f->end_completo);
+                printf("Telefone           : %s\n", f->telefone);
+                printf("Email              : %s\n", f->email);
                 pausaSist();
             }
             else
@@ -1154,21 +1153,21 @@ void visualCadastroFornecedor(int mode)
 
             printf("Informe o CNPJ: \n");
             fflush(stdin);
-            scanf("%s", f.cnpj);
+            scanf("%s", f->cnpj);
 
             printf("\n");
 
-            ret = pesquisarFornecedor(mode, f.cnpj, &f);
+            ret = pesquisarFornecedor(mode, f->cnpj, f, f);
 
             if (ret == 0)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("Código             : %d\n", f.codigo);
-                printf("Nome               : %s\n", f.nome);
-                printf("Telefone           : %s\n", f.telefone);
-                printf("Email              : %s\n", f.email);
-                printf("CNPJ               : %s\n", f.cnpj);
+                printf("Código             : %d\n", f->codigo);
+                printf("Nome               : %s\n", f->nome);
+                printf("Telefone           : %s\n", f->telefone);
+                printf("Email              : %s\n", f->email);
+                printf("CNPJ               : %s\n", f->cnpj);
                 printf("=========================================\n");
                 printf("Deseja alterar este fornecedor?\n");
                 printf("1 - Sim\n");
@@ -1181,33 +1180,33 @@ void visualCadastroFornecedor(int mode)
                     clearPrompt();
                     fflush(stdin);
                     printf("Indique o novo nome               : ");
-                    scanf(" %[^\n]", f.nome);
+                    scanf(" %[^\n]", f->nome);
 
                     fflush(stdin);
                     printf("Indique a nova razÆo social       : ");
-                    scanf(" %[^\n]", f.razao_social);
+                    scanf(" %[^\n]", f->razao_social);
 
                     fflush(stdin);
                     printf("Indique a nova inscri?Æo estadual : ");
-                    scanf(" %[^\n]", f.inscricao_estadual);
+                    scanf(" %[^\n]", f->inscricao_estadual);
 
                     fflush(stdin);
                     printf("Indique o novo cnpj               : ");
-                    scanf(" %[^\n]", f.cnpj);
+                    scanf(" %[^\n]", f->cnpj);
 
                     fflush(stdin);
                     printf("Indique o novo endere?o completo  : ");
-                    scanf(" %[^\n]", f.end_completo);
+                    scanf(" %[^\n]", f->end_completo);
 
                     fflush(stdin);
                     printf("Indique o novo telefone           : ");
-                    scanf(" %[^\n]", f.telefone);
+                    scanf(" %[^\n]", f->telefone);
 
                     fflush(stdin);
                     printf("Indique o novo email              : ");
-                    scanf(" %[^\n]", f.email);
+                    scanf(" %[^\n]", f->email);
 
-                    ret = alterarFornecedor(mode, f.cnpj, f);
+                    ret = alterarFornecedor(mode, f->cnpj, f);
 
                     if (ret == 0)
                     {
@@ -1234,21 +1233,21 @@ void visualCadastroFornecedor(int mode)
 
             printf("Informe o CNPJ: \n");
             fflush(stdin);
-            scanf("%s", f.cnpj);
+            scanf("%s", f->cnpj);
 
             printf("\n");
 
-            ret = pesquisarFornecedor(mode, f.cnpj, &f);
+            ret = pesquisarFornecedor(mode, f->cnpj, f, f);
 
             if (ret == 0)
             {
                 printf("=> Fornecedor encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", f.codigo);
-                printf("Nome               : %s\n", f.nome);
-                printf("Telefone           : %s\n", f.telefone);
-                printf("Email              : %s\n", f.email);
-                printf("CNPJ               : %s\n", f.cnpj);
+                printf("C¢digo             : %d\n", f->codigo);
+                printf("Nome               : %s\n", f->nome);
+                printf("Telefone           : %s\n", f->telefone);
+                printf("Email              : %s\n", f->email);
+                printf("CNPJ               : %s\n", f->cnpj);
                 printf("=========================================\n");
                 printf("Deseja excluir este fornecedor?\n");
                 printf("1 - Sim\n");
@@ -1258,7 +1257,7 @@ void visualCadastroFornecedor(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirFornecedor(mode, f.cnpj);
+                    ret = excluirFornecedor(mode, f->cnpj, f);
 
                     if (ret == 0)
                     {
@@ -1286,6 +1285,7 @@ void visualCadastroFornecedor(int mode)
         }
     }
 
+    free(f);
     return;
 }
 
@@ -1533,10 +1533,9 @@ void visualCadastroProdutos(int mode)
     return;
 }
 
-void visualCadastroOperadores(int mode)
+void visualCadastroOperadores(int mode, str_op_sistemas *op)
 {
     int choice, ret;
-    str_op_sistemas operador;
 
     while (1)
     {
@@ -1560,22 +1559,22 @@ void visualCadastroOperadores(int mode)
             // Recolhendo dados do novo operador
             fflush(stdin);
             printf("Indique o nome   : ");
-            scanf(" %[^\n]", operador.nome);
+            scanf(" %[^\n]", op->nome);
 
             fflush(stdin);
             printf("Indique o login  : ");
-            scanf(" %[^\n]", operador.usuario);
+            scanf(" %[^\n]", op->usuario);
 
             fflush(stdin);
             printf("Indique a senha  : ");
-            scanf(" %[^\n]", operador.senha);
+            scanf(" %[^\n]", op->senha);
 
             fflush(stdin);
             printf("Indique as permissões (separadas por vírgulas) : ");
-            scanf(" %[^\n]", operador.permissoes);
+            scanf(" %[^\n]", op->permissoes);
 
             // Função cadastra o operador
-            ret = cadastrarOperador(mode, operador);
+            ret = cadastrarOperador(mode, op);
 
             if (ret == 0)
             {
@@ -1593,18 +1592,18 @@ void visualCadastroOperadores(int mode)
             printf("Pesquisar Operador: \n");
             printf("Login do operador: ");
             fflush(stdin);
-            scanf("%s", operador.usuario);
+            scanf("%s", op->usuario);
 
-            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, op->usuario, op);
 
             if (ret == 0)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("Código      : %d\n", operador.codigo);
-                printf("Nome        : %s\n", operador.nome);
-                printf("Login       : %s\n", operador.usuario);
-                printf("Permissões  : %s\n", operador.permissoes);
+                printf("Código      : %d\n", op->codigo);
+                printf("Nome        : %s\n", op->nome);
+                printf("Login       : %s\n", op->usuario);
+                printf("Permissões  : %s\n", op->permissoes);
                 pausaSist();
             }
             else
@@ -1619,19 +1618,19 @@ void visualCadastroOperadores(int mode)
             printf("Alterar operador:\n");
             printf("Informe o login: \n");
             fflush(stdin);
-            scanf("%s", operador.usuario);
+            scanf("%s", op->usuario);
 
             printf("\n");
-            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, op->usuario, op);
 
             if (ret == 0)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("Código      : %d\n", operador.codigo);
-                printf("Nome        : %s\n", operador.nome);
-                printf("Login       : %s\n", operador.usuario);
-                printf("Permissões  : %s\n", operador.permissoes);
+                printf("Código      : %d\n", op->codigo);
+                printf("Nome        : %s\n", op->nome);
+                printf("Login       : %s\n", op->usuario);
+                printf("Permissões  : %s\n", op->permissoes);
                 printf("=========================================\n");
                 printf("Deseja alterar este operador?\n");
                 printf("1 - Sim\n");
@@ -1644,17 +1643,17 @@ void visualCadastroOperadores(int mode)
                     clearPrompt();
                     fflush(stdin);
                     printf("Indique o novo nome        : ");
-                    scanf(" %[^\n]", operador.nome);
+                    scanf(" %[^\n]", op->nome);
 
                     fflush(stdin);
                     printf("Indique a nova senha       : ");
-                    scanf(" %[^\n]", operador.senha);
+                    scanf(" %[^\n]", op->senha);
 
                     fflush(stdin);
                     printf("Indique as novas permissões (separadas por vírgulas) : ");
-                    scanf(" %[^\n]", operador.permissoes);
+                    scanf(" %[^\n]", op->permissoes);
 
-                    ret = editarOperador(mode, operador.usuario, operador);
+                    ret = editarOperador(mode, op->usuario, op);
 
                     if (ret == 0)
                     {
@@ -1680,20 +1679,20 @@ void visualCadastroOperadores(int mode)
             printf("Excluir operador:\n");
             printf("Informe o login: \n");
             fflush(stdin);
-            scanf("%s", operador.usuario);
+            scanf("%s", op->usuario, op);
 
             printf("\n");
 
-            ret = pesquisarOperadorPorUsuario(mode, operador.usuario, &operador);
+            ret = pesquisarOperadorPorUsuario(mode, op->usuario, op);
 
             if (ret == 0)
             {
                 printf("=> Operador encontrado!\n");
                 printf("=========================================\n");
-                printf("Código      : %d\n", operador.codigo);
-                printf("Nome        : %s\n", operador.nome);
-                printf("Login       : %s\n", operador.usuario);
-                printf("Permissões  : %s\n", operador.permissoes);
+                printf("Código      : %d\n", op->codigo);
+                printf("Nome        : %s\n", op->nome);
+                printf("Login       : %s\n", op->usuario);
+                printf("Permissões  : %s\n", op->permissoes);
                 printf("=========================================\n");
                 printf("Deseja excluir este operador?\n");
                 printf("1 - Sim\n");
@@ -1703,7 +1702,7 @@ void visualCadastroOperadores(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirOperador(mode, operador.usuario);
+                    ret = excluirOperador(mode, op->usuario, op);
 
                     if (ret == 0)
                     {

@@ -4,8 +4,18 @@
 #include "bib_cadastro_operadores.h"
 #include "bib_quick_tools.h"
 
-// Fun?’o para cadastrar um operador no sistema
-int cadastrarOperador(int mode, str_op_sistemas operador)
+int iniciaOp(str_op_sistemas *op){
+    op = (str_op_sistemas*)malloc(0*sizeof(str_op_sistemas));
+	if(op == NULL){
+		fprintf(stderr, "Memory Allocation error\n");
+		exit(EXIT_FAILURE);
+	}
+
+	return 1;
+}
+
+// Fun?ï¿½o para cadastrar um operador no sistema
+int cadastrarOperador(int mode, str_op_sistemas *op)
 {
     FILE *foperador;
     switch (mode)
@@ -16,7 +26,7 @@ int cadastrarOperador(int mode, str_op_sistemas operador)
         {
             return 1;
         }
-        operador.codigo = contadorLinhas("..\\data\\dados_operadores.txt") + 1;
+        op->codigo = contadorLinhas("..\\data\\dados_operadores.txt") + 1;
         break;
     case 2:
         foperador = fopen("..\\data\\dados_operadores.dat", "ab");
@@ -24,25 +34,27 @@ int cadastrarOperador(int mode, str_op_sistemas operador)
         {
             return 1;
         }
-        operador.codigo = contadorLinhas("..\\data\\dados_operadores.dat") + 1;
+        op->codigo = contadorLinhas("..\\data\\dados_operadores.dat") + 1;
         break;
     case 3: // alocacao dinamica
 
         break;
     }
 
-    fprintf(foperador, "%d|", operador.codigo);
-    fprintf(foperador, "%s|", operador.nome);
-    fprintf(foperador, "%s|", operador.usuario);
-    fprintf(foperador, "%s|", operador.senha);
-    fprintf(foperador, "%s\n", operador.permissoes);
+    fprintf(foperador, "%d|", op->codigo);
+    fprintf(foperador, "%s|", op->nome);
+    fprintf(foperador, "%s|", op->usuario);
+    fprintf(foperador, "%s|", op->senha);
+    fprintf(foperador, "%s\n", op->permissoes);
+
+    op = (str_op_sistemas *)realloc(op, (sizeof(str_op_sistemas)+1));
 
     fclose(foperador);
     return 0; // Operador cadastrado com sucesso
 }
 
-// Fun?’o para pesquisar um operador pelo usuÇ­rio
-int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *operador)
+// Fun?ï¿½o para pesquisar um operador pelo usuÇ­rio
+int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *op)
 {
     FILE *foperador;
     switch (mode)
@@ -72,22 +84,22 @@ int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *o
     {
         if (strcmp(pqusuario, dados.usuario) == 0)
         {
-            operador->codigo = dados.codigo;
-            strcpy(operador->nome, dados.nome);
-            strcpy(operador->usuario, dados.usuario);
-            strcpy(operador->senha, dados.senha);
-            strcpy(operador->permissoes, dados.permissoes);
+            op->codigo = dados.codigo;
+            strcpy(op->nome, dados.nome);
+            strcpy(op->usuario, dados.usuario);
+            strcpy(op->senha, dados.senha);
+            strcpy(op->permissoes, dados.permissoes);
             fclose(foperador);
             return 0; // Operador encontrado
         }
     }
 
     fclose(foperador);
-    return 1; // Operador n’o encontrado
+    return 1; // Operador nï¿½o encontrado
 }
 
-// Fun?’o para editar um operador
-int editarOperador(int mode, char pqusuario[20], str_op_sistemas operador)
+// Fun?ï¿½o para editar um operador
+int editarOperador(int mode, char pqusuario[20], str_op_sistemas *op)
 {
     FILE *ftemp, *foperador;
     str_op_sistemas temp;
@@ -127,13 +139,14 @@ int editarOperador(int mode, char pqusuario[20], str_op_sistemas operador)
         else
         {
             fprintf(ftemp, "%d|", temp.codigo);
-            fprintf(ftemp, "%s|", operador.nome);
-            fprintf(ftemp, "%s|", operador.usuario);
-            fprintf(ftemp, "%s|", operador.senha);
-            fprintf(ftemp, "%s\n", operador.permissoes);
+            fprintf(ftemp, "%s|", op->nome);
+            fprintf(ftemp, "%s|", op->usuario);
+            fprintf(ftemp, "%s|", op->senha);
+            fprintf(ftemp, "%s\n", op->permissoes);
         }
     }
 
+    op = (str_op_sistemas *)realloc(op, sizeof(str_op_sistemas));
     fclose(foperador);
     fclose(ftemp);
 
@@ -162,8 +175,8 @@ int editarOperador(int mode, char pqusuario[20], str_op_sistemas operador)
     return 0;
 }
 
-// Fun?’o para excluir um operador
-int excluirOperador(int mode, char pqusuario[20])
+// Fun?ï¿½o para excluir um operador
+int excluirOperador(int mode, char pqusuario[20], str_op_sistemas *op)
 {
     FILE *ftemp, *foperador;
     str_op_sistemas temp;
@@ -202,7 +215,7 @@ int excluirOperador(int mode, char pqusuario[20])
         }
         else
         {
-            fprintf(ftemp, "0|"); // Marca o operador como exclu­do
+            fprintf(ftemp, "0|", op->codigo); // Marca o operador como excluï¿½do
             fprintf(ftemp, "%s|", temp.nome);
             fprintf(ftemp, "%s|", temp.usuario);
             fprintf(ftemp, "%s|", temp.senha);
@@ -210,6 +223,7 @@ int excluirOperador(int mode, char pqusuario[20])
         }
     }
 
+    op = (str_op_sistemas *)realloc(op, sizeof(str_op_sistemas)-1);
     fclose(foperador);
     fclose(ftemp);
 

@@ -15,24 +15,25 @@ typedef struct
     char permissoes[200];
 } str_op_sistemas;
 
+int iniciaOp(str_op_sistemas *op);
 /*
- * FUN€ÇO CADASTRA OPERADOR 
+ * FUNï¿½ï¿½O CADASTRA OPERADOR 
 */
-int cadastrarOperador(int mode, str_op_sistemas operador);
+int cadastrarOperador(int mode, str_op_sistemas *op);
 
 /*
- * FUN€ÇO PESQUISA OPERADOR 
+ * FUNï¿½ï¿½O PESQUISA OPERADOR 
 */
-int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *operador);
+int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *op);
 
 /*
- * FUN€ÇO EDITA OPERADOR 
+ * FUNï¿½ï¿½O EDITA OPERADOR 
 */
-int editarOperador(int mode, char pqusuario[20], str_op_sistemas operador);
+int editarOperador(int mode, char pqusuario[20], str_op_sistemas *op);
 
 /*
- * FUN€ÇO EXCLUI OPERADOR 
+ * FUNï¿½ï¿½O EXCLUI OPERADOR 
 */
-int excluirOperador(int mode, char pqusuario[20]);
+int excluirOperador(int mode, char pqusuario[20], str_op_sistemas *op);
 
 #endif

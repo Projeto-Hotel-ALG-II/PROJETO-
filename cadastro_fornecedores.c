@@ -5,7 +5,17 @@
 #include "bib_quick_tools.h"
 #include "bib_cadastro_fornecedores.h"
 
-int cadastrarFornecedor(int mode, str_fornecedores f)
+int iniciaF(str_fornecedores * f){
+	f = (str_fornecedores*)malloc(0*sizeof(str_fornecedores));
+	if(f == NULL){
+		fprintf(stderr, "Memory Allocation error\n");
+		exit(EXIT_FAILURE);
+	}
+
+	return 1;
+}
+
+int cadastrarFornecedor(int mode, str_fornecedores * f)
 {
     FILE *pF_fornec;
     switch (mode)
@@ -24,38 +34,34 @@ int cadastrarFornecedor(int mode, str_fornecedores f)
             return 1;
         }
         break;
-    case 3: //usadno alocacao dinamica
-        //codigo
-        break;
     }
-   
-    if (mode != 3)
-    {
-        fprintf(pF_fornec, "%d|", f.codigo);
-        fprintf(pF_fornec, "%s|", f.nome);
-        fprintf(pF_fornec, "%s|", f.razao_social);
-        fprintf(pF_fornec, "%s|", f.inscricao_estadual);
-        fprintf(pF_fornec, "%s|", f.cnpj);
-        fprintf(pF_fornec, "%s|", f.end_completo);
-        fprintf(pF_fornec, "%s|", f.telefone);
-        fprintf(pF_fornec, "%s|", f.email);
+
+        fprintf(pF_fornec, "%d|", f->codigo);
+        fprintf(pF_fornec, "%s|", f->nome);
+        fprintf(pF_fornec, "%s|", f->razao_social);
+        fprintf(pF_fornec, "%s|", f->inscricao_estadual);
+        fprintf(pF_fornec, "%s|", f->cnpj);
+        fprintf(pF_fornec, "%s|", f->end_completo);
+        fprintf(pF_fornec, "%s|", f->telefone);
+        fprintf(pF_fornec, "%s|", f->email);
+
+        if (mode == 3)
+        {
+            f = (str_fornecedores*)realloc(f, (sizeof(str_fornecedores)+1));
+        }
+        
 
         fclose(pF_fornec);
-    }
-    else{
-
-    }
-    
+   
     return 0;
 }
 
 /*
  * Faz a pesquisa do fornecedor
  */
-int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec)
+int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec, str_fornecedores * f)
 {
     FILE *pF_fornec;
-    str_fornecedores f;
 
     switch (mode)
     {
@@ -73,36 +79,32 @@ int pesquisarFornecedor(int mode, char cnpj_pesq[15], str_fornecedores *pFornec)
             return 1;
         }
         break;
-    case 3: //usadno alocacao dinamica
-        //codigo
-        break;
     }
 
-    if (mode != 3)
-    {
-        while (fscanf(pF_fornec, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^\n]\n", &f.codigo, f.nome, f.razao_social,
-                  f.inscricao_estadual, f.cnpj, f.end_completo, f.telefone, f.email) != EOF)
+
+        while (fscanf(pF_fornec, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^\n]\n", &f->codigo, f->nome, f->razao_social,
+                  f->inscricao_estadual, f->cnpj, f->end_completo, f->telefone, f->email) != EOF)
         {
-            if (strcmp(cnpj_pesq, f.cnpj) == 0 && f.codigo != 0)
+            if (strcmp(cnpj_pesq, f->cnpj) == 0 && f->codigo != 0)
             {
-                pFornec->codigo = f.codigo;
-                strcpy(pFornec->nome, f.nome);
-                strcpy(pFornec->razao_social, f.razao_social);
-                strcpy(pFornec->inscricao_estadual, f.inscricao_estadual);
-                strcpy(pFornec->cnpj, f.cnpj);
-                strcpy(pFornec->end_completo, f.end_completo);
-                strcpy(pFornec->telefone, f.telefone);
-                strcpy(pFornec->email, f.email);
+                pFornec->codigo = f->codigo;
+                strcpy(pFornec->nome, f->nome);
+                strcpy(pFornec->razao_social, f->razao_social);
+                strcpy(pFornec->inscricao_estadual, f->inscricao_estadual);
+                strcpy(pFornec->cnpj, f->cnpj);
+                strcpy(pFornec->end_completo, f->end_completo);
+                strcpy(pFornec->telefone, f->telefone);
+                strcpy(pFornec->email, f->email);
                 return 0;
             }
         }   
-    }
+
     
     fclose(pF_fornec);
     return 1;
 }
 
-int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec)
+int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores * f)
 {
     FILE *pF_temp, *pF_fornec;
     str_fornecedores tmp;
@@ -125,15 +127,12 @@ int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec)
             return 1;
         }
         break;
-    case 3: //usadno alocacao dinamica
-        //codigo
-        break;
     }
   
     while (fscanf(pF_fornec, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.razao_social, tmp.inscricao_estadual,
                     tmp.cnpj, tmp.end_completo, tmp.telefone, tmp.email) != EOF)
     {
-            // caso o fornecedor n’o seja o que se deseja alterar serÿ copiado os dados diretamente do arquivo original para o temporÿrio
+            // caso o fornecedor nï¿½o seja o que se deseja alterar serï¿½ copiado os dados diretamente do arquivo original para o temporï¿½rio
         if (strcmp(tmp.cnpj, cnpj_forn) != 0)
         {
             fprintf(pF_temp, "%d|", tmp.codigo);
@@ -145,17 +144,17 @@ int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec)
             fprintf(pF_temp, "%s|", tmp.telefone);
             fprintf(pF_temp, "%s\n", tmp.email);
         }
-            // caso o fornecedor seja o que se deseja alterar serÿ escrito no arquivo temporÿrio os novos dados
+            // caso o fornecedor seja o que se deseja alterar serï¿½ escrito no arquivo temporï¿½rio os novos dados
         else
         {
-            fprintf(pF_temp, "%d|", att_fornec.codigo);
-            fprintf(pF_temp, "%s|", att_fornec.nome);
-            fprintf(pF_temp, "%s|", att_fornec.razao_social);
-            fprintf(pF_temp, "%s|", att_fornec.inscricao_estadual);
-            fprintf(pF_temp, "%s|", att_fornec.cnpj);
-            fprintf(pF_temp, "%s|", att_fornec.end_completo);
-            fprintf(pF_temp, "%s|", att_fornec.telefone);
-            fprintf(pF_temp, "%s\n", att_fornec.email);
+            fprintf(pF_temp, "%d|", f->codigo);
+            fprintf(pF_temp, "%s|", f->nome);
+            fprintf(pF_temp, "%s|", f->razao_social);
+            fprintf(pF_temp, "%s|", f->inscricao_estadual);
+            fprintf(pF_temp, "%s|", f->cnpj);
+            fprintf(pF_temp, "%s|", f->cnpj);
+            fprintf(pF_temp, "%s|", f->telefone);
+            fprintf(pF_temp, "%s\n", f->email);
         }
     }
 
@@ -182,11 +181,7 @@ int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec)
         }
 
     }
-    else{
-        //alocacao
-    }
-    
-    
+  
     copiarArquivo(pF_temp, pF_fornec);
 
     fclose(pF_temp);
@@ -195,7 +190,7 @@ int alterarFornecedor(int mode, char cnpj_forn[15], str_fornecedores att_fornec)
     return 0;
 }
 
-int excluirFornecedor(int mode, char cnpj_forn[15])
+int excluirFornecedor(int mode, char cnpj_forn[15], str_fornecedores * f)
 {
     FILE *pF_temp, *pF_fornec;
     str_fornecedores tmp;
@@ -217,15 +212,12 @@ int excluirFornecedor(int mode, char cnpj_forn[15])
             return 1;
         }
         break;
-    case 3: //usadno alocacao dinamica
-        //codigo
-        break;
     }
 
     while (fscanf(pF_fornec, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.razao_social, tmp.inscricao_estadual,
                   tmp.cnpj, tmp.end_completo, tmp.telefone, tmp.email) != EOF)
     {
-        // caso o fornecedor n’o seja o que se deseja excluir, serÿ copiado os dados diretamente do arquivo original para o temporÿrio
+        // caso o fornecedor nï¿½o seja o que se deseja excluir, serï¿½ copiado os dados diretamente do arquivo original para o temporï¿½rio
         if (strcmp(tmp.cnpj, cnpj_forn) != 0)
         {
             fprintf(pF_temp, "%d|", tmp.codigo);
@@ -237,10 +229,10 @@ int excluirFornecedor(int mode, char cnpj_forn[15])
             fprintf(pF_temp, "%s|", tmp.telefone);
             fprintf(pF_temp, "%s\n", tmp.email);
         }
-        // caso o fornecedor seja o que se deseja excluir, ele serÿ escrito no arquivo temporÿrio s½ que com c½digo igual a 0
+        // caso o fornecedor seja o que se deseja excluir, ele serï¿½ escrito no arquivo temporï¿½rio sï¿½ que com cï¿½digo igual a 0
         else
         {
-            fprintf(pF_temp, "0|"); // fornecedor excluido - codigo = 0
+            fprintf(pF_temp, "0|", f->codigo); // fornecedor excluido - codigo = 0
             fprintf(pF_temp, "%s|", tmp.nome);
             fprintf(pF_temp, "%s|", tmp.razao_social);
             fprintf(pF_temp, "%s|", tmp.inscricao_estadual);
@@ -275,10 +267,9 @@ int excluirFornecedor(int mode, char cnpj_forn[15])
         }
 
     }
-    else{
-        //alocacao
-    }
-    // fun?’o vai copiar os dados do arquivo temporÿrio de volta para o original
+    
+    f = (str_fornecedores*)realloc(f, (sizeof(str_fornecedores)-1));
+    // fun?ï¿½o vai copiar os dados do arquivo temporï¿½rio de volta para o original
     copiarArquivo(pF_temp, pF_fornec);
 
     fclose(pF_temp);

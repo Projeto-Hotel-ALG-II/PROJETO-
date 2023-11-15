@@ -12,6 +12,8 @@
 
 int main()
 {
+    str_fornecedores * f;
+    str_op_sistemas * op;
     // STRUCT HOTEL
     str_hotel hotel;
 
@@ -93,13 +95,13 @@ int main()
                     visualCadastroAcomodacoes(mode);
                     break;
                 case 4: // Campo 5 - Fornecedores - Matheus Garcia *
-                    visualCadastroFornecedor(mode);
+                    visualCadastroFornecedor(mode, f);
                     break;
                 case 5: // Campo 6 - Produtos - Jo�o Vitor *
                     visualCadastroProdutos(mode);
                     break;
                 case 6: // Campo 7 - Operadores - Iasmim Garcia *
-                    visualCadastroOperadores(mode);
+                    visualCadastroOperadores(mode, op);
                     break;
                 default: // Nenhuma das op��es
                     printf("\n[X] ERRO - Insira um valor v�lido!");

@@ -1,34 +1,36 @@
 #ifndef Z_VISUAIS_H
 #define Z_VISUAIS_H
+#include "bib_cadastro_fornecedores.h"
+#include "bib_cadastro_operadores.h"
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: HOTEL
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: HOTEL
  */
 void visualCadastroHotel(int mode);
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: HàSPEDES
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: Hï¿½SPEDES
  */
 void visualCadastroHospedes(int mode);
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: ACOMODA€åES
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: ACOMODAï¿½ï¿½ES
  */
 void visualCadastroAcomodacoes(int mode);
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: FORNECEDOR
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: FORNECEDOR
  */
-void visualCadastroFornecedor(int mode);
+void visualCadastroFornecedor(int mode, str_fornecedores * f);
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: PRODUTOS
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: PRODUTOS
  */
 void visualCadastroProdutos(int mode);
 
 /*
- * FUN€ÇO CONTEM OS VISUAIS DA SE€ÇO CADASTRO E GESTÇO: OPERADORES
+ * FUNï¿½ï¿½O CONTEM OS VISUAIS DA SEï¿½ï¿½O CADASTRO E GESTï¿½O: OPERADORES
  */
-void visualCadastroOperadores(int mode);
+void visualCadastroOperadores(int mode, str_op_sistemas * op);
 
 #endif
