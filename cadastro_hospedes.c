@@ -6,7 +6,7 @@
 #include "bib_quick_tools.h"
 #include "bib_cadastro_hospedes.h"
 
-int cadastrarHospede(int mode, str_hospedes hospedes)
+int cadastrarHospede(int mode, str_hospedes *hospedes)
 {
     FILE *pF_hosped;
     switch (mode)
@@ -17,7 +17,7 @@ int cadastrarHospede(int mode, str_hospedes hospedes)
         {
             exit(1);
         }
-        hospedes.codigo = contadorLinhas("..\\data\\dados_hospedes.txt");
+        hospedes->codigo = contadorLinhas("..\\data\\dados_hospedes.txt");
         break;
 
     case 2: // TRABALHANDO COM ARQUIVOS BINµRIOS
@@ -26,7 +26,7 @@ int cadastrarHospede(int mode, str_hospedes hospedes)
         {
             exit(1);
         }
-        hospedes.codigo = contadorLinhas("..\\data\\dados_hospedes.dat");
+        hospedes->codigo = contadorLinhas("..\\data\\dados_hospedes.dat");
         break;
 
     case 3: // TRABALHANDO COM ALOCA€ÇO DIN¶MICA DE MEMàRIA
@@ -36,15 +36,15 @@ int cadastrarHospede(int mode, str_hospedes hospedes)
 
     if (mode != 3)
     {
-        fprintf(pF_hosped, "%d|", hospedes.codigo);
-        fprintf(pF_hosped, "%s|", hospedes.nome);
-        fprintf(pF_hosped, "%s|", hospedes.end_completo);
-        fprintf(pF_hosped, "%s|", hospedes.cpf);
-        fprintf(pF_hosped, "%s|", hospedes.telefone);
-        fprintf(pF_hosped, "%s|", hospedes.email);
-        fprintf(pF_hosped, "%c|", hospedes.sexo);
-        fprintf(pF_hosped, "%s|", hospedes.estado_civil);
-        fprintf(pF_hosped, "%s\n", hospedes.data_nasc);
+        fprintf(pF_hosped, "%d|", hospedes->codigo);
+        fprintf(pF_hosped, "%s|", hospedes->nome);
+        fprintf(pF_hosped, "%s|", hospedes->end_completo);
+        fprintf(pF_hosped, "%s|", hospedes->cpf);
+        fprintf(pF_hosped, "%s|", hospedes->telefone);
+        fprintf(pF_hosped, "%s|", hospedes->email);
+        fprintf(pF_hosped, "%c|", hospedes->sexo);
+        fprintf(pF_hosped, "%s|", hospedes->estado_civil);
+        fprintf(pF_hosped, "%s\n", hospedes->data_nasc);
 
         fclose(pF_hosped);
     }
@@ -54,7 +54,9 @@ int cadastrarHospede(int mode, str_hospedes hospedes)
 int pesquisarHospede(int mode, char pesQ_cpf[15], str_hospedes *pHosped)
 {
     FILE *pF_hosped;
-    str_hospedes h; // struct hospedes
+
+    str_hospedes *h; // struct hospedes
+    h = (str_hospedes *)malloc(sizeof(str_hospedes));
 
     switch (mode)
     {
@@ -73,48 +75,39 @@ int pesquisarHospede(int mode, char pesQ_cpf[15], str_hospedes *pHosped)
             exit(1);
         }
         break;
-
-    case 3:
-        /* code */
-        break;
-
-    default:
-        break;
     }
 
-    if (mode != 3)
+    while (fscanf(pF_hosped, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &h->codigo, h->nome, h->end_completo, h->cpf, h->telefone,
+                  h->email, &h->sexo, h->estado_civil, h->data_nasc) != EOF)
     {
-        while (fscanf(pF_hosped, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &h.codigo, h.nome, h.end_completo, h.cpf, h.telefone,
-                      h.email, &h.sexo, h.estado_civil, h.data_nasc) != EOF)
+        if (strcmp(h->cpf, pesQ_cpf) == 0 && h->codigo != 0)
         {
-            if (strcmp(h.cpf, pesQ_cpf) == 0 && h.codigo != 0)
-            {
-                pHosped->codigo = h.codigo;
-                strcpy(pHosped->nome, h.nome);
-                strcpy(pHosped->end_completo, h.end_completo);
-                strcpy(pHosped->cpf, h.cpf);
-                strcpy(pHosped->telefone, h.telefone);
-                strcpy(pHosped->email, h.email);
-                pHosped->sexo = h.sexo;
-                strcpy(pHosped->estado_civil, h.estado_civil);
-                strcpy(pHosped->data_nasc, h.data_nasc);
-                return 0;
-            }
-        }
+            // copiando dados encontrados para os endere‡os fornecidos
+            pHosped->codigo = h->codigo;
+            strcpy(pHosped->nome, h->nome);
+            strcpy(pHosped->end_completo, h->end_completo);
+            strcpy(pHosped->cpf, h->cpf);
+            strcpy(pHosped->telefone, h->telefone);
+            strcpy(pHosped->email, h->email);
+            pHosped->sexo = h->sexo;
+            strcpy(pHosped->estado_civil, h->estado_civil);
+            strcpy(pHosped->data_nasc, h->data_nasc);
 
-        fclose(pF_hosped);
+            free(h);
+            fclose(pF_hosped);
+            return 0;
+        }
     }
-    else
-    {
-    }
+
+    free(h);
+    fclose(pF_hosped);
     return 1;
 }
 
-int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
+int alterarHospede(int mode, char cpf[15], str_hospedes *att_hosped)
 {
     FILE *pF_hospedes;
     FILE *pF_temp;
-    str_hospedes tmp;
 
     switch (mode)
     {
@@ -136,49 +129,48 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
             exit(1);
         }
         break;
-    case 3:
-        /* code */
-        break;
     }
 
-    if (mode != 3)
+    str_hospedes *tmp;
+    tmp = (str_hospedes *)malloc(sizeof(str_hospedes));
+
+    while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp->codigo, tmp->nome, tmp->end_completo, tmp->cpf, tmp->telefone,
+                  tmp->email, &tmp->sexo, tmp->estado_civil, tmp->data_nasc) != EOF)
     {
-        while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.end_completo, tmp.cpf, tmp.telefone,
-                      tmp.email, &tmp.sexo, tmp.estado_civil, tmp.data_nasc) != EOF)
+        // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
+        if (strcmp(tmp->cpf, cpf) != 0)
         {
-            // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
-            if (strcmp(tmp.cpf, cpf) != 0)
-            {
-                fprintf(pF_temp, "%d|", tmp.codigo);
-                fprintf(pF_temp, "%s|", tmp.nome);
-                fprintf(pF_temp, "%s|", tmp.end_completo);
-                fprintf(pF_temp, "%s|", tmp.cpf);
-                fprintf(pF_temp, "%s|", tmp.telefone);
-                fprintf(pF_temp, "%s|", tmp.email);
-                fprintf(pF_temp, "%c|", tmp.sexo);
-                fprintf(pF_temp, "%s|", tmp.estado_civil);
-                fprintf(pF_temp, "%s\n", tmp.data_nasc);
-            }
-            // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com os novos dados
-            else
-            {
-                att_hosped.codigo = tmp.codigo;
-                fprintf(pF_temp, "%d|", att_hosped.codigo);
-                fprintf(pF_temp, "%s|", att_hosped.nome);
-                fprintf(pF_temp, "%s|", att_hosped.end_completo);
-                fprintf(pF_temp, "%s|", att_hosped.cpf);
-                fprintf(pF_temp, "%s|", att_hosped.telefone);
-                fprintf(pF_temp, "%s|", att_hosped.email);
-                fprintf(pF_temp, "%c|", att_hosped.sexo);
-                fprintf(pF_temp, "%s|", att_hosped.estado_civil);
-                fprintf(pF_temp, "%s\n", att_hosped.data_nasc);
-            }
+            fprintf(pF_temp, "%d|", tmp->codigo);
+            fprintf(pF_temp, "%s|", tmp->nome);
+            fprintf(pF_temp, "%s|", tmp->end_completo);
+            fprintf(pF_temp, "%s|", tmp->cpf);
+            fprintf(pF_temp, "%s|", tmp->telefone);
+            fprintf(pF_temp, "%s|", tmp->email);
+            fprintf(pF_temp, "%c|", tmp->sexo);
+            fprintf(pF_temp, "%s|", tmp->estado_civil);
+            fprintf(pF_temp, "%s\n", tmp->data_nasc);
         }
-
-        // fechando arquivos
-        fclose(pF_hospedes);
-        fclose(pF_temp);
+        // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com os novos dados
+        else
+        {
+            att_hosped->codigo = tmp->codigo;
+            fprintf(pF_temp, "%d|", att_hosped->codigo);
+            fprintf(pF_temp, "%s|", att_hosped->nome);
+            fprintf(pF_temp, "%s|", att_hosped->end_completo);
+            fprintf(pF_temp, "%s|", att_hosped->cpf);
+            fprintf(pF_temp, "%s|", att_hosped->telefone);
+            fprintf(pF_temp, "%s|", att_hosped->email);
+            fprintf(pF_temp, "%c|", att_hosped->sexo);
+            fprintf(pF_temp, "%s|", att_hosped->estado_civil);
+            fprintf(pF_temp, "%s\n", att_hosped->data_nasc);
+        }
     }
+
+    free(tmp); // desalocando memoria
+
+    // fechando arquivos
+    fclose(pF_hospedes);
+    fclose(pF_temp);
 
     switch (mode)
     {
@@ -202,14 +194,11 @@ int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped)
         break;
     }
 
-    if (mode != 3)
-    {
-        // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
-        copiarArquivo(pF_temp, pF_hospedes);
+    // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
+    copiarArquivo(pF_temp, pF_hospedes);
 
-        fclose(pF_temp);
-        fclose(pF_hospedes);
-    }
+    fclose(pF_temp);
+    fclose(pF_hospedes);
 
     return 0;
 }
@@ -245,52 +234,48 @@ int excluirHospede(int mode, char cpf[15])
             exit(1);
         }
         break;
-
-    case 3:
-        /* code */
-        break;
     }
 
-    str_hospedes tmp;
+    str_hospedes *tmp;
+    tmp = (str_hospedes *)malloc(sizeof(str_hospedes));
 
-    if (mode != 3)
+    // lendo arquivo original linha por linha
+    while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp->codigo, tmp->nome, tmp->end_completo, tmp->cpf, tmp->telefone,
+                  tmp->email, &tmp->sexo, tmp->estado_civil, tmp->data_nasc) != EOF)
     {
-        // lendo arquivo original linha por linha
-        while (fscanf(pF_hospedes, "%d|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%c|%[^|]|%[^\n]\n", &tmp.codigo, tmp.nome, tmp.end_completo, tmp.cpf, tmp.telefone,
-                      tmp.email, &tmp.sexo, tmp.estado_civil, tmp.data_nasc) != EOF)
+        // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
+        if (strcmp(tmp->cpf, cpf) != 0)
         {
-            // caso h¢spede nÆo seja o pesquisado, ser  escrito diretamente o conteudo do arquivo original no tempor rio
-            if (strcmp(tmp.cpf, cpf) != 0)
-            {
-                fprintf(pF_temp, "%d|", tmp.codigo);
-                fprintf(pF_temp, "%s|", tmp.nome);
-                fprintf(pF_temp, "%s|", tmp.end_completo);
-                fprintf(pF_temp, "%s|", tmp.cpf);
-                fprintf(pF_temp, "%s|", tmp.telefone);
-                fprintf(pF_temp, "%s|", tmp.email);
-                fprintf(pF_temp, "%c|", tmp.sexo);
-                fprintf(pF_temp, "%s|", tmp.estado_civil);
-                fprintf(pF_temp, "%s\n", tmp.data_nasc);
-            }
-            // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com o c¢digo igual a 0
-            else
-            {
-                fprintf(pF_temp, "0|");
-                fprintf(pF_temp, "%s|", tmp.nome);
-                fprintf(pF_temp, "%s|", tmp.end_completo);
-                fprintf(pF_temp, "%s|", tmp.cpf);
-                fprintf(pF_temp, "%s|", tmp.telefone);
-                fprintf(pF_temp, "%s|", tmp.email);
-                fprintf(pF_temp, "%c|", tmp.sexo);
-                fprintf(pF_temp, "%s|", tmp.estado_civil);
-                fprintf(pF_temp, "%s\n", tmp.data_nasc);
-            }
+            fprintf(pF_temp, "%d|", tmp->codigo);
+            fprintf(pF_temp, "%s|", tmp->nome);
+            fprintf(pF_temp, "%s|", tmp->end_completo);
+            fprintf(pF_temp, "%s|", tmp->cpf);
+            fprintf(pF_temp, "%s|", tmp->telefone);
+            fprintf(pF_temp, "%s|", tmp->email);
+            fprintf(pF_temp, "%c|", tmp->sexo);
+            fprintf(pF_temp, "%s|", tmp->estado_civil);
+            fprintf(pF_temp, "%s\n", tmp->data_nasc);
         }
-
-        // fechando arquivos
-        fclose(pF_hospedes);
-        fclose(pF_temp);
+        // caso o h¢spede seja o pesquisado, ele ser  escrito no arquivo tempor rio s¢ que com o c¢digo igual a 0
+        else
+        {
+            fprintf(pF_temp, "0|");
+            fprintf(pF_temp, "%s|", tmp->nome);
+            fprintf(pF_temp, "%s|", tmp->end_completo);
+            fprintf(pF_temp, "%s|", tmp->cpf);
+            fprintf(pF_temp, "%s|", tmp->telefone);
+            fprintf(pF_temp, "%s|", tmp->email);
+            fprintf(pF_temp, "%c|", tmp->sexo);
+            fprintf(pF_temp, "%s|", tmp->estado_civil);
+            fprintf(pF_temp, "%s\n", tmp->data_nasc);
+        }
     }
+
+    free(tmp);  // desalocando memoria
+
+    // fechando arquivos
+    fclose(pF_hospedes);
+    fclose(pF_temp);
 
     switch (mode)
     {
@@ -314,14 +299,12 @@ int excluirHospede(int mode, char cpf[15])
         break;
     }
 
-    if (mode != 3)
-    {
-        // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
-        copiarArquivo(pF_temp, pF_hospedes);
+    // fun‡Æo vai copiar os dados do arquivo tempor rio de volta para o original
+    copiarArquivo(pF_temp, pF_hospedes);
 
-        fclose(pF_temp);
-        fclose(pF_hospedes);
-    }
+    fclose(pF_temp);
+    fclose(pF_hospedes);
+
 
     return 0;
 }

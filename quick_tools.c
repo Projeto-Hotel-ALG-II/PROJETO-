@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 
 #include "bib_quick_tools.h"
+#include "bib_reservas.h"
 
 void clearPrompt()
 {
@@ -59,4 +60,81 @@ void copiarArquivo(FILE *pF_fileCopiada, FILE *pF_fileCriada)
     {
         fputs(linha, pF_fileCriada);
     }
+}
+
+int incrementaData(str_reservas *r)
+{
+    int rest;
+    if (r->mes_iniReserva == 1 || r->mes_iniReserva == 3 || r->mes_iniReserva == 5 || r->mes_iniReserva == 7 || r->mes_iniReserva == 8 || r->mes_iniReserva == 10 || r->mes_iniReserva == 12)
+    {
+        if (r->dia_iniReserva < 31)
+        {
+            r->dia_iniReserva++;
+            return 0;
+        }
+        else
+        {
+            if (r->mes_iniReserva < 12)
+            {
+                r->mes_iniReserva++;
+                r->dia_iniReserva = 1;
+                return 0;
+            }
+            else
+            {
+                r->ano_iniReserva++;
+                r->mes_iniReserva = 1;
+                r->dia_iniReserva = 1;
+                return 0;
+            }
+        }
+    }
+    else if (r->mes_iniReserva == 4 || r->mes_iniReserva == 6 || r->mes_iniReserva == 9 || r->mes_iniReserva == 11)
+    {
+        if (r->dia_iniReserva < 30)
+        {
+            r->dia_iniReserva++;
+            return 0;
+        }
+        else
+        {
+            r->mes_iniReserva++;
+            r->dia_iniReserva = 1;
+            return 0;
+        }
+    }
+    else if (r->mes_iniReserva == 2)
+    {
+        rest = r->ano_iniReserva % 4;
+        if (rest != 0)
+        {
+            if (r->dia_iniReserva < 28)
+            {
+                r->dia_iniReserva++;
+                return 0;
+            }
+            else
+            {
+                r->mes_iniReserva++;
+                r->dia_iniReserva = 1; 
+                return 0;
+            }
+        }
+        else
+        {
+            if (r->dia_iniReserva < 29)
+            {
+                r->dia_iniReserva++;
+                return 0;
+            }
+            else
+            {
+                r->mes_iniReserva++;
+                r->dia_iniReserva = 1; 
+                return 0;
+            } 
+        }
+    }
+
+    return 1;
 }

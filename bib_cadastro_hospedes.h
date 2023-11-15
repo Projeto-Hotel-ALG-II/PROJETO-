@@ -22,7 +22,7 @@ typedef struct
 /*
  * Cadastra o H¢spede (Parƒmetro: struct com todos os dados)
  */
-int cadastrarHospede(int mode, str_hospedes hospedes);
+int cadastrarHospede(int mode, str_hospedes *hospedes);
 
 /*
  * Pesquisa o H¢spede (precisa ser chamado com os endere‡os de mem¢ria de todos as vari veis)
@@ -32,7 +32,7 @@ int pesquisarHospede(int mode, char pesQ_cpf[15], str_hospedes *pHosped);
 /*
  * Faz a altera‡Æo do h¢spede (selecionado pelo CPF)
  */
-int alterarHospede(int mode, char cpf[15], str_hospedes att_hosped);
+int alterarHospede(int mode, char cpf[15], str_hospedes *att_hosped);
 
 /*
  * Exclui o h¢spede selecionado

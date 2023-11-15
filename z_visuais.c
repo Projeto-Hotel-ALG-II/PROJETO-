@@ -297,7 +297,18 @@ void visualCadastroHospedes(int mode)
 {
     int choice; // armazena as escolhas de navegabilidade do usu†rio
     int ret;    // armazena o retorno das funá‰es
-    str_hospedes hospedes;
+    str_hospedes *hospedes;
+
+    // Alocando mem¢ria para a gest∆o dos dados dos h¢spedes
+    hospedes = (str_hospedes *)malloc(sizeof(str_hospedes));
+
+    // caso n∆o seja poss°vel alocar mem¢ria
+    if (!hospedes)
+    {
+        printf("Erro ao alocar mem¢ria\n");
+        pausaSist();
+        exit(1);
+    }
 
     while (1)
     {
@@ -314,6 +325,7 @@ void visualCadastroHospedes(int mode)
 
         if (choice == 5)
         {
+            free(hospedes);
             break;
         }
 
@@ -322,76 +334,88 @@ void visualCadastroHospedes(int mode)
         case 1: // ===== CADASTRAR H‡SPEDE =====
 
             // recolhendo dados do novo hospede
-            fflush(stdin);
-            printf("Indique o nome               : ");
-            scanf(" %[^\n]", hospedes.nome);
-
             fflush(stdin); // Limpa o buffer
-            printf("Indique o endereáo completo  : ");
-            scanf(" %[^\n]", hospedes.end_completo);
+            printf("Indique o CPF ( XXX.XXX.XXX-YY )          : ");
+            scanf(" %[^\n]", hospedes->cpf);
 
-            fflush(stdin);
-            printf("Indique o CPF                : ");
-            scanf(" %[^\n]", hospedes.cpf);
-
-            fflush(stdin);
-            printf("Indique o telefone           : ");
-            scanf(" %[^\n]", hospedes.telefone);
-
-            fflush(stdin);
-            printf("Indique o e-mail             : ");
-            scanf(" %[^\n]", hospedes.email);
-
-            fflush(stdin);
-            printf("Indique o sexo               : ");
-            hospedes.sexo = getch();
-            printf("%c\n", hospedes.sexo);
-
-            fflush(stdin);
-            printf("Indique o estado civil       : ");
-            scanf("%[^\n]", hospedes.estado_civil);
-
-            fflush(stdin);
-            printf("Indique a data de nascimento : ");
-            scanf("%[^\n]", hospedes.data_nasc);
-
-            // funá∆o cadastra os h¢spedes
-            ret = cadastrarHospede(mode, hospedes);
+            ret = pesquisarHospede(mode, hospedes->cpf, hospedes);
 
             if (ret == 0)
             {
-                printf("\nH¢spede cadastrado com sucesso!");
+                printf("Esse cpf j† foi cadastrado!\n");
                 pausaSist();
             }
             else
             {
-                printf("Erro ao acessar o arquivo dados_hospedes.txt\n");
-                pausaSist();
+                fflush(stdin);
+                printf("Indique o nome                            : ");
+                scanf(" %[^\n]", hospedes->nome);
+
+                fflush(stdin);
+                printf("Indique o endereáo completo               : ");
+                scanf(" %[^\n]", hospedes->end_completo);
+
+                fflush(stdin);
+                printf("Indique o telefone (ZZ) YXXXX-XXXX        : ");
+                scanf(" %[^\n]", hospedes->telefone);
+
+                fflush(stdin);
+                printf("Indique o e-mail                          : ");
+                scanf(" %[^\n]", hospedes->email);
+
+                fflush(stdin);
+                printf("Indique o sexo M, F ou N                  : ");
+                hospedes->sexo = getch();
+                printf("%c\n", hospedes->sexo);
+
+                fflush(stdin);
+                printf("Indique o estado civil                    : ");
+                scanf("%[^\n]", hospedes->estado_civil);
+
+                fflush(stdin);
+                printf("Indique a data de nascimento (DD/MM/AAAA) : ");
+                scanf("%[^\n]", hospedes->data_nasc);
+
+                // funá∆o cadastra os h¢spedes
+                ret = cadastrarHospede(mode, hospedes);
+
+                if (ret == 0)
+                {
+                    printf("\nH¢spede cadastrado com sucesso!");
+                    pausaSist();
+                }
+                else
+                {
+                    printf("Erro ao acessar o arquivo dados_hospedes.txt\n");
+                    pausaSist();
+                }
             }
 
             break;
 
         case 2: // ===== PESQUISAR H‡SPEDE =====
+            
             printf("Pesquisar H¢spede: \n");
-            printf("CPF do h¢spede (XXX.XXX.XXX-XX): ");
+            printf("Informe o CPF do h¢spede (XXX.XXX.XXX-XX): ");
+            
             fflush(stdin);
-            scanf("%s", hospedes.cpf);
+            scanf("%s", hospedes->cpf);
 
-            ret = pesquisarHospede(mode, hospedes.cpf, &hospedes);
+            ret = pesquisarHospede(mode, hospedes->cpf, hospedes);
 
             if (ret == 0)
             {
                 printf("=> H¢spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
-                printf("Nome               : %s\n", hospedes.nome);
-                printf("Endereáo           : %s\n", hospedes.end_completo);
-                printf("CPF                : %s\n", hospedes.cpf);
-                printf("Telefone           : %s\n", hospedes.telefone);
-                printf("E-mail             : %s\n", hospedes.email);
-                printf("Sexo               : %c\n", hospedes.sexo);
-                printf("Estado Civil       : %s\n", hospedes.estado_civil);
-                printf("Data de Nascimento : %s\n", hospedes.data_nasc);
+                printf("C¢digo             : %d\n", hospedes->codigo);
+                printf("Nome               : %s\n", hospedes->nome);
+                printf("Endereáo           : %s\n", hospedes->end_completo);
+                printf("CPF                : %s\n", hospedes->cpf);
+                printf("Telefone           : %s\n", hospedes->telefone);
+                printf("E-mail             : %s\n", hospedes->email);
+                printf("Sexo               : %c\n", hospedes->sexo);
+                printf("Estado Civil       : %s\n", hospedes->estado_civil);
+                printf("Data de Nascimento : %s\n", hospedes->data_nasc);
                 pausaSist();
             }
             else
@@ -401,26 +425,27 @@ void visualCadastroHospedes(int mode)
             }
             break;
         case 3: // ===== ALTERAR H‡SPEDE =====
+            
             clearPrompt();
             printf("Alterar h¢spede:\n");
+            printf("Informe o CPF do h¢spede (XXX.XXX.XXX-XX): ");
 
-            printf("Informe o CPF: \n");
             fflush(stdin);
-            scanf("%s", hospedes.cpf);
+            scanf("%s", hospedes->cpf);
 
             printf("\n");
 
-            ret = pesquisarHospede(mode, hospedes.cpf, &hospedes);
+            ret = pesquisarHospede(mode, hospedes->cpf, hospedes);
 
             if (ret == 0)
             {
                 printf("=> H¢spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
-                printf("Nome               : %s\n", hospedes.nome);
-                printf("Telefone           : %s\n", hospedes.telefone);
-                printf("Email              : %s\n", hospedes.email);
-                printf("Data de Nascimento : %s\n", hospedes.data_nasc);
+                printf("C¢digo             : %d\n", hospedes->codigo);
+                printf("Nome               : %s\n", hospedes->nome);
+                printf("Telefone           : %s\n", hospedes->telefone);
+                printf("Email              : %s\n", hospedes->email);
+                printf("Data de Nascimento : %s\n", hospedes->data_nasc);
                 printf("=========================================\n");
                 printf("Deseja alterar este h¢spede?\n");
                 printf("1 - Sim\n");
@@ -435,14 +460,14 @@ void visualCadastroHospedes(int mode)
                         fflush(stdin);
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
-                        printf("1 - Nome               - %s.\n", hospedes.nome);
-                        printf("2 - Endereáo Completo  - %s.\n", hospedes.end_completo);
-                        printf("3 - CPF                - %s.\n", hospedes.cpf);
-                        printf("4 - Telefone           - %s.\n", hospedes.telefone);
-                        printf("5 - Email              - %s.\n", hospedes.email);
-                        printf("6 - Sexo               - %c.\n", hospedes.sexo);
-                        printf("7 - Estado Civil       - %s.\n", hospedes.estado_civil);
-                        printf("8 - Data de Nascimento - %s.\n", hospedes.data_nasc);
+                        printf("1 - Nome               - %s.\n", hospedes->nome);
+                        printf("2 - Endereáo Completo  - %s.\n", hospedes->end_completo);
+                        printf("3 - CPF                - %s.\n", hospedes->cpf);
+                        printf("4 - Telefone           - %s.\n", hospedes->telefone);
+                        printf("5 - Email              - %s.\n", hospedes->email);
+                        printf("6 - Sexo               - %c.\n", hospedes->sexo);
+                        printf("7 - Estado Civil       - %s.\n", hospedes->estado_civil);
+                        printf("8 - Data de Nascimento - %s.\n", hospedes->data_nasc);
                         printf("\n");
                         printf("9 - Cancelar\n");
                         printf("10 - Confirmar\n");
@@ -459,43 +484,43 @@ void visualCadastroHospedes(int mode)
                         case 1:
                             fflush(stdin);
                             printf("Indique o nome               : ");
-                            scanf(" %[^\n]", hospedes.nome);
+                            scanf(" %[^\n]", hospedes->nome);
                             break;
                         case 2:
                             fflush(stdin);
                             printf("Indique o endereáo completo  : ");
-                            scanf(" %[^\n]", hospedes.end_completo);
+                            scanf(" %[^\n]", hospedes->end_completo);
                             break;
                         case 3:
                             fflush(stdin);
                             printf("Indique o CPF                : ");
-                            scanf(" %[^\n]", hospedes.cpf);
+                            scanf(" %[^\n]", hospedes->cpf);
                             break;
                         case 4:
                             fflush(stdin);
                             printf("Indique o telefone           : ");
-                            scanf(" %[^\n]", hospedes.telefone);
+                            scanf(" %[^\n]", hospedes->telefone);
                             break;
                         case 5:
                             fflush(stdin);
                             printf("Indique o e-mail             : ");
-                            scanf(" %[^\n]", hospedes.email);
+                            scanf(" %[^\n]", hospedes->email);
                             break;
                         case 6:
                             fflush(stdin);
                             printf("Indique o sexo               : ");
-                            hospedes.sexo = getch();
-                            printf("%c\n", hospedes.sexo);
+                            hospedes->sexo = getch();
+                            printf("%c\n", hospedes->sexo);
                             break;
                         case 7:
                             fflush(stdin);
                             printf("Indique o estado civil       : ");
-                            scanf("%[^\n]", hospedes.estado_civil);
+                            scanf("%[^\n]", hospedes->estado_civil);
                             break;
                         case 8:
                             fflush(stdin);
                             printf("Indique a data de nascimento : ");
-                            scanf("%[^\n]", hospedes.data_nasc);
+                            scanf("%[^\n]", hospedes->data_nasc);
                             break;
                         default:
                             printf("Insira um valor v†lido!\n");
@@ -506,7 +531,7 @@ void visualCadastroHospedes(int mode)
 
                     if (choice != 9)
                     {
-                        ret = alterarHospede(mode, hospedes.cpf, hospedes);
+                        ret = alterarHospede(mode, hospedes->cpf, hospedes);
 
                         if (ret == 0)
                         {
@@ -534,21 +559,21 @@ void visualCadastroHospedes(int mode)
 
             printf("Informe o CPF: \n");
             fflush(stdin);
-            scanf("%s", hospedes.cpf);
+            scanf("%s", hospedes->cpf);
 
             printf("\n");
 
-            ret = pesquisarHospede(mode, hospedes.cpf, &hospedes);
+            ret = pesquisarHospede(mode, hospedes->cpf, hospedes);
 
             if (ret == 0)
             {
                 printf("=> H¢spede encontrado!\n");
                 printf("=========================================\n");
-                printf("C¢digo             : %d\n", hospedes.codigo);
-                printf("Nome               : %s\n", hospedes.nome);
-                printf("Telefone           : %s\n", hospedes.telefone);
-                printf("Email              : %s\n", hospedes.email);
-                printf("Data de Nascimento : %s\n", hospedes.data_nasc);
+                printf("C¢digo             : %d\n", hospedes->codigo);
+                printf("Nome               : %s\n", hospedes->nome);
+                printf("Telefone           : %s\n", hospedes->telefone);
+                printf("Email              : %s\n", hospedes->email);
+                printf("Data de Nascimento : %s\n", hospedes->data_nasc);
                 printf("=========================================\n");
                 printf("Deseja excluir este h¢spede?\n");
                 printf("1 - Sim\n");
@@ -558,7 +583,7 @@ void visualCadastroHospedes(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirHospede(mode, hospedes.cpf);
+                    ret = excluirHospede(mode, hospedes->cpf);
 
                     if (ret == 0)
                     {
@@ -600,11 +625,11 @@ void visualCadastroAcomodacoes(int mode)
         printf("1  - Cadastrar Categoria de Acomodaá∆o\n");
         printf("2  - Pesquisar Categoria de Acomodaá∆o\n");
         printf("3  - Editar Categoria de Acomodaá∆o\n");
-        printf("4  - Excluir Categoria de Acomodaá∆o\n");
+        printf("4  - Excluir Categoria de Acomodaá∆o\n\n");
         printf("5  - Cadastrar Acomodaá∆o\n");
         printf("6  - Pesquisar Acomodaá∆o\n");
         printf("7  - Editar Acomodaá∆o\n");
-        printf("8  - Excluir Acomodaá∆o\n");
+        printf("8  - Excluir Acomodaá∆o\n\n");
         printf("9  - Listar Categorias\n");
         printf("10 - Listar Acomodaá‰es\n");
         printf("11 - Sair\n");
@@ -613,7 +638,8 @@ void visualCadastroAcomodacoes(int mode)
 
         switch (choice)
         {
-        case 1:
+        case 1: // Cadastrando Categoria
+            printf("Cadastrando categoria.\n");
             fflush(stdin);
             printf("Informe a descriá∆o da categoria: ");
             scanf(" %[^\n]", categoria.descricao);
@@ -862,7 +888,7 @@ void visualCadastroAcomodacoes(int mode)
                 printf("Descriá∆o   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
                 printf("=> Categoria de Acomodaá∆o\n");
-                if (ret = 0)
+                if (ret == 0)
                 {
                     printf("=  C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
                     printf("=  Descriá∆o             : %s\n", acomodacao.catec_acomod.descricao);
@@ -928,7 +954,7 @@ void visualCadastroAcomodacoes(int mode)
                         printf("Categoria de Acomodaá∆o:\n");
 
                         ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
-                        
+
                         if (ret == 0)
                         {
                             printf("3 - C¢digo      : %d - %s\n\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
@@ -1819,7 +1845,7 @@ void visualReservas()
         printf("Indique o dia e o mes de check-out (DD/MM): ");
         scanf("%d/%d", &reserva.dia_fimReserva, &reserva.mes_fimReserva);
 
-      
+
         ret = pesquisarDisp_porData(mode, reserva, reservaDados, num_reservas, reserva.dia_iniReserva, reserva.mes_iniReserva, reserva.dia_fimReserva, reserva.mes_fimReserva);
 
         if (ret == 0)
@@ -1981,7 +2007,7 @@ void visualReservas()
         break;
       }
 
-    case 2: 
+    case 2:
       printf("Qual Ç o dia e mes de check-in desejado para a sua reserva? Digite em DD/MM/AA");
       scanf("%d/%d", &reserva.dia_iniReserva, &reserva.dia_fimReserva);
 
@@ -2015,10 +2041,10 @@ void visualReservas()
       else{
         printf("A reserva n∆o foi feita.");
       }
-      
 
-      
-     
+
+
+
 
 
       break;
