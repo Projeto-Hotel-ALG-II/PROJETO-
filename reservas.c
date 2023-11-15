@@ -4,17 +4,19 @@
 #include <time.h>
 #include <string.h>
 #include "bib_reservas.h"
-int  mode;
 
-int reservar(int mode, str_reservas reserva ){
+// Fun��o ir� realizar a reserva
+int reservar(int mode, str_reservas reserva)
+{
 
     FILE *pF_reservas;
 
     switch (mode)
     {
-     case 1:
+    case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo de texto");
             return -1;
         }
@@ -22,35 +24,36 @@ int reservar(int mode, str_reservas reserva ){
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo binário");
             return -1;
         }
         break;
-    
-    case 3: 
+
+    case 3:
 
     default:
         break;
     }
 
-    
-    if (pF_reservas != NULL) {
-        
+    if (pF_reservas != NULL)
+    {
     }
-    
- 
 }
 
-
-int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, struct tm check_in, struct tm check_out) {
-    FILE* pF_reservas = NULL;
+// Fun��o pesquisa se h� disponibilidade por data
+int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, struct tm check_in, struct tm check_out)
+{
+    FILE *pF_reservas = NULL;
     int ret = 0;
 
-    switch (mode) {
+    switch (mode)
+    {
     case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             printf("Erro na abertura do arquivo de texto");
             return 0;
         }
@@ -58,31 +61,36 @@ int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, st
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             printf("Erro na abertura do arquivo binário");
             return 0;
         }
         break;
 
     case 3:
-        for (int i = 0; i < num_reservas; i++) {
+        for (int i = 0; i < num_reservas; i++)
+        {
             time_t reserva_inicio = mktime((&reservas[i].dia_iniReserva) && (&reservas[i].mes_iniReserva));
             time_t reserva_fim = mktime((&reservas[i].dia_fimReserva) && (&reservas[i].mes_fimReserva));
 
             time_t check_in_time = mktime(&check_in);
             time_t check_out_time = mktime(&check_out);
 
-            if (check_in_time >= reserva_inicio && check_in_time < reserva_fim) {
+            if (check_in_time >= reserva_inicio && check_in_time < reserva_fim)
+            {
                 ret = 1;
                 break;
             }
 
-            if (check_out_time >= reserva_inicio && check_out_time < reserva_fim) {
+            if (check_out_time >= reserva_inicio && check_out_time < reserva_fim)
+            {
                 ret = 1;
                 break;
             }
 
-            if (check_in_time >= reserva_inicio && check_out_time <= reserva_fim) {
+            if (check_in_time >= reserva_inicio && check_out_time <= reserva_fim)
+            {
                 ret = 1;
                 break;
             }
@@ -93,14 +101,18 @@ int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, st
         return -1;
     }
 
-    if (pF_reservas != NULL) {
+    if (pF_reservas != NULL)
+    {
         int disponibilidade = 1;
         char linha[100];
 
-        while (fgets(linha, sizeof(linha), pF_reservas) != NULL) {
+        while (fgets(linha, sizeof(linha), pF_reservas) != NULL)
+        {
+            struct tm reserva_inicio, reserva_fim;
             int dia_ini, mes_ini, dia_fim, mes_fim;
             int campos_lidos = sscanf(linha, "%d/%d %d/%d", &dia_ini, &mes_ini, &dia_fim, &mes_fim);
-            if (campos_lidos != 4) {
+            if (campos_lidos != 4)
+            {
                 printf("Formato inválido no arquivo de reservas.\n");
                 continue;
             }
@@ -128,7 +140,8 @@ int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, st
             time_t check_out_time = mktime(&check_out);
 
             if ((check_in_time >= reserva_inicio_time && check_in_time <= reserva_fim_time) ||
-                (check_out_time >= reserva_inicio_time && check_out_time <= reserva_fim_time)) {
+                (check_out_time >= reserva_inicio_time && check_out_time <= reserva_fim_time))
+            {
                 disponibilidade = 0;
                 break;
             }
@@ -141,9 +154,10 @@ int pesquisaDisp_PorData(int mode, str_reservas reservas[], int num_reservas, st
     return ret;
 }
 
-
-int pesquisaDisp_PorCategoria(int codigoCateg, int dias_verifica) {
-    FILE* pF_reservas = NULL;
+// Fun��o pesquisa disponibilidade por categoria
+int pesquisaDisp_PorCategoria(int mode, int codigoCateg, int dias_verifica)
+{
+    FILE *pF_reservas = NULL;
     str_reservas reservas;
 
     time_t agora = time(NULL);
@@ -152,20 +166,23 @@ int pesquisaDisp_PorCategoria(int codigoCateg, int dias_verifica) {
     int disponibilidade = 1;
     time_t dia_verif = agora + dias_verifica * 24 * 60 * 60;
 
-    switch (mode) {
+    switch (mode)
+    {
     case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo de texto");
-            return 0;
+            return -1;
         }
         break;
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo binário");
-            return 0;
+            return -1;
         }
         break;
 
@@ -191,25 +208,25 @@ int pesquisaDisp_PorCategoria(int codigoCateg, int dias_verifica) {
 
                 if (freserva >= agora && ireserva <= dia_verif)
                 {
-                    disponibilidade = 0; 
+                    disponibilidade = 0;
                 }
-                
             }
-            
         }
         return disponibilidade;
-    break;
+        break;
 
     default:
         return -1;
     }
 
-    if (pF_reservas != NULL) {
+    if (pF_reservas != NULL)
+    {
 
         char linha[100];
         while (fgets(linha, sizeof(linha), pF_reservas) != NULL)
+            ;
         {
-            
+
             if (sscanf(linha, "%d/%d %d/%d %d", &reservas.dia_iniReserva, &reservas.mes_iniReserva, &reservas.dia_fimReserva, &reservas.mes_fimReserva, &reservas.acomod.catec_acomod.codigo) == 5)
             {
                 if (reservas.acomod.catec_acomod.codigo == codigoCateg)
@@ -226,26 +243,23 @@ int pesquisaDisp_PorCategoria(int codigoCateg, int dias_verifica) {
 
                     time_t ireserva = mktime(&inicio_reserva);
                     time_t freserva = mktime(&fim_reserva);
-                    
-                    if (freserva >= agora || ireserva <= dia_verif)
+
+                    if (freserva >= agora && ireserva <= dia_verif)
                     {
                         disponibilidade = 0;
                     }
-                    
                 }
-                
             }
-            
         }
         fclose(pF_reservas);
         return disponibilidade;
-        
     }
-    
 }
 
-int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reservas, int num_pessoas, int dias_verifica) {
-    FILE* pF_reservas = NULL;
+// Fun��o pesquisa disponibilidade por quantidade de pessoas
+int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reservas, int num_pessoas, int dias_verifica)
+{
+    FILE *pF_reservas = NULL;
     str_reservas reserva;
 
     time_t agora = time(NULL);
@@ -254,10 +268,12 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
     int disponibilidade = 1;
     time_t dia_verif = agora + dias_verifica * 24 * 60 * 60;
 
-    switch (mode) {
+    switch (mode)
+    {
     case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo de texto");
             return -1;
         }
@@ -265,15 +281,18 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo binário");
             return -1;
         }
         break;
 
     case 3:
-        for (int i = 0; i < num_reservas; i++) {
-            if (reservas[i].acomod.catec_acomod.qtd_pessoas >= num_pessoas) {
+        for (int i = 0; i < num_reservas; i++)
+        {
+            if (reservas[i].acomod.catec_acomod.qtd_pessoas >= num_pessoas)
+            {
                 struct tm inicio_reserva = {0};
                 inicio_reserva.tm_year = data_atual.tm_year;
                 inicio_reserva.tm_mon = reservas[i].mes_iniReserva - 1;
@@ -287,7 +306,8 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
                 time_t ireserva = mktime(&inicio_reserva);
                 time_t freserva = mktime(&fim_reserva);
 
-                if (freserva >= agora && ireserva <= dia_verif) {
+                if (freserva >= agora && ireserva <= dia_verif)
+                {
                     disponibilidade = 0;
                 }
             }
@@ -298,11 +318,15 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
         return -1;
     }
 
-    if (pF_reservas != NULL) {
+    if (pF_reservas != NULL)
+    {
         char linha[100];
-        while (fgets(linha, sizeof(linha), pF_reservas) != NULL) {
-            if (sscanf(linha, "%d/%d %d/%d %d %d", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas) == 6) {
-                if (reserva.acomod.catec_acomod.qtd_pessoas >= num_pessoas) {
+        while (fgets(linha, sizeof(linha), pF_reservas) != NULL)
+        {
+            if (sscanf(linha, "%d/%d %d/%d %d %d", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas) == 6)
+            {
+                if (reserva.acomod.catec_acomod.qtd_pessoas >= num_pessoas)
+                {
                     struct tm inicio_reserva = {0};
                     inicio_reserva.tm_year = data_atual.tm_year;
                     inicio_reserva.tm_mon = reserva.mes_iniReserva - 1;
@@ -316,7 +340,8 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
                     time_t ireserva = mktime(&inicio_reserva);
                     time_t freserva = mktime(&fim_reserva);
 
-                    if (freserva >= agora && ireserva <= dia_verif) {
+                    if (freserva >= agora && ireserva <= dia_verif)
+                    {
                         disponibilidade = 0;
                     }
                 }
@@ -327,8 +352,10 @@ int pesquisaDisp_PorQtdPessoas(int mode, str_reservas reservas[], int num_reserv
     }
 }
 
-int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas, const char* facilidades_desejadas, int dias_verifica) {
-    FILE* pF_reservas = NULL;
+// Fun��o pesquisa disponibilidade pelas facilidades
+int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas, const char *facilidades_desejadas, int dias_verifica)
+{
+    FILE *pF_reservas = NULL;
     str_reservas reserva;
 
     time_t agora = time(NULL);
@@ -337,10 +364,12 @@ int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas,
     int disponibilidade = 1;
     time_t dia_verif = agora + dias_verifica * 24 * 60 * 60;
 
-    switch (mode) {
+    switch (mode)
+    {
     case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo de texto");
             return -1;
         }
@@ -348,26 +377,32 @@ int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas,
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo binário");
             return -1;
         }
         break;
 
     case 3:
-        for (int i = 0; i < num_reservas; i++) {
-            const char* facilidades_acomodacao = reservas[i].acomod.facilidades;
+        for (int i = 0; i < num_reservas; i++)
+        {
+            const char *facilidades_acomodacao = reservas[i].acomod.facilidades;
             time_t inicio_reserva = mktime(&reservas[i].dia_iniReserva);
             time_t fim_reserva = mktime(&reservas[i].dia_fimReserva);
 
-            if (strstr(facilidades_acomodacao, facilidades_desejadas) != NULL) {
-                if (inicio_reserva <= agora && fim_reserva >= agora) {
+            if (strstr(facilidades_acomodacao, facilidades_desejadas) != NULL)
+            {
+                if (inicio_reserva <= agora && fim_reserva >= agora)
+                {
                     disponibilidade = 0;
                     break;
                 }
-                for (int dia = 0; dia <= dias_verifica; dia++) {
+                for (int dia = 0; dia <= dias_verifica; dia++)
+                {
                     time_t dia_verifica = agora + dia * 24 * 60 * 60;
-                    if (inicio_reserva <= dia_verifica && fim_reserva >= dia_verifica) {
+                    if (inicio_reserva <= dia_verifica && fim_reserva >= dia_verifica)
+                    {
                         disponibilidade = 0;
                         break;
                     }
@@ -380,22 +415,29 @@ int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas,
         return -1;
     }
 
-    if (pF_reservas != NULL) {
+    if (pF_reservas != NULL)
+    {
         char linha[100];
-        while (fgets(linha, sizeof(linha), pF_reservas) != NULL) {
-            if (sscanf(linha, "%d/%d %d/%d %d %d", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas) == 6) {
-                const char* facilidades_acomodacao = reserva.acomod.facilidades;
+        while (fgets(linha, sizeof(linha), pF_reservas) != NULL)
+        {
+            if (sscanf(linha, "%d/%d %d/%d %d %d", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas) == 6)
+            {
+                const char *facilidades_acomodacao = reserva.acomod.facilidades;
                 time_t inicio_reserva = mktime(&reserva.dia_iniReserva);
                 time_t fim_reserva = mktime(&reserva.dia_fimReserva);
 
-                if (strstr(facilidades_acomodacao, facilidades_desejadas) != NULL) {
-                    if (inicio_reserva <= agora && fim_reserva >= agora) {
+                if (strstr(facilidades_acomodacao, facilidades_desejadas) != NULL)
+                {
+                    if (inicio_reserva <= agora && fim_reserva >= agora)
+                    {
                         disponibilidade = 0;
                         break;
                     }
-                    for (int dia = 0; dia <= dias_verifica; dia++) {
+                    for (int dia = 0; dia <= dias_verifica; dia++)
+                    {
                         time_t dia_verifica = agora + dia * 24 * 60 * 60;
-                        if (inicio_reserva <= dia_verifica && fim_reserva >= dia_verifica) {
+                        if (inicio_reserva <= dia_verifica && fim_reserva >= dia_verifica)
+                        {
                             disponibilidade = 0;
                             break;
                         }
@@ -408,9 +450,10 @@ int pesquisaPor_Facilidades(int mode, str_reservas reservas[], int num_reservas,
     }
 }
 
-
-int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas, struct tm check_in, struct tm check_out, int codigo_categ, int num_pessoas, const char* facilidades_desejadas, int dias_verifica) {
-    FILE* pF_reservas = NULL;
+// Fun��o pesquisa disponibilidade por uma combina��o das demais pesquisas
+int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas, struct tm check_in, struct tm check_out, int codigo_categ, int num_pessoas, const char *facilidades_desejadas, int dias_verifica)
+{
+    FILE *pF_reservas = NULL;
     str_reservas reserva;
 
     time_t agora = time(NULL);
@@ -419,10 +462,12 @@ int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas,
 
     int disponibilidade = 1;
 
-    switch (mode) {
+    switch (mode)
+    {
     case 1:
         pF_reservas = fopen("..\\data\\reservas_feitas.txt", "r");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo de texto");
             return -1;
         }
@@ -430,23 +475,28 @@ int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas,
 
     case 2:
         pF_reservas = fopen("..\\data\\reservas_feitas.dat", "rb");
-        if (pF_reservas == NULL) {
+        if (pF_reservas == NULL)
+        {
             perror("Erro na abertura do arquivo binário");
             return -1;
         }
         break;
 
     case 3:
-        for (int i = 0; i < num_reservas; i++) {
-            if (codigo_categ != -1 && reservas[i].acomod.catec_acomod.codigo != codigo_categ) {
+        for (int i = 0; i < num_reservas; i++)
+        {
+            if (codigo_categ != -1 && reservas[i].acomod.catec_acomod.codigo != codigo_categ)
+            {
                 continue;
             }
 
-            if (num_pessoas != -1 && reservas[i].acomod.catec_acomod.qtd_pessoas < num_pessoas) {
+            if (num_pessoas != -1 && reservas[i].acomod.catec_acomod.qtd_pessoas < num_pessoas)
+            {
                 continue;
             }
 
-            if (facilidades_desejadas[0] != '\0' && strstr(reservas[i].acomod.facilidades, facilidades_desejadas) == NULL) {
+            if (facilidades_desejadas[0] != '\0' && strstr(reservas[i].acomod.facilidades, facilidades_desejadas) == NULL)
+            {
                 continue;
             }
 
@@ -463,8 +513,10 @@ int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas,
             time_t ireserva = mktime(&inicio_reserva);
             time_t freserva = mktime(&fim_reserva);
 
-            if (freserva >= agora && ireserva <= dia_verif) {
+            if (freserva >= agora && ireserva <= dia_verif)
+            {
                 disponibilidade = 0;
+                break;
             }
         }
         return disponibilidade;
@@ -473,19 +525,25 @@ int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas,
         return -1;
     }
 
-    if (pF_reservas != NULL) {
+    if (pF_reservas != NULL)
+    {
         char linha[100];
-        while (fgets(linha, sizeof(linha), pF_reservas) != NULL) {
-            if (sscanf(linha, "%d/%d %d/%d %d %d %s", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.catec_acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas, reserva.acomod.facilidades) == 7) {
-                if (codigo_categ != -1 && reserva.acomod.catec_acomod.codigo != codigo_categ) {
+        while (fgets(linha, sizeof(linha), pF_reservas) != NULL)
+        {
+            if (sscanf(linha, "%d/%d %d/%d %d %d %s", &reserva.dia_iniReserva, &reserva.mes_iniReserva, &reserva.dia_fimReserva, &reserva.mes_fimReserva, &reserva.acomod.catec_acomod.codigo, &reserva.acomod.catec_acomod.qtd_pessoas, reserva.acomod.facilidades) == 7)
+            {
+                if (codigo_categ != -1 && reserva.acomod.catec_acomod.codigo != codigo_categ)
+                {
                     continue;
                 }
 
-                if (num_pessoas != -1 && reserva.acomod.catec_acomod.qtd_pessoas < num_pessoas) {
+                if (num_pessoas != -1 && reserva.acomod.catec_acomod.qtd_pessoas < num_pessoas)
+                {
                     continue;
                 }
 
-                if (facilidades_desejadas[0] != '\0' && strstr(reserva.acomod.facilidades, facilidades_desejadas) == NULL) {
+                if (facilidades_desejadas[0] != '\0' && strstr(reserva.acomod.facilidades, facilidades_desejadas) == NULL)
+                {
                     continue;
                 }
 
@@ -502,7 +560,8 @@ int pesquisaDisponibilidade(int mode, str_reservas reservas[], int num_reservas,
                 time_t ireserva = mktime(&inicio_reserva);
                 time_t freserva = mktime(&fim_reserva);
 
-                if (freserva >= agora && ireserva <= dia_verif) {
+                if (freserva >= agora && ireserva <= dia_verif)
+                {
                     disponibilidade = 0;
                     break;
                 }

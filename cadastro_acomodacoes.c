@@ -359,28 +359,29 @@ int excluirCategoria(int mode, int codigo)
 // FUN€ÇO LISTA ACOMODA€åES
 void listarAcomodacoes(int mode)
 {
-    FILE *arquivo;
+    FILE *pF_Acomod, *pF_Categ;
+    int op;
 
     switch (mode)
     {
     case 1:
         // Abre o arquivo "dados_acomodacoes.txt" no modo de leitura
-        arquivo = fopen("..\\data\\dados_acomodacoes.txt", "r");
+        pF_Acomod = fopen("..\\data\\dados_acomodacoes.txt", "r");
+        pF_Categ = fopen("..\\data\\dados_categ_acomodacoes.txt", "r");
 
-        if (arquivo == NULL)
+        if (pF_Acomod == NULL || pF_Categ == NULL)
         { // mensagemd de erro
-
             return;
         }
         break;
 
     case 2:
-        // Abre o arquivo "dados_acomodacoes.dat" no modo de leitura
-        arquivo = fopen("..\\data\\dados_acomodacoes.dat", "rb");
+        // Abre o arquivo "dados_acomodacoes.txt" no modo de leitura
+        pF_Acomod = fopen("..\\data\\dados_acomodacoes.dat", "rb");
+        pF_Categ = fopen("..\\data\\dados_categ_acomodacoes.dat", "rb");
 
-        if (arquivo == NULL)
+        if (pF_Acomod == NULL || pF_Categ == NULL)
         { // mensagemd de erro
-
             return;
         }
         break;
@@ -396,8 +397,8 @@ void listarAcomodacoes(int mode)
     {
         // Lˆ os dados das acomoda‡Æes do arquivo enquanto nÆo atingir o final do arquivo EOF
         printf("Acomoda‡Æes Cadastradas:\n");
-                    printf("-------------------------------\n");
-        while (fscanf(arquivo, "%d|%[^|]|%[^|]|%d|%[^|]|%f|%d", &acomodacao.codigo, acomodacao.descricao, acomodacao.facilidades, &acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao, &acomodacao.catec_acomod.valor_diaria, &acomodacao.catec_acomod.qtd_pessoas) != EOF)
+        printf("-------------------------------\n");
+        while (fscanf(pF_Acomod, "%d|%[^|]|%[^|]|%d", &acomodacao.codigo, acomodacao.descricao, acomodacao.facilidades, &acomodacao.catec_acomod.codigo) != EOF)
         {
             if (acomodacao.codigo != 0)
             {
@@ -405,7 +406,10 @@ void listarAcomodacoes(int mode)
                 printf("Descri‡Æo   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
                 printf("=> Categoria de Acomoda‡Æo\n");
-                if (acomodacao.catec_acomod.codigo != 0)
+
+                op = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+                
+                if (op == 0)
                 {
                     printf("= C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
                     printf("= Descri‡Æo             : %s\n", acomodacao.catec_acomod.descricao);
@@ -416,13 +420,13 @@ void listarAcomodacoes(int mode)
                 else
                 {
                     printf("A categoria desta acomoda‡Æo foi apagada, por favor, edite ela e selecione uma nova categoria.\n");
-                    pausaSist();
+                    printf("-------------------------------\n");
                 }
             }
         }
 
         // fechamento do arquivo
-        fclose(arquivo);
+        fclose(pF_Acomod);
     }
     else
     {
@@ -468,10 +472,7 @@ int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao)
         fprintf(arquivo, "%d|", acomodacao.codigo);
         fprintf(arquivo, "%s|", acomodacao.descricao);
         fprintf(arquivo, "%s|", acomodacao.facilidades);
-        fprintf(arquivo, "%d|", acomodacao.catec_acomod.codigo);
-        fprintf(arquivo, "%s|", acomodacao.catec_acomod.descricao);
-        fprintf(arquivo, "%.2f|", acomodacao.catec_acomod.valor_diaria);
-        fprintf(arquivo, "%d\n", acomodacao.catec_acomod.qtd_pessoas);
+        fprintf(arquivo, "%d\n", acomodacao.catec_acomod.codigo);
 
         fclose(arquivo);
     }
@@ -516,10 +517,8 @@ int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
 
     if (mode != 3)
     {
-        while (fscanf(arquivo, "%d|%[^|]|%[^|]|%d|%[^|]|%f|%d", &acomodacaoTemp.codigo, acomodacaoTemp.descricao,
-                      acomodacaoTemp.facilidades, &acomodacaoTemp.catec_acomod.codigo,
-                      acomodacaoTemp.catec_acomod.descricao, &acomodacaoTemp.catec_acomod.valor_diaria,
-                      &acomodacaoTemp.catec_acomod.qtd_pessoas) != EOF)
+        while (fscanf(arquivo, "%d|%[^|]|%[^|]|%d\n", &acomodacaoTemp.codigo, acomodacaoTemp.descricao,
+                      acomodacaoTemp.facilidades, &acomodacaoTemp.catec_acomod.codigo) != EOF)
         {
             if (acomodacaoTemp.codigo == codigo)
             {
@@ -527,11 +526,8 @@ int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
                 pAcomodacao->codigo = acomodacaoTemp.codigo;
                 strcpy(pAcomodacao->descricao, acomodacaoTemp.descricao);
                 strcpy(pAcomodacao->facilidades, acomodacaoTemp.facilidades);
-
                 pAcomodacao->catec_acomod.codigo = acomodacaoTemp.catec_acomod.codigo;
-                strcpy(pAcomodacao->catec_acomod.descricao, acomodacaoTemp.catec_acomod.descricao);
-                pAcomodacao->catec_acomod.qtd_pessoas = acomodacaoTemp.catec_acomod.qtd_pessoas;
-                pAcomodacao->catec_acomod.valor_diaria = acomodacaoTemp.catec_acomod.valor_diaria;
+
                 return 0;
             }
         }
@@ -590,20 +586,14 @@ int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
                 fprintf(arquivoTemp, "%d|", acomodacao.codigo);
                 fprintf(arquivoTemp, "%s|", acomodacao.descricao);
                 fprintf(arquivoTemp, "%s|", acomodacao.facilidades);
-                fprintf(arquivoTemp, "%d|", acomodacao.catec_acomod.codigo);
-                fprintf(arquivoTemp, "%s|", acomodacao.catec_acomod.descricao);
-                fprintf(arquivoTemp, "%.2f|", acomodacao.catec_acomod.valor_diaria);
-                fprintf(arquivoTemp, "%d\n", acomodacao.catec_acomod.qtd_pessoas);
+                fprintf(arquivoTemp, "%d\n", acomodacao.catec_acomod.codigo);
             }
             else
             {
                 fprintf(arquivoTemp, "%d|", acomodacaoTemp.codigo);
                 fprintf(arquivoTemp, "%s|", acomodacaoTemp.descricao);
                 fprintf(arquivoTemp, "%s|", acomodacaoTemp.facilidades);
-                fprintf(arquivoTemp, "%d|", acomodacaoTemp.catec_acomod.codigo);
-                fprintf(arquivoTemp, "%s|", acomodacaoTemp.catec_acomod.descricao);
-                fprintf(arquivoTemp, "%.2f|", acomodacaoTemp.catec_acomod.valor_diaria);
-                fprintf(arquivoTemp, "%d\n", acomodacaoTemp.catec_acomod.qtd_pessoas);
+                fprintf(arquivoTemp, "%d\n", acomodacaoTemp.catec_acomod.codigo);
             }
         }
 

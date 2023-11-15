@@ -1,0 +1,8 @@
+1|M‚dia Familiar|140.50|4
+0|Luxo|210.00|2
+3|Luxo Fam¡lia|300.00|5
+4|M‚dia Fam¡lia+|179.90|6
+5|Luxo +++|450.50|2
+0|Standard|55.90|2
+7|Standard+|70.00|3
+8|Presidencial|420.90|2
