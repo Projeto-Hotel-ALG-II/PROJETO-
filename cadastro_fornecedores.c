@@ -45,11 +45,7 @@ int cadastrarFornecedor(int mode, str_fornecedores * f)
         fprintf(pF_fornec, "%s|", f->telefone);
         fprintf(pF_fornec, "%s|", f->email);
 
-        if (mode == 3)
-        {
-            f = (str_fornecedores*)realloc(f, (sizeof(str_fornecedores)+1));
-        }
-        
+        f = (str_fornecedores*)realloc(f, (sizeof(str_fornecedores)+1));
 
         fclose(pF_fornec);
    

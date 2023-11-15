@@ -36,9 +36,6 @@ int cadastrarOperador(int mode, str_op_sistemas *op)
         }
         op->codigo = contadorLinhas("..\\data\\dados_operadores.dat") + 1;
         break;
-    case 3: // alocacao dinamica
-
-        break;
     }
 
     fprintf(foperador, "%d|", op->codigo);
@@ -72,9 +69,6 @@ int pesquisarOperadorPorUsuario(int mode, char pqusuario[20], str_op_sistemas *o
         {
             return 1;
         }
-        break;
-    case 3: // alocacao dinamica
-
         break;
     }
 
@@ -120,10 +114,7 @@ int editarOperador(int mode, char pqusuario[20], str_op_sistemas *op)
         {
             return 1;
         }
-        break;
-    case 3: // alocacao dinamica
-
-        break;
+        break;;
     }
 
     while (fscanf(foperador, "%d|%[^|]|%[^|]|%[^|]|%[^\n]\n", &temp.codigo, temp.nome, temp.usuario, temp.senha, temp.permissoes) != EOF)
@@ -197,9 +188,6 @@ int excluirOperador(int mode, char pqusuario[20], str_op_sistemas *op)
         {
             return 1;
         }
-        break;
-    case 3: // alocacao dinamica
-
         break;
     }
 
