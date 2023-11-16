@@ -25,12 +25,12 @@ typedef struct
 /**
  * Escreve os dados do hotel - caso o hotel exista ele ser  reescrito, s¢ ‚ poss¡vel existir um hotel
 */
-int escreveHotel(int, str_hotel);
+int escreveHotel(int, str_hotel *);
 
 /*
 * Altera o hotel cadastrado
 */
-int alteraHotel(int, str_hotel);
+int alteraHotel(int, str_hotel *);
 
 /**
  * Lˆ o hotel cadastrado caso haja um
