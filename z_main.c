@@ -28,14 +28,15 @@ int main()
         printf("Digite o modo que deseja armazenar dados no seu sistema!\n");
         printf("1 - Arquivos de Texto (.txt).\n");
         printf("2 - Arquivos Bin�rios (.dat).\n");
-        printf("3 - Cancelar.\n");
+        printf("3 - Memoria.\n");
+        printf("4 - Cancelar.\n");
         printf("=> ");
         scanf("%d", &mode);
 
-        if(mode == 3){
+        if(mode == 4){
             return 0;
         }
-        else if(mode == 1 || mode == 2){
+        else if(mode == 1 || mode == 2 || mode == 3){
             break;
         }
     }
