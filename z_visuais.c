@@ -636,16 +636,15 @@ void visualCadastroHospedes(int mode)
     return;
 }
 
+
 void visualCadastroAcomodacoes(int mode)
 {
     int choice, ret;
-    str_categ_acomodacoes categoria;
-    str_acomodacoes acomodacao;
-
+    str_categ_acomodacoes *categoria = NULL;
+   // str_acomodacoes *acomodacao = (str_acomodacoes *)malloc(sizeof(str_acomodacoes));
     while (1)
     {
         clearPrompt();
-<<<<<<< HEAD
         printf("Cadastro e Gestﾃ｣o de Acomodaﾃｧﾃｵes e Categorias:\n");
         printf("1  - Cadastrar Categoria de Acomodaﾃｧﾃ｣o\n");
         printf("2  - Pesquisar Categoria de Acomodaﾃｧﾃ｣o\n");
@@ -657,19 +656,6 @@ void visualCadastroAcomodacoes(int mode)
         printf("8  - Excluir Acomodaﾃｧﾃ｣o\n");
         printf("9  - Listar Categorias\n");
         printf("10 - Listar Acomodaﾃｧﾃｵes\n");
-=======
-        printf("Cadastro e Gestﾆo de Acomoda�es e Categorias:\n");
-        printf("1  - Cadastrar Categoria de Acomoda�o\n");
-        printf("2  - Pesquisar Categoria de Acomoda�o\n");
-        printf("3  - Editar Categoria de Acomoda�o\n");
-        printf("4  - Excluir Categoria de Acomoda�o\n\n");
-        printf("5  - Cadastrar Acomoda�o\n");
-        printf("6  - Pesquisar Acomoda�o\n");
-        printf("7  - Editar Acomoda�o\n");
-        printf("8  - Excluir Acomoda�o\n\n");
-        printf("9  - Listar Categorias\n");
-        printf("10 - Listar Acomoda�es\n");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
         printf("11 - Sair\n");
         printf("=> ");
         scanf("%d", &choice);
@@ -677,23 +663,21 @@ void visualCadastroAcomodacoes(int mode)
         switch (choice)
         {
         case 1: // Cadastrando Categoria
+            categoria = (str_categ_acomodacoes *)malloc(sizeof(str_categ_acomodacoes)); // Alocando memória para categoria
+
             printf("Cadastrando categoria.\n");
             fflush(stdin);
             printf("Informe a descriﾃｧﾃ｣o da categoria: ");
-            scanf(" %[^\n]", categoria.descricao);
+            scanf(" %[^\n]", categoria->descricao);
 
             fflush(stdin);
-<<<<<<< HEAD
             printf("Informe o valor da diﾃ｡ria: ");
-=======
-            printf("Informe o valor da diria: R$");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
-            scanf("%f", &categoria.valor_diaria);
+            scanf("%f", &categoria->valor_diaria);
 
             fflush(stdin);
             printf("Informe a quantidade de pessoas: ");
-            scanf("%d", &categoria.qtd_pessoas);
-
+            scanf("%d", &categoria->qtd_pessoas);
+//qualquer coisa arrumara aqui
             ret = cadastrarCategoria(mode, categoria);
 
             if (ret == 0)
@@ -708,22 +692,22 @@ void visualCadastroAcomodacoes(int mode)
             }
 
             break;
-
+/*/
         case 2:
             printf("Pesquisa de Categoria de Acomodaﾃｧﾃ｣o.\n");
             printf("Informe o cﾃｳdigo da categoria de acomodaﾃｧﾃ｣o: ");
-            scanf("%d", &acomodacao.catec_acomod.codigo);
+            scanf("%d", &acomodacao->catec_acomod->codigo);
 
-            ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &categoria);
+            ret = pesquisarCategoria(mode, acomodacao->catec_acomod->codigo, &categoria);
 
             if (ret == 0)
             {
                 printf("Categoria de Acomodaﾃｧﾃ｣o encontrada!\n");
                 printf("===================================\n");
-                printf("Cﾃｳdigo                : %d\n", categoria.codigo);
-                printf("Descriﾃｧﾃ｣o             : %s\n", categoria.descricao);
-                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria.valor_diaria);
-                printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
+                printf("Cﾃｳdigo                : %d\n", categoria->codigo);
+                printf("Descriﾃｧﾃ｣o             : %s\n", categoria->descricao);
+                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria->valor_diaria);
+                printf("Quantidade de Pessoas : %d\n", categoria->qtd_pessoas);
                 pausaSist();
             }
             else
@@ -737,18 +721,18 @@ void visualCadastroAcomodacoes(int mode)
         case 3:
             printf("Pesquisa de Categoria de Acomodaﾃｧﾃ｣o.\n");
             printf("Informe o cﾃｳdigo da categoria de acomodaﾃｧﾃ｣o: ");
-            scanf("%d", &acomodacao.catec_acomod.codigo);
+            scanf("%d", &acomodacao->catec_acomod->codigo);
 
-            ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &categoria);
+            ret = pesquisarCategoria(mode, acomodacao->catec_acomod.codigo, &categoria);
 
             if (ret == 0)
             {
                 printf("Categoria de Acomodaﾃｧﾃ｣o encontrada!\n");
                 printf("===================================\n");
-                printf("Cﾃｳdigo                : %d\n", categoria.codigo);
-                printf("Descriﾃｧﾃ｣o             : %s\n", categoria.descricao);
-                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria.valor_diaria);
-                printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
+                printf("Cﾃｳdigo                : %d\n", categoria->codigo);
+                printf("Descriﾃｧﾃ｣o             : %s\n", categoria->descricao);
+                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria->valor_diaria);
+                printf("Quantidade de Pessoas : %d\n", categoria->qtd_pessoas);
                 printf("===================================\n");
                 printf("Deseja alterar esta categoria?\n");
                 printf("1 - Sim\n");
@@ -762,9 +746,9 @@ void visualCadastroAcomodacoes(int mode)
                     {
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
-                        printf("1 - Descriﾃｧﾃ｣o             - %s\n", categoria.descricao);
-                        printf("2 - Valor da Diﾃ｡ria       - R$%.2f\n", categoria.valor_diaria);
-                        printf("3 - Quantidade de Pessoas - %d\n\n", categoria.qtd_pessoas);
+                        printf("1 - Descriﾃｧﾃ｣o             - %s\n", categoria->descricao);
+                        printf("2 - Valor da Diﾃ｡ria       - R$%.2f\n", categoria->valor_diaria);
+                        printf("3 - Quantidade de Pessoas - %d\n\n", categoria->qtd_pessoas);
                         printf("4 - Cancelar\n");
                         printf("5 - Alterar Categoria\n");
                         printf("=> ");
@@ -780,23 +764,19 @@ void visualCadastroAcomodacoes(int mode)
                         case 1:
                             fflush(stdin);
                             printf("Informe a descriﾃｧﾃ｣o da categoria: ");
-                            scanf(" %[^\n]", categoria.descricao);
+                            scanf(" %[^\n]", categoria->descricao);
                             break;
 
                         case 2:
                             fflush(stdin);
-<<<<<<< HEAD
                             printf("Informe o valor da diﾃ｡ria: ");
-=======
-                            printf("Informe o valor da diria: R$");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
-                            scanf("%f", &categoria.valor_diaria);
+                            scanf("%f", &categoria->valor_diaria);
                             break;
 
                         case 3:
                             fflush(stdin);
                             printf("Informe a quantidade de pessoas: ");
-                            scanf("%d", &categoria.qtd_pessoas);
+                            scanf("%d", &categoria->qtd_pessoas);
                             break;
 
                         default:
@@ -808,7 +788,7 @@ void visualCadastroAcomodacoes(int mode)
 
                     if (choice == 5)
                     {
-                        ret = editarCategoria(mode, categoria.codigo, categoria);
+                        ret = editarCategoria(mode, categoria->codigo, *categoria);
 
                         if (ret == 0)
                         {
@@ -833,18 +813,18 @@ void visualCadastroAcomodacoes(int mode)
 
         case 4:
             printf("Informe o cﾃｳdigo da categoria a ser excluﾃｭda: ");
-            scanf("%d", &categoria.codigo);
+            scanf("%d", &categoria->codigo);
 
-            ret = pesquisarCategoria(mode, categoria.codigo, &categoria);
+            ret = pesquisarCategoria(mode, categoria->codigo, &categoria);
 
             if (ret == 0)
             {
                 printf("Categoria de Acomodaﾃｧﾃ｣o encontrada!\n");
                 printf("===================================\n");
-                printf("Cﾃｳdigo                : %d\n", categoria.codigo);
-                printf("Descriﾃｧﾃ｣o             : %s\n", categoria.descricao);
-                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria.valor_diaria);
-                printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
+                printf("Cﾃｳdigo                : %d\n", categoria->codigo);
+                printf("Descriﾃｧﾃ｣o             : %s\n", categoria->descricao);
+                printf("Valor da Diﾃ｡ria       : R$%.2f\n", categoria->valor_diaria);
+                printf("Quantidade de Pessoas : %d\n", categoria->qtd_pessoas);
                 printf("===================================\n");
                 printf("Deseja excluir esta categoria?\n");
                 printf("1 - Sim\n");
@@ -854,7 +834,7 @@ void visualCadastroAcomodacoes(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirCategoria(mode, categoria.codigo);
+                    ret = excluirCategoria(mode, categoria->codigo);
 
                     if (ret == 0)
                     {
@@ -881,21 +861,21 @@ void visualCadastroAcomodacoes(int mode)
 
             printf("Informe a descriﾃｧﾃ｣o da acomodaﾃｧﾃ｣o: ");
             fflush(stdin);
-            scanf(" %[^\n]", acomodacao.descricao);
+            scanf(" %[^\n]", acomodacao->descricao);
 
             printf("Informe as facilidades: ");
             fflush(stdin);
-            scanf(" %[^\n]", acomodacao.facilidades);
+            scanf(" %[^\n]", acomodacao->facilidades);
 
             printf("Informe o cﾃｳdigo da categoria da acomodaﾃｧﾃ｣o: ");
             fflush(stdin);
-            scanf("%d", &acomodacao.catec_acomod.codigo);
+            scanf("%d", &acomodacao->catec_acomod->codigo);
 
-            ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+            ret = pesquisarCategoria(mode, acomodacao->catec_acomod->codigo, &acomodacao->catec_acomod);
 
             if (ret == 0)
             {
-                ret = cadastrarAcomodacao(mode, acomodacao);
+                ret = cadastrarAcomodacao(mode, *acomodacao);
 
                 if (ret == 0)
                 {
@@ -920,43 +900,22 @@ void visualCadastroAcomodacoes(int mode)
 
             printf("Pesquisando acomodaﾃｧﾃ｣o.\n");
             printf("Informe o cﾃｳdigo da acomodaﾃｧﾃ｣o: ");
-            scanf("%d", &acomodacao.codigo);
+            scanf("%d", &acomodacao->codigo);
 
-            ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
+            ret = pesquisarAcomodacao(mode, acomodacao->codigo, &acomodacao);
 
             if (ret == 0)
             {
-<<<<<<< HEAD
                 printf("Acomodaﾃｧﾃ｣o encontrada!\n");
-=======
-                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
-
-                printf("Acomoda�o encontrada!\n");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
                 printf("===========================\n");
-                printf("Cﾃｳdigo      : %d\n", acomodacao.codigo);
-                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao.descricao);
-                printf("Facilidades : %s\n", acomodacao.facilidades);
-<<<<<<< HEAD
+                printf("Cﾃｳdigo      : %d\n", acomodacao->codigo);
+                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao->descricao);
+                printf("Facilidades : %s\n", acomodacao->facilidades);
                 printf("=> Categoria de Acomodaﾃｧﾃ｣o\n");
-                printf("=  Cﾃｳdigo                : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descriﾃｧﾃ｣o             : %s\n", acomodacao.catec_acomod.descricao);
-                printf("=  Valor da Diﾃ｡ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
-                printf("=  Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
-=======
-                printf("=> Categoria de Acomoda�o\n");
-                if (ret == 0)
-                {
-                    printf("=  C｢digo                : %d\n", acomodacao.catec_acomod.codigo);
-                    printf("=  Descri�o             : %s\n", acomodacao.catec_acomod.descricao);
-                    printf("=  Valor da Diria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
-                    printf("=  Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
-                }
-                else
-                {
-                    printf("= A categoria desta acomoda�o foi exclu｡da, por favor, altere a acomoda�o para resolver o problema.\n");
-                }
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
+                printf("=  Cﾃｳdigo                : %d\n", acomodacao->catec_acomod.codigo);
+                printf("=  Descriﾃｧﾃ｣o             : %s\n", acomodacao->catec_acomod.descricao);
+                printf("=  Valor da Diﾃ｡ria       : R$%.2f\n", acomodacao->catec_acomod->valor_diaria);
+                printf("=  Quantidade de Pessoas : %d\n", acomodacao->catec_acomod->qtd_pessoas);
 
                 pausaSist();
             }
@@ -970,39 +929,20 @@ void visualCadastroAcomodacoes(int mode)
         case 7:
             printf("Alterando acomodaﾃｧﾃ｣o.\n");
             printf("Informe o cﾃｳdigo da acomodaﾃｧﾃ｣o: ");
-            scanf("%d", &acomodacao.codigo);
+            scanf("%d", &acomodacao->codigo);
 
-            ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
+            ret = pesquisarAcomodacao(mode, acomodacao->codigo, &acomodacao);
 
             if (ret == 0)
             {
-<<<<<<< HEAD
                 printf("Categoria de Acomodaﾃｧﾃ｣o encontrada!\n");
-=======
-                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
-
-                printf("Acomoda�o encontrada!\n");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
                 printf("===================================\n");
-                printf("Cﾃｳdigo      : %d\n", acomodacao.codigo);
-                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao.descricao);
-                printf("Facilidades : %s\n", acomodacao.facilidades);
-<<<<<<< HEAD
+                printf("Cﾃｳdigo      : %d\n", acomodacao->codigo);
+                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao->descricao);
+                printf("Facilidades : %s\n", acomodacao->facilidades);
                 printf("=> Categoria de Acomodaﾃｧﾃ｣o\n");
-                printf("=  Cﾃｳdigo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descriﾃｧﾃ｣o   : %s\n", acomodacao.catec_acomod.descricao);
-=======
-                printf("=> Categoria de Acomoda�o\n");
-                if (ret == 0)
-                {
-                    printf("=  C｢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                    printf("=  Descri�o   : %s\n", acomodacao.catec_acomod.descricao);
-                }
-                else
-                {
-                    printf("Informe uma nova categoria para esta acomoda�o!\n");
-                }
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
+                printf("=  Cﾃｳdigo      : %d\n", acomodacao->catec_acomod->codigo);
+                printf("=  Descriﾃｧﾃ｣o   : %s\n", acomodacao->catec_acomod->descricao);
                 printf("===================================\n");
                 printf("Deseja alterar esta acomodaﾃｧﾃ｣o?\n");
                 printf("1 - Sim\n");
@@ -1017,26 +957,10 @@ void visualCadastroAcomodacoes(int mode)
                     {
                         clearPrompt();
                         printf("Qual campo deseja alterar?\n");
-                        printf("1 - Descriﾃｧﾃ｣o   : %s\n", acomodacao.descricao);
-                        printf("2 - Facilidades : %s\n\n", acomodacao.facilidades);
-<<<<<<< HEAD
+                        printf("1 - Descriﾃｧﾃ｣o   : %s\n", acomodacao->descricao);
+                        printf("2 - Facilidades : %s\n\n", acomodacao->facilidades);
                         printf("Categoria de Acomodaﾃｧﾃ｣o:\n");
-                        printf("3 - Cﾃｳdigo      : %d (%s)\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
-=======
-                        printf("Categoria de Acomoda�o:\n");
-
-                        ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
-
-                        if (ret == 0)
-                        {
-                            printf("3 - C｢digo      : %d - %s\n\n", acomodacao.catec_acomod.codigo, acomodacao.catec_acomod.descricao);
-                        }
-                        else
-                        {
-                            printf("3 - C｢digo      : %d - Indispon｡vel.\n\n", acomodacao.catec_acomod.codigo);
-                        }
-
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
+                        printf("3 - Cﾃｳdigo      : %d (%s)\n", acomodacao->catec_acomod->codigo, acomodacao->catec_acomod->descricao);
                         printf("4 - Cancelar\n");
                         printf("5 - Alterar Categoria\n");
                         printf("=> ");
@@ -1052,29 +976,29 @@ void visualCadastroAcomodacoes(int mode)
                         case 1:
                             printf("Informe a nova descriﾃｧﾃ｣o da acomodaﾃｧﾃ｣o: ");
                             fflush(stdin);
-                            scanf(" %[^\n]", acomodacao.descricao);
+                            scanf(" %[^\n]", acomodacao->descricao);
                             break;
 
                         case 2:
                             printf("Informe as novas facilidades: ");
                             fflush(stdin);
-                            scanf(" %[^\n]", acomodacao.facilidades);
+                            scanf(" %[^\n]", acomodacao->facilidades);
                             break;
 
                         case 3:
-                            codTemp = acomodacao.catec_acomod.codigo;
+                            codTemp = acomodacao->catec_acomod->codigo;
                             printf("Informe o novo cﾃｳdigo da categoria da acomodaﾃｧﾃ｣o: ");
                             fflush(stdin);
-                            scanf("%d", &acomodacao.catec_acomod.codigo);
+                            scanf("%d", &acomodacao->catec_acomod->codigo);
 
-                            ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
+                            ret = pesquisarCategoria(mode, acomodacao->catec_acomod->codigo, &acomodacao->catec_acomod);
 
                             if (ret != 0)
                             {
                                 printf("Informe um cﾃｳdigo de categoria vﾃ｡lido!\n");
                                 pausaSist();
 
-                                acomodacao.catec_acomod.codigo = codTemp;
+                                acomodacao->catec_acomod->codigo = codTemp;
                             }
                             break;
 
@@ -1087,7 +1011,7 @@ void visualCadastroAcomodacoes(int mode)
 
                     if (choice == 5)
                     {
-                        ret = editarAcomodacao(mode, acomodacao.codigo, acomodacao);
+                        ret = editarAcomodacao(mode, acomodacao->codigo, *acomodacao);
 
                         if (ret == 0)
                         {
@@ -1112,40 +1036,20 @@ void visualCadastroAcomodacoes(int mode)
         case 8:
             printf("Excluindo acomodaﾃｧﾃ｣o.\n");
             printf("Informe o cﾃｳdigo da acomodaﾃｧﾃ｣o: ");
-            scanf("%d", &acomodacao.codigo);
+            scanf("%d", &acomodacao->codigo);
 
-            ret = pesquisarAcomodacao(mode, acomodacao.codigo, &acomodacao);
+            ret = pesquisarAcomodacao(mode, acomodacao->codigo, &acomodacao);
 
             if (ret == 0)
             {
-<<<<<<< HEAD
                 printf("Categoria de Acomodaﾃｧﾃ｣o encontrada!\n");
-=======
-                ret = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
-
-                printf("Categoria de Acomoda�o encontrada!\n");
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
                 printf("===================================\n");
-                printf("Cﾃｳdigo      : %d\n", acomodacao.codigo);
-                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao.descricao);
-                printf("Facilidades : %s\n", acomodacao.facilidades);
-<<<<<<< HEAD
+                printf("Cﾃｳdigo      : %d\n", acomodacao->codigo);
+                printf("Descriﾃｧﾃ｣o   : %s\n", acomodacao->descricao);
+                printf("Facilidades : %s\n", acomodacao->facilidades);
                 printf("=> Categoria de Acomodaﾃｧﾃ｣o\n");
-                printf("=  Cﾃｳdigo      : %d\n", acomodacao.catec_acomod.codigo);
-                printf("=  Descriﾃｧﾃ｣o   : %s\n", acomodacao.catec_acomod.descricao);
-=======
-                printf("=> Categoria de Acomoda�o\n");
-
-                if (ret == 0)
-                {
-                    printf("=  C｢digo      : %d\n", acomodacao.catec_acomod.codigo);
-                    printf("=  Descri�o   : %s\n", acomodacao.catec_acomod.descricao);
-                }
-                else
-                {
-                    printf("A categoria desta acomoda�o foi apagada!\n");
-                }
->>>>>>> 1b79091f9597d12b0cf9942e3491be94257266d2
+                printf("=  Cﾃｳdigo      : %d\n", acomodacao->catec_acomod->codigo);
+                printf("=  Descriﾃｧﾃ｣o   : %s\n", acomodacao->catec_acomod->descricao);
                 printf("===================================\n");
                 printf("Deseja excluir esta acomodaﾃｧﾃ｣o?\n");
                 printf("1 - Sim\n");
@@ -1155,7 +1059,7 @@ void visualCadastroAcomodacoes(int mode)
 
                 if (choice == 1)
                 {
-                    ret = excluirAcomodacao(mode, acomodacao.codigo);
+                    ret = excluirAcomodacao(mode, acomodacao->codigo);
 
                     if (ret == 0)
                     {
@@ -1188,7 +1092,7 @@ void visualCadastroAcomodacoes(int mode)
 
         case 11:
             return;
-
+/*/
         default:
             printf("Opﾃｧﾃ｣o invﾃ｡lida. Tente novamente.\n");
             pausaSist();
@@ -1198,7 +1102,6 @@ void visualCadastroAcomodacoes(int mode)
 
     return;
 }
-
 void visualCadastroFornecedor(int mode, str_fornecedores * f)
 {
     int choice, ret;
