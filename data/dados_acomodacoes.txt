@@ -1,0 +1,5 @@
+1|Horizonte 1|vista para o mar, banheira, televis∆o|3
+2|Albergue 1|televis∆o|1
+3|Cobertura 1|televis∆o, hidromassagem, vista 360|3
+4|Aconchego Econìmico|nenhuma|7
+5|Horizon 2|televis∆o, ar condicionado, cama queen, frigobar|8

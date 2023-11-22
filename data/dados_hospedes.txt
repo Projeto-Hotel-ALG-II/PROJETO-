@@ -1,0 +1,12 @@
+1|Ana Silva Santos|Rua das Flores - SÆo Paulo SP|123.456.789-01|(11) 98765-4321|ana.silva@gmail.com|F|casada|25/03/1980
+2|Carlos Oliveira Lima|Avenida dos P ssaros - Rio de Janeiro RJ|987.654.321-02|(21) 87654-1234|carlos.oliveira@gmail.com|M|casado|10/11/1972
+3|Maria Fernanda Pereira|Rua das Palmeiras - Belo Horizonte MG|234.567.890-03|(31) 76543-9876|maria.fernanda@gmail.com|F|solteira|05/09/1990
+4|JoÆo Rodrigues Almeida|Avenida das Estrelas - Bras¡lia DF|345.678.901-04|(61) 65432-8765|joao.rodrigues@gmail.com|M|solteiro|20/07/1985
+5|Luana Mendes Costa|Rua das µguas - Salvador BA|456.789.012-05|(71) 54321-7654|luana.mendes@gmail.com|F|casada|12/12/1993
+6|Andr‚ Santos Pereira|Avenida das Montanhas - Curitiba PR|567.890.123-06|(41) 43210-6543|andre.santos@gmail.com|M|casado|18/04/1982
+0|Sofia Oliveira Silva|Rua dos Ventos - Fortaleza CE|678.901.234-07|(85) 32109-5432|sofia.oliveira@gmail.com|F|solteira|30/01/1998
+8|Lucas Rodrigues Santos|Avenida das Ondas - Recife PE|789.012.345-08|(81) 21098-7654|lucas.rodrigues@gmail.com|M|solteiro|08/06/1991
+0|Isabela Costa Lima|Rua das Pedras - Manaus AM|890.123.456-09|(92) 10987-6543|isabela.costa@gmail.com|F|casada|17/11/1987
+10|Ricardo Fernandes Costa|Avenida das Pedras - Campo Grande MS|901.234.567-10|(67) 65432-0000|cricardocosta@gmail.com|M|solteiro|13/06/1980
+11|Matheus Garcia|Rua Maestro Vila-Lobos, 485 - Tucuruv¡, SÆo Paulo SP|575.572.438-54|(11) 96640-6068|bmatheus@gmail.com|M|Casado|21/12/2004
+12|Matheus Garcia|Rua Maestro vila lobos 12, sp|873.092.092-12|(11) 93343-1222|matheus@.com|M|Solteiro|21/12/2004
