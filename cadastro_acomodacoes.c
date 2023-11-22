@@ -5,7 +5,7 @@
 #include "bib_quick_tools.h"
 #include "bib_cadastro_acomodacoes.h"
 
-// FUN€ÇO MOSTRA TODAS AS CATEGORIAS
+// FUNï¿½ï¿½O MOSTRA TODAS AS CATEGORIAS
 void listarCategorias(int mode)
 {
     FILE *arquivo;
@@ -15,27 +15,28 @@ void listarCategorias(int mode)
     case 1: // USANDO ARQUIVO DE TEXTO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.txt", "r");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
-            printf("Erro ao abrir o arquivo de categorias de acomoda‡Æes.\n");
+            printf("Erro ao abrir o arquivo de categorias de acomodaï¿½ï¿½es.\n");
             return;
         }
         break;
 
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINï¿½RIO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.dat", "rb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
-            printf("Erro ao abrir o arquivo de categorias de acomoda‡Æes.\n");
+            printf("Erro ao abrir o arquivo de categorias de acomodaï¿½ï¿½es.\n");
             return;
         }
         break;
 
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMï¿½RIA
         /* code */
+        
         break;
     }
 
@@ -43,16 +44,16 @@ void listarCategorias(int mode)
     {
         str_categ_acomodacoes categoria;
 
-        printf("Categorias de Acomoda‡Æes Cadastradas:\n");
+        printf("Categorias de Acomodaï¿½ï¿½es Cadastradas:\n");
         printf("-------------------------------\n");
-        // o fscanf lˆ os dados e armazena na variavel categorias ate chegar no fim do arquivo (EOF)
+        // o fscanf lï¿½ os dados e armazena na variavel categorias ate chegar no fim do arquivo (EOF)
         while (fscanf(arquivo, "%d|%[^|]|%f|%d", &categoria.codigo, categoria.descricao, &categoria.valor_diaria, &categoria.qtd_pessoas) != EOF)
         {
             if (categoria.codigo != 0)
             {
-                printf("C¢digo                : %d\n", categoria.codigo);
-                printf("Descri‡Æo             : %s\n", categoria.descricao);
-                printf("Valor da Di ria       : R$%.2f\n", categoria.valor_diaria);
+                printf("Cï¿½digo                : %d\n", categoria.codigo);
+                printf("Descriï¿½ï¿½o             : %s\n", categoria.descricao);
+                printf("Valor da Diï¿½ria       : R$%.2f\n", categoria.valor_diaria);
                 printf("Quantidade de Pessoas : %d\n", categoria.qtd_pessoas);
                 printf("-------------------------------\n");
             }
@@ -62,60 +63,103 @@ void listarCategorias(int mode)
         fclose(arquivo);
     }
     else
-    {
+    {   str_categ_acomodacoes *categoria;
+        //alocaÃ§Ã£o dinamica
+        categoria = ( str_categ_acomodacoes * ) malloc(sizeof( str_categ_acomodacoes));
+
+        printf("Categorias de Acomodaï¿½ï¿½es Cadastradas:\n");
+        printf("-------------------------------\n");
+        // o fscanf lï¿½ os dados e armazena na variavel categorias ate chegar no fim do arquivo (EOF)
+        while (fscanf(arquivo, "%d|%[^|]|%f|%d", &categoria->codigo, categoria->descricao, &categoria->valor_diaria, &categoria->qtd_pessoas) != EOF)
+        {
+            if (categoria->codigo != 0)
+            {
+                printf("Cï¿½digo                : %d\n", categoria->codigo);
+                printf("Descriï¿½ï¿½o             : %s\n", categoria->descricao);
+                printf("Valor da Diï¿½ria       : R$%.2f\n", categoria->valor_diaria);
+                printf("Quantidade de Pessoas : %d\n", categoria->qtd_pessoas);
+                printf("-------------------------------\n");
+            }
+        }
+
+        // assim q terminar a leitura, fecha o arquivo
+        fclose(arquivo);
+        free(categoria);
     }
 }
 
-// FUN€ÇO CADASTRA UMA CATEGORIA
-int cadastrarCategoria(int mode, str_categ_acomodacoes categoria)
+// FUNï¿½ï¿½O CADASTRA UMA CATEGORIA
+int cadastrarCategoria(int mode, str_categ_acomodacoes *categoria)
 {
     FILE *arquivo;
+    str_categ_acomodacoes *categorias = NULL;
+    int totalCategorias = 0;
 
     switch (mode)
     {
     case 1: // USANDO ARQUIVO DE TEXTO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.txt", "a");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIÃ‡ÃƒO DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
-        categoria.codigo = contadorLinhas("..\\data\\dados_categ_acomodacoes.txt");
+        categoria->codigo = contadorLinhas("..\\data\\dados_categ_acomodacoes.txt");
         break;
 
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINÃRIO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.dat", "ab");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIÃ‡ÃƒO DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
-        categoria.codigo = contadorLinhas("..\\data\\dados_categ_acomodacoes.dat");
+        categoria->codigo = contadorLinhas("..\\data\\dados_categ_acomodacoes.dat");
         break;
 
-    case 3: // USANDO MEMàRIA
-        /* code */
+    case 3: // USANDO MEMÃ“RIA
+        totalCategorias++;
+        str_categ_acomodacoes *temp = realloc(categorias, sizeof(str_categ_acomodacoes) * totalCategorias);
+
+        if (temp == NULL) {
+            printf("Error em alocar");
+            free(categorias);
+            return 1;
+        }
+
+        categorias = temp;
+        categorias[totalCategorias - 1] = *categoria;
+        
+        // Exibir os valores do array categorias
+        for (int i = 0; i < totalCategorias; i++) {
+            printf("Categoria %d:\n", i+1);
+            printf("CÃ³digo: %d\n", categorias[i].codigo);
+            printf("DescriÃ§Ã£o: %s\n", categorias[i].descricao);
+            printf("Valor diÃ¡ria: %.2f\n", categorias[i].valor_diaria);
+            printf("Quantidade de pessoas: %d\n\n", categorias[i].qtd_pessoas);
+        }
         break;
     }
 
     if (mode != 3)
     {
-        fprintf(arquivo, "%d|", categoria.codigo);
-        fprintf(arquivo, "%s|", categoria.descricao);
-        fprintf(arquivo, "%.2f|", categoria.valor_diaria);
-        fprintf(arquivo, "%d\n", categoria.qtd_pessoas);
+        fprintf(arquivo, "%d|", categoria->codigo);
+        fprintf(arquivo, "%s|", categoria->descricao);
+        fprintf(arquivo, "%.2f|", categoria->valor_diaria);
+        fprintf(arquivo, "%d\n", categoria->qtd_pessoas);
 
         fclose(arquivo);
     }
-    else
-    {
-    }
+    free(categorias);
+
     return 0;
 }
 
-// FUN€ÇO PESQUISA CATEGORIA
+
+
+// FUNï¿½ï¿½O PESQUISA CATEGORIA
 int pesquisarCategoria(int mode, int codigo, str_categ_acomodacoes *pCategoria)
 {
     FILE *arquivo;
@@ -125,25 +169,25 @@ int pesquisarCategoria(int mode, int codigo, str_categ_acomodacoes *pCategoria)
     case 1: // USANDO ARQUIVO DE TEXTO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.txt", "r");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
         break;
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINï¿½RIO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.dat", "rb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
         break;
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMï¿½RIA
         /* code */
-        break;
-    }
+      //  break;
+    //}
 
     str_categ_acomodacoes categoriaTemp;
     // variavel que vai armazenar temporariamente os dados das categorias
@@ -155,7 +199,7 @@ int pesquisarCategoria(int mode, int codigo, str_categ_acomodacoes *pCategoria)
         {
             if (categoriaTemp.codigo == codigo)
             {
-                // mandando valores encontrados para os respectivos endere‡os fornecido para a fun‡Æo
+                // mandando valores encontrados para os respectivos endereï¿½os fornecido para a funï¿½ï¿½o
                 pCategoria->codigo = categoriaTemp.codigo;
                 strcpy(pCategoria->descricao, categoriaTemp.descricao);
                 pCategoria->qtd_pessoas = categoriaTemp.qtd_pessoas;
@@ -171,8 +215,9 @@ int pesquisarCategoria(int mode, int codigo, str_categ_acomodacoes *pCategoria)
 
     return 1;
 }
+/*
 
-// FUN€ÇO EDITA CATEGORIA
+// FUNï¿½ï¿½O EDITA CATEGORIA
 int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria)
 {
     FILE *arquivo, *arquivoTemp;
@@ -183,25 +228,25 @@ int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria)
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.txt", "r");
         arquivoTemp = fopen("..\\data\\temp.txt", "w");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
         break;
-    case 2: // USANDO ARQUIVO BINµRIO
+    case 2: // USANDO ARQUIVO BINï¿½RIO
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.dat", "rb");
         arquivoTemp = fopen("..\\data\\temp.dat", "wb");
 
-        // CONDI€ÇO DE ERRO
+        // CONDIï¿½ï¿½O DE ERRO
         if (arquivo == NULL)
         {
             return 1;
         }
         break;
-    case 3: // USANDO MEMàRIA
+    case 3: // USANDO MEMï¿½RIA
         /* code */
-        break;
+       /*/ break;
     }
 
     str_categ_acomodacoes categoriaTemp;
@@ -233,7 +278,7 @@ int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria)
     {
     }
 
-    // passando dados do arquivo tempor rio para arquivo original
+    // passando dados do arquivo temporï¿½rio para arquivo original
     if (mode == 1)
     {
         arquivo = fopen("..\\data\\dados_categ_acomodacoes.txt", "w");
@@ -255,7 +300,7 @@ int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria)
 
     if (mode != 3)
     {
-        // fun‡Æo copia dados do tempor rio para o original
+        // funï¿½ï¿½o copia dados do temporï¿½rio para o original
         copiarArquivo(arquivoTemp, arquivo);
 
         fclose(arquivo);
@@ -265,7 +310,7 @@ int editarCategoria(int mode, int codigo, str_categ_acomodacoes categoria)
     return 0;
 }
 
-// FUN€ÇO EXCLUI CATEGORIA
+// FUNï¿½ï¿½O EXCLUI CATEGORIA
 int excluirCategoria(int mode, int codigo)
 {
     FILE *arquivo, *arquivoTemp;
@@ -294,10 +339,10 @@ int excluirCategoria(int mode, int codigo)
 
     case 3:
         /* code */
-        break;
-    }
+       // break;
+    //}
 
-    str_categ_acomodacoes categoriaTemp;
+    /*/str_categ_acomodacoes categoriaTemp;
 
     if (mode != 3)
     {
@@ -356,7 +401,7 @@ int excluirCategoria(int mode, int codigo)
     return 0;
 }
 
-// FUN€ÇO LISTA ACOMODA€åES
+// FUNï¿½ï¿½O LISTA ACOMODAï¿½ï¿½ES
 void listarAcomodacoes(int mode)
 {
     FILE *pF_Acomod, *pF_Categ;
@@ -395,31 +440,31 @@ void listarAcomodacoes(int mode)
 
     if (mode != 3)
     {
-        // Lˆ os dados das acomoda‡Æes do arquivo enquanto nÆo atingir o final do arquivo EOF
-        printf("Acomoda‡Æes Cadastradas:\n");
+        // Lï¿½ os dados das acomodaï¿½ï¿½es do arquivo enquanto nï¿½o atingir o final do arquivo EOF
+        printf("Acomodaï¿½ï¿½es Cadastradas:\n");
         printf("-------------------------------\n");
         while (fscanf(pF_Acomod, "%d|%[^|]|%[^|]|%d", &acomodacao.codigo, acomodacao.descricao, acomodacao.facilidades, &acomodacao.catec_acomod.codigo) != EOF)
         {
             if (acomodacao.codigo != 0)
             {
-                printf("C¢digo      : %d\n", acomodacao.codigo);
-                printf("Descri‡Æo   : %s\n", acomodacao.descricao);
+                printf("Cï¿½digo      : %d\n", acomodacao.codigo);
+                printf("Descriï¿½ï¿½o   : %s\n", acomodacao.descricao);
                 printf("Facilidades : %s\n", acomodacao.facilidades);
-                printf("=> Categoria de Acomoda‡Æo\n");
+                printf("=> Categoria de Acomodaï¿½ï¿½o\n");
 
                 op = pesquisarCategoria(mode, acomodacao.catec_acomod.codigo, &acomodacao.catec_acomod);
                 
                 if (op == 0)
                 {
-                    printf("= C¢digo                : %d\n", acomodacao.catec_acomod.codigo);
-                    printf("= Descri‡Æo             : %s\n", acomodacao.catec_acomod.descricao);
-                    printf("= Valor da Di ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
+                    printf("= Cï¿½digo                : %d\n", acomodacao.catec_acomod.codigo);
+                    printf("= Descriï¿½ï¿½o             : %s\n", acomodacao.catec_acomod.descricao);
+                    printf("= Valor da Diï¿½ria       : R$%.2f\n", acomodacao.catec_acomod.valor_diaria);
                     printf("= Quantidade de Pessoas : %d\n", acomodacao.catec_acomod.qtd_pessoas);
                     printf("-------------------------------\n");
                 }
                 else
                 {
-                    printf("A categoria desta acomoda‡Æo foi apagada, por favor, edite ela e selecione uma nova categoria.\n");
+                    printf("A categoria desta acomodaï¿½ï¿½o foi apagada, por favor, edite ela e selecione uma nova categoria.\n");
                     printf("-------------------------------\n");
                 }
             }
@@ -433,7 +478,7 @@ void listarAcomodacoes(int mode)
     }
 }
 
-// FUN€ÇO CADASTRA UMA ACOMODA€ÇO
+// FUNï¿½ï¿½O CADASTRA UMA ACOMODAï¿½ï¿½O
 int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao)
 {
     FILE *arquivo;
@@ -441,7 +486,7 @@ int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao)
     switch (mode)
     {
     case 1:
-        // Abre o arquivo "dados_acomodacoes.txt" no modo de apˆndice (para adicionar novos dados ao final)
+        // Abre o arquivo "dados_acomodacoes.txt" no modo de apï¿½ndice (para adicionar novos dados ao final)
         arquivo = fopen("..\\data\\dados_acomodacoes.txt", "a");
 
         if (arquivo == NULL)
@@ -452,7 +497,7 @@ int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao)
         break;
 
     case 2:
-        // Abre o arquivo "dados_acomodacoes.dat" no modo de apˆndice (para adicionar novos dados ao final)
+        // Abre o arquivo "dados_acomodacoes.dat" no modo de apï¿½ndice (para adicionar novos dados ao final)
         arquivo = fopen("..\\data\\dados_acomodacoes.dat", "ab");
 
         if (arquivo == NULL)
@@ -483,7 +528,7 @@ int cadastrarAcomodacao(int mode, str_acomodacoes acomodacao)
     return 0;
 }
 
-// FUN€ÇO PESQUISA UMA ACOMODA€ÇO
+// FUNï¿½ï¿½O PESQUISA UMA ACOMODAï¿½ï¿½O
 int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
 {
     FILE *arquivo;
@@ -510,8 +555,8 @@ int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
         break;
     case 3:
         /* code */
-        break;
-    }
+        //break;
+   /*/ }
 
     str_acomodacoes acomodacaoTemp;
 
@@ -522,7 +567,7 @@ int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
         {
             if (acomodacaoTemp.codigo == codigo)
             {
-                // mandando valores encontrados para os respectivos endere‡os fornecido para a fun‡Æo
+                // mandando valores encontrados para os respectivos endereï¿½os fornecido para a funï¿½ï¿½o
                 pAcomodacao->codigo = acomodacaoTemp.codigo;
                 strcpy(pAcomodacao->descricao, acomodacaoTemp.descricao);
                 strcpy(pAcomodacao->facilidades, acomodacaoTemp.facilidades);
@@ -541,7 +586,7 @@ int pesquisarAcomodacao(int mode, int codigo, str_acomodacoes *pAcomodacao)
     return 1;
 }
 
-// FUN€ÇO EDITA UMA ACOMODA€ÇO
+// FUNï¿½ï¿½O EDITA UMA ACOMODAï¿½ï¿½O
 int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
 {
     FILE *arquivo, *arquivoTemp;
@@ -569,11 +614,11 @@ int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
         break;
     case 3:
         /* code */
-        break;
-    }
+      //  break;
+    //}
 
-    str_acomodacoes acomodacaoTemp;
-
+   // str_acomodacoes acomodacaoTemp;
+/*/
     if (mode != 3)
     {
         while (fscanf(arquivo, "%d|%[^|]|%[^|]|%d|%[^|]|%f|%d", &acomodacaoTemp.codigo, acomodacaoTemp.descricao,
@@ -601,7 +646,7 @@ int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
         fclose(arquivoTemp);
     }
 
-    // passando dados do arquivo tempor rio para arquivo original
+    // passando dados do arquivo temporï¿½rio para arquivo original
     if (mode == 1)
     {
         arquivo = fopen("..\\data\\dados_acomodacoes.txt", "w");
@@ -623,7 +668,7 @@ int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
 
     if (mode != 3)
     {
-        // fun‡Æo copia dados do tempor rio para o original
+        // funï¿½ï¿½o copia dados do temporï¿½rio para o original
         copiarArquivo(arquivoTemp, arquivo);
 
         fclose(arquivo);
@@ -633,7 +678,7 @@ int editarAcomodacao(int mode, int codigo, str_acomodacoes acomodacao)
     return 0;
 }
 
-// FUN€ÇO EXCLUI UMA ACOMODA€ÇO
+// FUNï¿½ï¿½O EXCLUI UMA ACOMODAï¿½ï¿½O
 int excluirAcomodacao(int mode, int codigo)
 {
     FILE *arquivo, *arquivoTemp;
@@ -699,7 +744,7 @@ int excluirAcomodacao(int mode, int codigo)
         fclose(arquivoTemp);
     }
 
-    // passando dados do arquivo tempor rio para arquivo original
+    // passando dados do arquivo temporï¿½rio para arquivo original
     if (mode == 1)
     {
         arquivo = fopen("..\\data\\dados_acomodacoes.txt", "w");
@@ -721,7 +766,7 @@ int excluirAcomodacao(int mode, int codigo)
 
     if (mode != 3)
     {
-        // fun‡Æo copia dados do tempor rio para o original
+        // funï¿½ï¿½o copia dados do temporï¿½rio para o original
         copiarArquivo(arquivoTemp, arquivo);
 
         fclose(arquivo);
@@ -730,3 +775,4 @@ int excluirAcomodacao(int mode, int codigo)
 
     return 0;
 }
+/*/
